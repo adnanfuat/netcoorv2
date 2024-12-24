@@ -1,0 +1,168 @@
+.shell {
+    font-size: 1.2rem;    
+    display: flex;       
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    background-color: rgb(0, 0, 0);    
+    z-index: 2800;
+    height: 100%;      
+    color: white;    
+    gap:10px;
+}
+
+
+.blink_me {
+    animation: blinker 1s linear 10;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  
+.shell div {
+    display: flex;
+    gap:6px
+}
+
+.bodywr {
+        display: flex;
+        flex-direction: column;
+}
+
+
+.menuitem {        
+    padding: 2px 10px;
+    display: flex;    
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+.menuitem a {
+    color: white;    
+}
+
+.menuitem:hover {
+background-color:#f1711e;
+color: black;
+text-decoration: none;
+
+}
+
+
+.menuitem:hover a {
+    
+    color: black;
+    text-decoration: none;
+    
+    
+    }
+    
+
+
+
+.login {
+
+    display: flex;
+    right: 0px;    
+    align-items: center;    
+    flex-grow: 1;
+    padding: 10px;
+    color: black;     
+    font-size: 0.8rem;
+    cursor: pointer;   
+    color: white;  
+    font-weight: bold;
+    position: relative;
+    height: 80px;
+}
+
+.login:hover  {
+    background-color:#ef6f35 ;
+}
+
+.login:hover span {
+    display: flex;
+}
+
+.login span {
+    position: absolute;
+    left: 0px;
+    top:0px;
+}
+
+.flagswr {
+    display: flex;    
+    
+    min-height: 100%;    
+}
+
+.bottom {
+    display: flex;
+    position: absolute;        
+    bottom: 0px;
+    left:0px;
+    width: 100%;             
+    padding: 10px;
+}
+
+
+
+.top {
+    display: flex;    
+    width: 100%;               
+    border-bottom: 1px solid white;
+    border-bottom-style: dashed;    
+    
+
+    background-color: rgb(10, 9, 9);
+    background: linear-gradient(
+      to right bottom,
+      #000000,
+      #2e2e2e,
+      #010101
+    );    
+    box-shadow: rgb(0 0 0 / 40%) 0px -4px 2px 0px,
+      rgb(0 0 0 / 30%) 5px -6px 13px -3px, rgb(0 0 0 / 20%) 0px -3px 0px inset;    
+}
+
+
+
+
+
+.wapp {    
+    right: 0px;
+    align-items: center;    
+    padding: 5px 6px;        
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    display: flex;
+    gap:10px;
+    align-items: center;
+    justify-content: center;            
+    font-size: 0.8rem;
+    font-weight: bold;    
+    color: #ffffff;
+}
+
+
+.wapp:hover {
+background-color: #ef6f35 ;
+
+}
+
+@media screen and (max-width: 900px) {
+    
+    .shell {
+              position: absolute;
+              z-index: 90;              
+              border-radius: 0px;
+          }            
+
+          .login {            
+            flex-grow: 0;            
+          }
+}      

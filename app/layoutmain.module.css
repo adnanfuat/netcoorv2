@@ -1,0 +1,142 @@
+.shell {    
+    display: flex;                
+    min-height: 100vh;
+    position: relative;       
+    gap:20px
+}
+
+.suptitle {
+    font-size: 0.7rem;
+    position: absolute;
+    color: gray;
+    top:2px;
+    line-height: 1rem;
+}
+
+.titlewr {
+        
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap:14px
+}
+
+.main {
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:10px;
+    /* background-image:url("/images/common/bg.jpg"); */
+    
+    height: 100%;
+    padding: 20px;            
+    border: 0px dashed rgb(227, 227, 227);    
+    justify-content: flex-start;
+}
+.bodywr {
+    justify-content: flex-start;
+    background-size: cover;    
+    width: 100%;
+}
+
+.left {    
+    width: 300px;
+    min-height: 100vh;
+    z-index: 0;              
+    }
+
+
+.left_mobile {    
+    display: none;    
+    width:100%;          
+    
+}
+
+
+.left_mobile_open_button {    
+    position: fixed;
+    top:0px;
+    right: 0px;
+    background-color: rgb(255, 211, 15);
+    border:1px solid black;
+    cursor: pointer;
+    z-index: 800;
+    display: none;
+    padding:10px
+}
+
+
+.left_mobile_close_button {    
+    position: fixed;
+    top:0px;
+    right: 0px;
+    z-index: 800;
+    background-color: rgb(255, 211, 15);
+    border:1px solid black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding:10px
+}
+
+
+
+   
+
+
+@media screen and (max-width: 900px) {
+    
+
+    .left_mobile {    
+            display: flex;                        
+            z-index: 229992500;            
+            width: 100%;            
+            left: 0px;
+            border-radius: 0px;
+            background-color: black;                   
+        }
+
+        .left_mobile_open_button {           
+            display: flex;
+        }
+
+        .left {
+            display: none;
+        }
+
+        .main {
+                padding: 8px;
+                border: 0px dashed rgb(227, 227, 227);
+                gap:8px;
+        }       
+        .suptitle {            
+            top:44px;            
+        }
+
+        .titlewr {
+            
+            padding-bottom:16px;                        
+        }
+
+        .suptitle {
+            font-size: 0.7rem;                        
+            top:34px;  
+            line-height: 0.9rem;          
+        }
+        
+           
+}      
+
+
+
+@media screen and (max-width: 374px) {
+    
+
+    .suptitle {    
+        font-size: 0.66rem;                        
+        font-weight: 100;
+        line-height: 0.8rem;
+    }
+
+}

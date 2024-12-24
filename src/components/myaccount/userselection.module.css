@@ -1,0 +1,96 @@
+.shell {
+    display: flex;
+    gap:10px;
+    flex-direction: column;   
+}
+
+
+.toolwr {    
+    display: grid;
+    gap:10px;       
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding-top: 18px;
+}
+
+.searchuser {
+    position: absolute;
+    left:0px;
+    top:-10px;
+    border: 0px;    
+    border-radius: 1px;    
+    
+    display: flex;
+    gap:4px;
+}
+.searchuser  input  {    
+    border: 1px solid rgb(1, 134, 196);
+    padding: 4px;    
+    background-color: rgb(121, 217, 255);
+    width: 300px;
+}
+
+.searchuser  button {    
+    border: 1px solid rgb(1, 134, 196);
+    background-color: rgb(121, 217, 255);
+    padding: 4px;   
+
+}
+
+
+.searchuser input::placeholder {
+    color: rgb(54, 166, 211);
+    opacity: 1; /* Firefox */
+    font-size: 0.7rem;
+  }
+  
+
+@media screen and (max-width: 1200px) {    
+
+    .toolwr {            
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+
+
+
+
+.newuserwr {
+    
+    display: flex;
+    gap:10px;
+    align-items: center;
+}
+
+
+.newuserwr  input, .newuserwr button {
+    height: 40px;
+    padding: 20px;
+    display: flex;align-items: center;
+}
+
+
+
+.select {
+    font-size: 1.2rem;
+    background-color: #dddddd;
+    padding: 10px;  
+  }
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    
+    .newuserbutton {
+        font-size: 0.8rem;
+         width: 100%;   
+         
+    }
+
+}

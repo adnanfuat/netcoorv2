@@ -1,0 +1,159 @@
+.mobilemenu{
+    display: flex;    
+    flex-direction: column;
+    padding: 60px;
+    margin:0px;
+    top:-20px;
+    left:0px;
+    gap: 18px;
+    font-size: 1.6rem;
+    background-color: #e3e3e3;
+    width: 100%;
+    height: 105vh;
+    position: absolute;
+}
+
+
+
+.close {
+    cursor: pointer;
+    font-size: 2.6rem;
+    font-weight: 900;
+    position: absolute;
+    right:15px;
+    top:15px
+}
+
+.title {    
+            
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-radius: 6px;   
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 3px;
+    transition: all .4;
+    background: linear-gradient(4deg, rgba(228,228,228,1) 0%, rgba(221,221,221,1) 35%, rgba(255,255,255,1) 100%);    
+    font-family: var(--roboto_condensed);
+    font-weight: 900;
+    cursor: pointer;
+    
+}
+
+.title:hover {    
+    background: linear-gradient(4deg, rgb(231 243 255) 0%, rgb(197 215 255) 35%, rgba(255,255,255,1) 100%);     
+    text-decoration: none;
+}
+
+.companiesmenuwr, .adminmenuwr {    
+    display: none;
+    padding-top: 20px;
+    top:30px;
+    left:0px;        
+    position: absolute;            
+    flex-direction: column;
+}
+
+
+
+
+.companiesmenu, .adminmenu, .contentsmenu {
+    display: none;    
+    padding: 10px;
+    background-color: antiquewhite;
+    
+}
+
+.companies {
+    position: relative;
+}
+
+.companies:hover .companiesmenu {
+    display: flex;
+    position: absolute;
+    top:40px;
+    left:0px;
+    background-color: rgb(48, 0, 0);
+}
+
+
+.submenu {
+    background-color:#dddddd;    
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+    width: 100%;
+    font-family: var(--roboto_condensed);
+}
+
+
+.submenu > div {
+    /* background-color: rgb(144, 134, 235); */
+    padding: 10px;
+    cursor: pointer;
+    border:1px solid transparent;
+}
+
+
+.submenu > div:hover {
+                                border:1px solid gray;
+                       }
+
+
+.companiesmenu, .adminmenu {
+                        display: none;    
+                        padding: 10px;
+                        background-color: antiquewhite;
+                        
+                    }
+
+
+                    
+
+.panel {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+.subpanel {
+                        position: absolute;    
+                        display: flex;
+                        top:38px;
+                        right:0px;
+                        
+                    }
+
+
+@media screen and  (max-width: 1200px)  {
+    
+    
+}
+
+
+@media screen and  (max-width: 900px)  {
+ 
+
+ 
+}
+
+@media screen and  (min-width: 901px)  {
+
+
+}
+
+
+
+.admin {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin:hover .adminmenu {
+    display: flex;
+    
+}
+
