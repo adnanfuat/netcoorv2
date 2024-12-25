@@ -16,10 +16,9 @@
 .searchuser {
     position: absolute;
     left:0px;
-    top:-10px;
+    top:-18px;
     border: 0px;    
-    border-radius: 1px;    
-    
+    border-radius: 1px;        
     display: flex;
     gap:4px;
 }

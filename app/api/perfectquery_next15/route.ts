@@ -32,7 +32,7 @@ export async function POST(req:NextRequest) {
     
     let result = await perfectqueryv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});
                    
-     console.log("fata::::::::::", result);
+    data?.type=="sectorsandsubsectors_next15" && console.log("perfectquery_next15:______ ", result,  data?.type);
 
 
       return NextResponse.json(

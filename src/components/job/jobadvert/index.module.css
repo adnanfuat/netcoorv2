@@ -1,0 +1,438 @@
+.main_container {
+    display: grid;           
+    gap: 20px;    
+    width: 100%;
+    position: relative;        
+}
+
+.grid_container {
+    display: grid;           
+    gap: 20px;    
+    grid-template-columns: 5fr 4fr;    
+    grid-template-areas:
+    "info address "    
+    "info contact "        
+    "others contact "    
+    "gmaps gmaps"
+    ;   
+}
+
+
+.stepbuttonwr {
+display: flex;
+gap:8px;
+}
+
+.stepbutton {
+    display: flex;
+    width: 150px;
+    background-color: #dedede;
+    justify-content: center;
+
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#c2c2c4 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #59595c;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 14px;
+}
+
+.stepbutton:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.stepbutton:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);  
+}
+
+.stepbutton:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+
+.infobar {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    align-items: center;
+    display: flex;
+    gap:6px;
+    flex-wrap: wrap;
+}
+
+.infobar div{
+    align-items: center;
+    display: flex;
+    gap:6px;
+}
+
+
+
+
+.others {
+    grid-area: others;
+    background-color: #dedede;
+    padding: 20px 0px;
+    gap:30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    grid-area: image;
+    /* background-color: white; */
+    /* padding:10px; */
+    gap:4px;
+    height: auto;
+    display:flex;
+    flex-direction: column;
+}
+
+.gmaps {
+         grid-area: gmaps;         
+       }
+ 
+.gmapstitle {
+         background-color: #dddddd;
+         padding: 10px 0px;
+         border-radius: 0px;
+         display: flex;
+         justify-content: space-between;
+         user-select: none;
+         cursor: pointer;
+         font-size: 20px;               
+  }      
+
+
+            
+.info {
+    grid-area: info;
+    gap:50px;
+    height: auto;
+    display:grid;
+    flex-direction: column;
+    background-color: #dedede;
+    padding: 20px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    
+}
+
+.contact {
+    height: auto;
+    display:flex;
+    flex-direction: column;    
+    background-color: #dedede;
+    padding: 20px 0px;
+}
+
+.address {
+    grid-area: address;
+    background-color: #dedede;
+    padding: 20px 0px;
+}
+
+
+.tabshell {
+    display: grid;    
+    align-items: center;      
+    flex-direction: column;
+    grid-template-rows: max-content 1fr;    
+}
+
+.activebuttonswr{
+    
+}
+
+.activebuttonswr:hover span{
+    text-decoration: underline;
+    cursor: pointer;    
+}
+
+.maintab {
+    display: flex;
+    flex-direction: column;            
+    /* background-color: rgb(42, 44, 49);     */
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 0px;
+    padding: 30px 20px 70px 20px;
+    gap:20px;
+    background-color: #dedede;
+    min-height: 300px;
+    justify-content: space-between;
+}
+
+
+.shelltab {
+    display: flex;
+    flex-direction: column;            
+    /* background-color: rgb(42, 44, 49);     */
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 0px;
+    padding: 40px 20px 50px 20px;
+    gap:10px;
+    background-color: #dedede;
+    min-height: 300px;
+    /* justify-content: space-between; */
+}
+
+.activebuttonswr{
+    background-color: #c2c2c4;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.textarea {
+    min-width: 100%;
+    padding: 20px;
+    font-size: 1.1rem;
+    height: 400px;
+    padding: 10px;
+    
+}
+
+.titleinfo {
+font-size: 0.7rem;
+}
+
+
+
+
+
+
+.buttons{
+    align-items: flex-end;
+    z-index: 50;
+    position: fixed;
+    display: flex;    
+    right:0px;
+    bottom:0px;
+    gap:10px;
+    padding:10px;
+    justify-content: flex-end;
+    
+    
+}
+
+.caution {
+    display: flex;
+    padding: 10px;
+    background-color: rgb(219, 45, 45);
+    color: white;
+    border-radius: 4px;
+    align-items: center;
+}
+
+
+
+.tabcontentwr {
+    display: flex;    
+    flex-direction: column;
+    padding: 20px;
+    gap:20px;
+    background-color: #ffffff;    
+}
+
+.tabs {
+    display: flex;
+    /* background-color: #dddddd; */
+    gap:8px;
+    /* padding:10px; */
+    /* justify-content: center; */
+    width: 100%;    
+}
+
+.tab {    
+        padding: 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: all 0.5s;
+        border:2px solid black;
+        border-bottom: 0px;
+        border-bottom-left-radius:0px ;
+        border-bottom-right-radius:0px ;
+        padding: 5px 20px ;
+        color: white;
+        display: flex;
+        gap:4px;
+        align-items: center;
+}
+
+.tab:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.05) ;
+}
+
+.infowr {
+    display: flex;
+    gap:20px;
+    flex-direction: column;
+    
+    
+}
+
+.titlewr {
+     display: flex;
+     
+     position: relative;
+}
+
+.package {
+    grid-area: package;
+    background-color: #dedede;
+    padding: 20px;
+}
+
+.mainttabtitlestrong {
+
+}
+
+.mainttabtitlelight {
+
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1536px)   {
+    .tab {
+            font-size: 0.8rem;
+            padding: 12px 13px ;
+         }
+}    
+
+@media screen and (max-width: 1200px) {    
+
+    .others > div{
+                display: flex;
+                flex-direction: column;                
+        }
+
+    
+    .grid_container {
+        display: grid;           
+        gap: 20px;    
+        grid-template-columns: 1fr;    
+        grid-template-areas:
+        "info"    
+        "address"
+        "contact"                
+        "gmaps"
+        "others"
+        ;   
+    }
+
+    .infobar {
+        font-weight: 100;
+    }
+    
+     .tab {                                                
+        padding: 10px 16px ;
+        font-size: 2.1rem;        
+        font-weight: bold;
+        }
+
+
+.tab div:nth-child(2) {
+    display: none;
+}
+
+
+.tab > span {
+        display: flex;
+}
+
+/* .tabs{
+        overflow-x: scroll;
+     } */
+
+.buttons{
+
+    background-color:#fdd176;
+    width: 100%;
+    justify-content: center;
+}
+
+.textarea {        
+    height: 200px;
+}
+
+.maintab {
+    
+    padding: 10px 14px 60px 14px;
+
+}
+
+
+.shelltab {    
+padding: 20px 10px 40px 10px;
+}
+
+    
+}     
+
+
+
+@media screen and (max-width: 600px)   {
+    .tab {                                                        
+            font-size: 1.5rem;    
+            padding: 3px 5px ;    
+        }
+
+        
+
+}
+
+
+
+@media screen and (max-width: 374px)   {
+    .tab {                                                        
+            font-size: 1.5rem;    
+            padding: 2px ;    
+        }
+
+        
+.caution {
+    font-size: 0.7rem;
+    padding: 4px;
+    min-height: 40px;
+    
+}
+
+.buttons {
+    gap:8px
+}
+}

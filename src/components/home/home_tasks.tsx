@@ -10,15 +10,15 @@ export default function Home_Tasks(props) {
 
     
 
-    let {userscopes, email } = userdata ?? {};    
-    let isTechnician  = userscopes?.isTechnician;
-    let manegerAuth  =  userscopes?.isManager;
-    let patreonAuth  =  userscopes?.isPatreon;
-    let technicianAuth  =  userdata?.userscopes.isManager;
+  let {userscopes, email } = userdata ?? {};    
+  let isTechnician  = userscopes?.isTechnician;
+  let manegerAuth  =  userscopes?.isManager;
+  let patreonAuth  =  userscopes?.isPatreon;
+  let technicianAuth  =  userdata?.userscopes.isManager;
 
 
 
-    const task_system_StateObj = useState();
+  const task_system_StateObj = useState();
   const task_system_user_StateObj = useState(email);
   const task_system_allsystems_StateObj = useState();
 
@@ -62,9 +62,9 @@ return <div className={s.tasks_mainwr}>
                                                                                                                       {/* Görev sistemi atanmamışsa ya da görev sistemleri arasında bu datakeye ait bir görev sistemi yoksa (Belki sonradan görev sistemi silinmiş olabilir) */}
                                                                                                                       {/* { !pta?.task_system_datakey || !task_systems?.find(a=>a?.datakey==pta?.task_system_datakey)   ? <option value=""> Görev Sistemi Seçiniz </option> : undefined } */}                                                                                                                                          
                                                                                                                       <option value=""> Görev Sistemi Seçiniz </option>
-                                                                                                                      {task_systems?.map(task_system=>{
+                                                                                                                      {task_systems?.map((task_system, i)=>{
 
-                                                                                                                                                    return <option value={task_system?.datakey} >  {task_system?.title}  </option>
+                                                                                                                                                    return <option value={task_system?.datakey} key={i}>  {task_system?.title}  </option>
                                                                                                                       })}
 
                                                     </select>
@@ -73,9 +73,9 @@ return <div className={s.tasks_mainwr}>
                                                                                                                                                                                                                                         
                                                                                                           <option value=""> Kullanıcı Seçiniz </option>
 
-                                                                                                          {task_system_users?.map(user=>{
+                                                                                                          {task_system_users?.map((user, i)=>{
 
-                                                                                                                                        return <option value={user?.email}>  { user?.email }  </option>
+                                                                                                                                        return <option value={user?.email}  key={i}>  { user?.email }  </option>
 
                                                                                                           })}
 

@@ -5,7 +5,7 @@ import perfectqueryv2_clerk from "@/modules/functions/perfectqueryv2_clerk"
 
 export async function GET() {
 
-  console.log("aaaaaaaaaaaaaaaaaaaaa_______________", );
+  // console.log("aaaaaaaaaaaaaaaaaaaaa_______________", );
 //   const {userId} = auth();
   let user = await currentUser();
   
@@ -46,22 +46,22 @@ export async function GET() {
                       
     
      try {
-       // verify token
-       
+       // verify token       
        const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret, {
                                         issuer: 'urn:example:issuer',
                                         audience: 'urn:example:audience',
                                       });
-       // log values to console
-       //console.log(payload);
-       //console.log(protectedHeader);
+       //  log values to console
+       //  console.log(payload);
+       //  console.log(protectedHeader);
+       
      } catch (e) {
        // token verification failed
        console.log("Token is invalid");
      }
   
   
-  //console.log("cypt::", userdata)
+  // console.log("cypt::", userdata)
 
   return NextResponse.json(
     {

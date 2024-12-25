@@ -10,7 +10,6 @@ import useStorage from "@/modules/functions/usestorage";
 import {_userState} from "@/modules/constants/user";
 import { RiCharacterRecognitionLine, RiAccountPinBoxLine } from "react-icons/ri";
 
-
 const UserSelection = (props) => {
 
   let {userdata} = props ?? {};
@@ -50,16 +49,16 @@ useEffect(() => {
     initializeuser = selecteduser;
     // console.log("zxccxzczxcxz 3");
   }
-  else if (!!user?.email)
+  else if (!!userdata?.email)
   {
-    initializeuser = user?.email;
+    initializeuser = userdata?.email;
     // console.log("zxccxzczxcxz 4");
   }
   
   _userState.myAccountUser.email = initializeuser
   setItem("ccuser", initializeuser); 
 
-}, [user?.email, ccuser, userparam])
+}, [userdata?.email, ccuser, userparam])
 
 
 
@@ -88,7 +87,7 @@ let processing = isLoading_Users || isFetching_Users;
 let verified = user?.userinfo?.slug_en;
 
      return <div className={s.toolwr}>
-                                     {/* { JSON.stringify(users)} */}
+                                     {/* { JSON.stringify(userdata)} */}
                                           {updateaccount && <div className={s.searchuser}>
                                             <input value={searchkeyword} onChange={e=>setSearchKeyword(e.target.value)} placeholder="Arama kelimesini yaz, enter tuşuna bas"/>
                                             <button onClick={e=>{setFilter(old=>old={...old, keyword:searchkeyword }); refetch()}} disabled={processing}> {processing ? "Aranıyor" :  "Ara" }</button>
@@ -124,8 +123,8 @@ let verified = user?.userinfo?.slug_en;
                                                       }} type="button" title="Tümü" style={{padding:4}}><RiCharacterRecognitionLine size={20}/></button>
 
                                                         <button onClick={()=>{
-                                                          _userState.myAccountUser.email=user?.email;
-                                                          setItem("ccuser", user?.email);                                                            
+                                                          _userState.myAccountUser.email=userdata?.email;
+                                                          setItem("ccuser", userdata?.email);                                                            
                                                           webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
                                                       }} type="button" title="Ben" style={{padding:4}}><RiAccountPinBoxLine   size={20}/></button>
 
