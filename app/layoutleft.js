@@ -2,7 +2,7 @@
 
 // import "react-responsive-modal/styles.css";
 
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 
 import s from "./layoutleft.module.css";
 // import UploadModal from "@/modules/selectimg/uploadmodal";
@@ -76,8 +76,8 @@ export const LayoutLeft = (props) => {
 
   
       
-      const searchParams = useSearchParams();
-      let userparam = searchParams.get('user');
+      // const searchParams = useSearchParams();
+      // let userparam = searchParams.get('user');
 
       let permissions=[]
 

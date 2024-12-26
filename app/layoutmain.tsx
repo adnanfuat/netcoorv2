@@ -33,6 +33,10 @@ const [left, setleft] = useState(false);
 // };
              
   return (<html lang="en"><body className={`${geistSans.variable} ${geistMono.variable} antialiased`}> 
+  <div style={{backgroundColor:"#db2d2d", padding:12, paddingBottom:20, fontSize:10, color:"white"}}>
+    
+    Sistemimizde büyük bir güncelleme yapılmaktadır. Tüm servisleri geri getiriyoruz. İlk olarak iş ilanlarıyla ilgili bazı servisler devreye alınmıştır. Diğer servisleri de hızlıca açacağız. Kesintiden ötürü özür dileriz.
+  </div>
                                                         
                                                                           <div className={s.shell}> 
                                                                                     {/* {JSON.stringify(props)} */}
