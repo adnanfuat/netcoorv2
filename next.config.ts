@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  swcMinify: true,
   images:{
     dangerouslyAllowSVG: true,
     domains: ['srcdn.sakaryarehberim.net', 'www.sakaryarehberim.com', 'lh3.googleusercontent.com'],

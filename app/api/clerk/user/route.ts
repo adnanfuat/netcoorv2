@@ -2,6 +2,8 @@ import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 const jose = require('jose');
 import perfectqueryv2_clerk from "@/modules/functions/perfectqueryv2_clerk"
+import iscached from "@/modules/functions/iscached";
+import makecached from "@/modules/functions/makecached";
 
 export async function GET() {
 
@@ -37,20 +39,35 @@ export async function GET() {
 
     const claims = jose.decodeJwt(jwt)
     
-    let userdata = await perfectqueryv2_clerk({ 
-      data:{type:"giveuserv2"}, 
-      session:{user:{accessToken:jwt}}, 
-      undefinedreturn:undefined
-                      });
 
-                      
+    let cachekey  =  `giveuserv2_${jwt}`;
+    let {cached}  =  iscached({cachekey});
+
+    let userdata=undefined;
     
+    if (cached) { return cached }
+    else 
+    {
+       userdata = await perfectqueryv2_clerk({ 
+        data:{type:"giveuserv2"}, 
+        session:{user:{accessToken:jwt}}, 
+        undefinedreturn:undefined
+                        });
+
+                        
+        makecached({cachekey, value:userdata, ttl:50000});
+
+
+    }
+
+    
+                          
      try {
        // verify token       
-       const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret, {
-                                        issuer: 'urn:example:issuer',
-                                        audience: 'urn:example:audience',
-                                      });
+      //  const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret, {
+      //                                   issuer: 'urn:example:issuer',
+      //                                   audience: 'urn:example:audience',
+      //                                 });
        //  log values to console
        //  console.log(payload);
        //  console.log(protectedHeader);
