@@ -10,10 +10,10 @@ export async function POST(req:NextRequest) {
 
   try {
     
-    console.log("11111::::::::::");
+       // console.log("11111::::::::::");
       let body = await req.json();    
       let data = body?.data ?? {};
-       console.log("fata::::::::::", data);
+       // console.log("fata::::::::::", data);
 
       let clerkuser = await currentUser();
       let emailAddresses = clerkuser?.emailAddresses ?? [];
@@ -27,11 +27,8 @@ export async function POST(req:NextRequest) {
         .setAudience('urn:example:audience')
         .setExpirationTime('2h')
         .sign(secret)
-
             
-
-        let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});
-                   
+        let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});                   
     
       return NextResponse.json(
         result,

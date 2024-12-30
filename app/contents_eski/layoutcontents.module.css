@@ -1,0 +1,40 @@
+.shell {
+    
+    display: flex;
+    flex-direction: column;
+    /* border:1px solid gray; */
+    /* padding: 20px; */
+    gap:20px;
+    min-height: 100%;
+    position: relative;
+    /* width: 100%; */
+}
+
+.header {
+    
+    display: flex;
+    justify-content: right;
+    position: absolute;
+    right: 0px;
+    top:-60px;
+}
+
+
+.links {
+    
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+    
+}
+
+.links a 
+{
+    font-size: 2rem;
+    transition: all .5s;
+}
+
+.links a:hover
+{
+    color: rgb(126, 0, 0);
+}

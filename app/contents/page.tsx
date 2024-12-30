@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }
 
 export default async function Home(context) {
   
-  let params = await context?.params;      
+  
   let userdata = await isloggedv4_clerk();
 
   let {userscopes } = userdata ?? {};

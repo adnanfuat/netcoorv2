@@ -19,7 +19,7 @@ interface TanstackProviderProps {
                                       userdata: any
                                 }
 
-export const LayoutMain = ({ children, userdata }: TanstackProviderProps) => {  
+export const LayoutMain = (props: TanstackProviderProps) => {  
 
 //   let userdata = await isloggedv4_clerk();
 
@@ -39,14 +39,14 @@ const [left, setleft] = useState(false);
   </div>
                                                         
                                                                           <div className={s.shell}> 
-                                                                                    {/* {JSON.stringify(props)} */}
+                                                                                    {/* {JSON.stringify(userdata)} */}
                                                                                     <div className={s.left}><LayoutLeft  uploadObj={uploadObj} /></div>  
                                                                                         
                                                                                         {left && <div className={s.left_mobile}  onClick={()=>setleft(false)}>                
                                                                                                     <LayoutLeft uploadObj={uploadObj}  />
                                                                                                     {left && <div className={s.left_mobile_close_button} onClick={()=>setleft(false)}> <RiCloseLine size={30}/> </div>} 
                                                                                         </div>} 
-                                                                                        <div style={{width:"100%", padding:20}}> {children} </div>
+                                                                                        <div style={{width:"100%", padding:20}}> {props?.children} </div>
                                                                           </div>                                                                 
             </body>
             </html>                                                                          

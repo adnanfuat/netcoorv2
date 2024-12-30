@@ -10,19 +10,30 @@ import { LayoutMain } from "./layoutmain";
 
 
  
-export default async function RootLayout({
-  children,
-}: Readonly<{
+export default async function RootLayout(props: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) 
+{
 
-   let userdata = undefined; //await isloggedv4_clerk();
+  let userdata = await isloggedv4_clerk();
+  //props.params.userdata = userdata;
+  //console.log("propsprops:", props);
+
+   
   return (<ClerkProvider>
                 <LayoutMain userdata={userdata}>
                   <TanstackProvider>
-                    {children}
+                    {/* {JSON.stringify(props)} */}
+                    {props?.children}
                   </TanstackProvider>
                 </LayoutMain>
             </ClerkProvider>                    
   );
 }
+
+
+// export default async function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) 

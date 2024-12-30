@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }
 
 export default async function Home(context) {
   
-  let params = await context?.params;
+//   let params = await context?.params;
   let userdata = await isloggedv4_clerk();
 
   let {userscopes } = userdata ?? {};
@@ -28,7 +28,7 @@ export default async function Home(context) {
   return (
     <div className={s.shell}>
 
-    {/* {JSON.stringify(task_system_users)} */}    
+    {/* {JSON.stringify("params")}     */}
     <div className={s.mainwr}>  
     {/* {those_waiting_for_your_control} */}
     
