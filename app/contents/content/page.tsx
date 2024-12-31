@@ -27,7 +27,7 @@ export default async function Home(props) {
   
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
     
-  //  return (<div>{JSON.stringify(userdata)}</div>)
+  // return (<div>{JSON.stringify(userdata)}</div>)
 
   return ( <Content_Core userdata={userdata}/> )
 }

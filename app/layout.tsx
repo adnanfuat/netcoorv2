@@ -1,4 +1,5 @@
 // import type { Metadata } from "next";
+import { trTR } from '@clerk/localizations'
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -18,6 +19,10 @@ export default async function RootLayout(props: Readonly<{
   let userdata = await isloggedv4_clerk();
   //props.params.userdata = userdata;
   //console.log("propsprops:", props);
+
+  // const localization = {
+  //   socialButtonsBlockButton: 'Sign In with11 {{provider|titleize}}',
+  // }
 
    
   return (<ClerkProvider>

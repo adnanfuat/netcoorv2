@@ -58,7 +58,7 @@ useEffect(() => {
   _userState.myAccountUser.email = initializeuser
   setItem("ccuser", initializeuser); 
 
-}, [userdata?.email, ccuser, userparam])
+}, [userdata?.userinfo?.user, ccuser, userparam])
 
 
 
