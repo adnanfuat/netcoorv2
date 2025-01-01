@@ -6,6 +6,9 @@ import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
+import UserSelection_Minimal from "@/components/myaccount/userselection_minimal"
+
+
 
 import JobAdverts_Core_Next15 from "@/modules/jobadverts_core_next15";
 
@@ -29,10 +32,7 @@ export default async function Home(context) {
   return (
       <div className={s.shell}> 
         {/* {JSON.stringify(users)} */}                                                  
-        { isTechnician ? <UserSelection userdata={userdata}/> : 
-        <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
-        {userdata?.email}
-        </div> }
+        { isTechnician ? <UserSelection userdata={userdata}/> : <UserSelection_Minimal userdata={userdata}/> }
       {/* {selecteduser} */}                                                
                       <JobAdverts_Core_Next15 selecteduser={undefined} subTabStateObj_1={undefined}  origin={"?????"} originTabStates={undefined} userdata={userdata}/>
             </div>
