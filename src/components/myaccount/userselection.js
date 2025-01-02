@@ -47,9 +47,8 @@ let processing = isLoading_Users || isFetching_Users;
                                             <button onClick={e=>{setFilter(old=>old={...old, keyword:searchkeyword }); refetch()}} disabled={processing}> {processing ? "Aranıyor" :  "Ara" }</button>
                                           </div>}
 
-{/* {selecteduser} - {typeof selecteduser} */}
                                           <select onChange={(e)=>{                                                                    
-                                                                  // _userState.myAccountUser.email=e?.target?.value;
+                                                                   _userState.myAccountUser.email=e?.target?.value;
                                                                   // _userState.task_system_datakey=undefined;                                                                  
                                                                   //setItem("ccuser", e?.target?.value);
                                                                   // console.log("çalıştım", sesUser, e?.target?.value);
@@ -69,7 +68,7 @@ let processing = isLoading_Users || isFetching_Users;
 
                                                 {users?.length>1 && <div className={s.newuserwr}>
                                                       
-                                                      <button onClick={()=>{
+                                                      <button onClick={()=>{                                      
                                                           _userState.myAccountUser.email="all";
                                                           setItem("ccuser", "all");                                                            
                                                           //webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
