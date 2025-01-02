@@ -32,9 +32,9 @@ export default async function Home(context) {
   return (
       <div className={s.shell}> 
         {/* {JSON.stringify(users)} */}                                                  
-                      { isTechnician ? <UserSelection userdata={userdata}/> : <UserSelection_Minimal userdata={userdata}/> }
-                      {/* {selecteduser} */}                                                
-                      <JobAdverts_Core_Next15 selecteduser={undefined} subTabStateObj_1={undefined}  origin={"?????"} originTabStates={undefined} userdata={userdata}/>
+                            { isTechnician ? <UserSelection userdata={userdata}/> : <UserSelection_Minimal userdata={userdata}/> }
+                            {/* {selecteduser} */}                                                
+                            <JobAdverts_Core_Next15 selecteduser={undefined} subTabStateObj_1={undefined}  origin={"?????"} originTabStates={undefined} userdata={userdata} />
             </div>
   );
 }
