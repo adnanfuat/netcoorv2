@@ -18,7 +18,6 @@ export async function GET() {
   let emailAddressObj=emailAddresses[0];
   let emailAddress=emailAddressObj?.emailAddress;
   //console.log("emailAddressObj::: ", emailAddress);
-
   // return NextResponse.json({});
   //return NextResponse.json({ emailAddressObj?.emailAddress}, { status: 401 })
 
