@@ -32,10 +32,9 @@ export default async function WebsPage(context) {
         { isTechnician ? <UserSelection userdata={userdata}/> : 
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
-        </div> }
-      {/* {selecteduser} */}                                                                      
-                      <Webs selecteduser={undefined} childTabStateObj_1={undefined}/>
-            </div>
+        </div> }                       
+                      <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/>
+        </div>
   );
 }
 

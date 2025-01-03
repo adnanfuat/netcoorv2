@@ -1,11 +1,8 @@
 import s from "./page.module.css";
 import {_userState} from "@/modules/constants/user"
 import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
-
 import { Inter } from "next/font/google";
-
 import Contents_Core from "@/modules/contents_core";
-
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
