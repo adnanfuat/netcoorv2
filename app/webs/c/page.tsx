@@ -21,8 +21,8 @@ export default async function Web() {
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
   
   let locale = "tr";
-  // return <WebContent_Next15/>    
-   return ( <div>----</div> )
+  return <WebContent_Next15 userdata={userdata}/>
+  //  return ( <div>----</div> )
 }
 
 

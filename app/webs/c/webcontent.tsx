@@ -137,6 +137,7 @@ const WebContent_Next15 = (props) => {
                 subtab, // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
                 routeChangerFunc, //Breadcrumta kullanıyorum..
                 navigatonLevelObj,
+                userdata
     }
 
     
