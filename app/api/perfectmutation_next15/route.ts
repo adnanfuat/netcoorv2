@@ -13,7 +13,7 @@ export async function POST(req:NextRequest) {
        // console.log("11111::::::::::");
       let body = await req.json();    
       let data = body?.data ?? {};
-       // console.log("fata::::::::::", data);
+       
 
       let clerkuser = await currentUser();
       let emailAddresses = clerkuser?.emailAddresses ?? [];
@@ -28,6 +28,8 @@ export async function POST(req:NextRequest) {
         .setExpirationTime('2h')
         .sign(secret)
             
+         //console.log("fata::::::::::", jwt);
+
         let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});                   
     
       return NextResponse.json(

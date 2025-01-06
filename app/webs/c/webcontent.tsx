@@ -3,7 +3,7 @@ import CoreContent_Next15 from  "@/modules/common/contentv2_next15/corecontent_n
 import {_userState} from "@/modules/constants/user"
 import 'react-tabs/style/react-tabs.css';
 import Link from "next/link";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/react-query";
 import { langConverter } from '@/modules/constants/langconverter';
 import { useState } from 'react';
 import { useSearchParams,useRouter } from "next/navigation";
@@ -24,28 +24,29 @@ const WebContent_Next15 = (props) => {
         let  tab = "webs";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
         let  subtab = "contents";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için      
     
-      const filtered_categoriesFunc = ({value}) => { _userState.web_contents_filtered_categories  =value; }
+        const filtered_categoriesFunc = ({value}) => { _userState.web_contents_filtered_categories  =value; }
 
-      const queryClient = useQueryClient();
-      let router = useRouter();
+        const queryClient = useQueryClient();
+        let router = useRouter();
       
-      // return JSON.stringify("contentData")
-      let fetcher_WebContent_Backend = async () => {       
-                                                      let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontent_backend_next15",domain, id:content_id, level:navigatonLevelObj[0]} }) } ); 
-                                                      let datajson =  await res?.json();   
-                                                      // console.log("datajsondatajson1:", datajson);                                                             
-                                                      // datajson = datajson?.fetcheddata;     
-                                                      return datajson;                                                      
-                                                  }
+        // return JSON.stringify("contentData")
+        let fetcher_WebContent_Backend = async () => {       
+                                                        let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontent_backend_next15",domain, id:content_id, level:navigatonLevelObj[0]} }) } ); 
+                                                        let datajson =  await res?.json();   
+                                                        // console.log("datajsondatajson1:", datajson);                                                             
+                                                        // datajson = datajson?.fetcheddata;     
+                                                        return datajson;                                                      
+                                                    }
                   
-        const { data:contentData, isLoading } = useQuery({queryKey:["webcontent_backend_next15", content_id, navigatonLevelObj[0]], queryFn:() => fetcher_WebContent_Backend()}); // { enabled:(!!userdata && !!domain) }
-        const addContentButtonState = useState(true); // Ekleme butonları ekleme esnasında disable yapmak için..
-        let fetcher_ContentsInTheSameCategory_Backend = async ({parentskeys}) => {  // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.     
+          const { data:contentData, isLoading } = useQuery({queryKey:["webcontent_backend_next15", content_id, navigatonLevelObj[0]], queryFn:() => fetcher_WebContent_Backend(), placeholderData:keepPreviousData }); // { enabled:(!!userdata && !!domain) }
+          const addContentButtonState = useState(true); // Ekleme butonları ekleme esnasında disable yapmak için..
+          let fetcher_ContentsInTheSameCategory_Backend = async ({parentskeys}) => {  // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.     
 
-        let res = await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontentsinthesamecategory_backend", domain, parentskeys} }) } );            
-        let datajson =  await res?.json();      
-        // console.log("datajsondatajso1n", datajson);
-        return datajson;
+          let res = await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontentsinthesamecategory_backend", domain, parentskeys} }) } );            
+          let datajson =  await res?.json();      
+          // console.log("datajsondatajso1n", datajson);
+          
+          return datajson;
   }
 
   // return JSON.stringify(contentData)
@@ -61,13 +62,14 @@ const WebContent_Next15 = (props) => {
                                                                                                                 //     staleTime: 6000,
                                                                                                                 // }
                                     );
-                                    
-       
-    const updateWebContent =async ({values})=>{                                                 
-                                                    let res= await fetch(process.env.NEXT_PUBLIC_API_URL, {
-                                                          method: "POST",
-                                                          headers: { "Content-Type": "application/json",  "authorization": `Bearer ${userdata?.user?.accessToken}` },
-                                                          body: JSON.stringify({ query: WebContentMutation_Update, variables: {data:{ values, domain}},}),
+                                                                        
+    const updateWebContent =async ({values})=>{        
+        
+                                                    console.log("aaaaaaaaaaaaaaaaaaaaaaa____",values, domain );
+
+                                                    let res= await fetch("/api/perfectmutation_next15", {
+                                                          method: "POST",                                                          
+                                                          body: JSON.stringify({ data:{ ...values, type:"websavecontent", domain } }),
                                                           }                                                                        
                                                                       );                                                                      
                                                           let datajson =  await res.json();                                                                                                                          
