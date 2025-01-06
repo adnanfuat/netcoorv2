@@ -35,7 +35,7 @@ const UserSelection = (props) => {
                                           return datajson;
                                       }
 
-let { data:users, refetch, isLoading:isLoading_Users, isFetching:isFetching_Users } = useQuery( {queryKey:["usersquery", filter?.keyword ],  queryFn:() =>  getUsersFunc()}); 
+let { data:users, refetch, isLoading:isLoading_Users, isFetching:isFetching_Users } = useQuery( {queryKey:["usersquery", filter?.keyword ],  queryFn:() =>  getUsersFunc(), staleTime:12000000000}); 
 
 let processing = isLoading_Users || isFetching_Users;
 
