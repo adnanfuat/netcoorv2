@@ -18,9 +18,9 @@ export default async function Web() {
   let patreonAuth     =   userscopes?.isPatreon;
   let technicianAuth  =   userdata?.userscopes.isManager;        
 
-  let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
-  
+  let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});  
   let locale = "tr";
+  
   return <WebContent_Next15 userdata={userdata}/>
   //  return ( <div>----</div> )
 }

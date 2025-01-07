@@ -65,7 +65,7 @@ const WebContent_Next15 = (props) => {
                                                                         
     const updateWebContent =async ({values})=>{        
         
-                                                    console.log("aaaaaaaaaaaaaaaaaaaaaaa____",values, domain );
+                                                    //console.log("aaaaaaaaaaaaaaaaaaaaaaa____",values, domain );
 
                                                     let res= await fetch("/api/perfectmutation_next15", {
                                                           method: "POST",                                                          
