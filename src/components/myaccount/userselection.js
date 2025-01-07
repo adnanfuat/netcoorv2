@@ -2,7 +2,7 @@
 import {webProxy} from "@/modules/constants/states/web";
 import { useSearchParams } from 'next/navigation';
 import {useSnapshot} from "valtio";
-import {useQuery} from "@tanstack/react-query";
+import {keepPreviousData, useQuery} from "@tanstack/react-query";
 import s from "./userselection.module.css";
 import React, { useEffect, useState } from "react";
 import 'react-tabs/style/react-tabs.css';
@@ -35,7 +35,7 @@ const UserSelection = (props) => {
                                           return datajson;
                                       }
 
-let { data:users, refetch, isLoading:isLoading_Users, isFetching:isFetching_Users } = useQuery( {queryKey:["usersquery", filter?.keyword ],  queryFn:() =>  getUsersFunc(), staleTime:12000000000}); 
+let { data:users, refetch, isLoading:isLoading_Users, isFetching:isFetching_Users } = useQuery( {queryKey:["usersquery", filter?.keyword ],  queryFn:() =>  getUsersFunc(), staleTime:1200000000000, placeholderData:keepPreviousData  }); 
 
 let processing = isLoading_Users || isFetching_Users;
 
@@ -109,7 +109,7 @@ const SwissArmyKnifeMutation =
 
 const createUserInfo = async ({user, email}) => {
 
-      let users =  await fetch(process.env.NEXT_PUBLIC_API_URL, {
+      let users =  await fetch(process.env.NEXT_PUBLIC_BACKEND_APIURL, {
         method: "POST",
         headers: { "Content-Type": "application/json", "authorization": `Bearer ${"user?.accessToken"}` },
         body: JSON.stringify({

@@ -6,34 +6,6 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 
 export default function Login({props}) {
-        
-        // const {session, user, accessToken} = isloggedv3_server();
-        
-        // console.log("sessionsession: ", session)
-        // if (!session) { res.status(500).json({ notlogged: null }) };
-  
-      //   const fetcher = async () => {
-                
-      //                   return await fetch(process.env.NEXT_PUBLIC_API_URL, {
-      //                     method: "POST",
-      //                     headers: { "Content-Type": "application/json", authorization: `Bearer ${accessToken}`},
-      //                     body: JSON.stringify({
-      //                       query: SwissArmyKnifeQuery_Raw,
-      //                       variables: { data: {type:"notifications_count"} },
-      //                     }),
-      //                   })
-      //                     .then((res) => res.json())
-      //                     .then((result) => { return  result?.data?.swissarmyknifequery; });
-      //   }
-   
-
-      // const { data} = useQuery( ["notifications_count"], () => fetcher() , {refetchOnWindowFocus:true})  // daha sonra false'a çevir...
-      
-      // console.log("sdsa--->", data?.i_key_1);
-
-  //**************************** (sitemap fecth) */
-
-  // let router = useRouter();
 
   return (<div>
   
