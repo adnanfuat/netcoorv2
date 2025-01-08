@@ -7,6 +7,8 @@ import apipaymentfunc from "../../../modules/api/apipaymentfunc"
 
 export async function POST(req:NextRequest, res:NextResponse) {
   try {
+
+    console.log("aaasaasaas");
     
     // let bodyaaa = await req.json();    
     //console.log("11111::::::::::__________",req?.body);

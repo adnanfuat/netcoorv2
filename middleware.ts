@@ -1,11 +1,17 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-const isPublicRoute = createRouteMatcher(['/sign-in', '/sign-up', '/api(.*)', '/api/webhooks/clerk(.*)','/api/payment(.*)', '/api/payment/result(.*)', 'accounts.(.*)']);
+const isPublicRoute = createRouteMatcher(['/sign-in', '/sign-up', '/api(.*)', '/api/webhooks/clerk(.*)','/api/payment(.*)', '/api/payment_result(.*)', 'accounts.(.*)']);
 
 export default clerkMiddleware( async (auth, request) => {   
-  //console.log("aaaaa:", request);
+
+  console.log("aaaaaaaaaaaaaaaaaaa____", request?.url, isPublicRoute(request));
+  
   if (!isPublicRoute(request)) {
+    // console.log("Korunması gereken sayfa::: ", request?.url);
     await auth.protect()
+  }
+  else {
+    // console.log("Korunması gereken sayfa değil::: ", request?.url);
   }
 }, 
 // { debug: true }, 
