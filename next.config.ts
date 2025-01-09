@@ -33,9 +33,16 @@ const nextConfig: NextConfig = {
   //     },
   //   ],
   },
+
+  
   experimental:{    
-    missingSuspenseWithCSRBailout: false,
-  },
+    // missingSuspenseWithCSRBailout: false,                          
+    serverActions: {
+      allowedOrigins: ["test-pos.param.com.tr", "localhost:3003", "frank-raven-89.clerk.accounts.dev"]
+    }
+},  
+  
+
   typescript:{
     ignoreBuildErrors:true,    
   },

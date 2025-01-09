@@ -3,10 +3,10 @@
   min-height: 100vh;
   background-color: #ebebeb;
   display: flex;
-  color: gray;
+  color: lightgray;
   justify-content: center;
   align-items: center;
   width: 100%;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
 }

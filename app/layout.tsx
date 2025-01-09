@@ -1,38 +1,43 @@
 // import type { Metadata } from "next";
-import { trTR } from '@clerk/localizations'
+"use server"
+
+import "./globals.css";
+// import { Header } from "@/src/components/header/header";
+// import { TanstackProvider } from "@/modules/functions/tanstackprovider";
+// import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
+// import { ClerkProvider } from "@clerk/nextjs";
+// import { LayoutMain } from "./layoutmain";
 
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Header } from "@/src/components/header/header";
-import { TanstackProvider } from "@/modules/functions/tanstackprovider";
-import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
-import { ClerkProvider } from "@clerk/nextjs";
-import { LayoutMain } from "./layoutmain";
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
- 
 export default async function RootLayout(props: Readonly<{
   children: React.ReactNode;
 }>) 
 {
 
-  let userdata = await isloggedv4_clerk();
+  // let userdata = await isloggedv4_clerk();
   //props.params.userdata = userdata;
   //console.log("propsprops:", props);
-
   // const localization = {
   //   socialButtonsBlockButton: 'Sign In with11 {{provider|titleize}}',
   // }
 
+
+
    
-  return (<ClerkProvider>
-                <LayoutMain userdata={userdata}>
-                  <TanstackProvider>
-                    {/* {JSON.stringify(props)} */}
-                    {props?.children}
-                  </TanstackProvider>
-                </LayoutMain>
-            </ClerkProvider>                    
+  return (<html lang="en"><body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>                       
+                              {props?.children}                                           
+            </body>
+    </html>   
   );
 }
 
