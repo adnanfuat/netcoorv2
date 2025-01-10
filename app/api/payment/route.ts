@@ -10,31 +10,6 @@ import apipaymentfunc from "../../../modules/api/apipaymentfunc"
 export async function POST(req:NextRequest, res:NextResponse) {
   try {
 
-     //console.log("aaasaasaas");
-    
-    // let bodyaaa = await req.json();    
-    //console.log("11111::::::::::__________",req?.body);
-    //  let bodyaaa = await req.json();    
-
-    // let data = body?.data ?? {};
-    // const {body, query} = req; //,method  
-    // let data = body?.data ?? {};
-    
-    //   let clerkuser = await currentUser();
-    //   let emailAddresses = clerkuser?.emailAddresses ?? [];
-    //   let emailAddressObj=emailAddresses[0];
-    //   let emailAddress=emailAddressObj?.emailAddress;
-    //   const secret = new TextEncoder().encode( process.env.JWT_SECRET, );        
-    //   const jwt = await new jose.SignJWT({ 'urn:example:claim': true, payload:{email:emailAddress} })
-    //     .setProtectedHeader({ alg: 'HS256' })
-    //     .setIssuedAt()
-    //     .setIssuer('urn:example:issuer')
-    //     .setAudience('urn:example:audience')
-    //     .setExpirationTime('2h')
-    //     .sign(secret)
-            
-    // let result = await perfectqueryv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});                   
-    // data?.type=="sectorsandsubsectors_next15" && console.log("perfectquery_next15:______ ", result,  data?.type);
 
     //console.log("aaaaaaaaaaa_r___ 0 ", req);
     let returndata = await apipaymentfunc({req,res});

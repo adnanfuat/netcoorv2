@@ -1,7 +1,7 @@
 
 import s from "./page.module.css";
 import {_userState} from "@/modules/constants/user"
-// import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
+ import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }
 export default async function PaymentPage(context) {
   
   let params = await context?.params;      
-  let userdata =undefined; //  await isloggedv4_clerk();
+  let userdata =  await isloggedv4_clerk();
 
   let {userscopes } = userdata ?? {};
   let email = userdata?.email;  
@@ -35,7 +35,7 @@ export default async function PaymentPage(context) {
         </div> }
 
                   {/* <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/> */}
-                  <Payment_Core_Next15 selecteduser={undefined} childTabStateObj_1={undefined} tabCount={4} domain="netcoor.com" project_type="independent" module_type={"free"} defaultusername={defaultusername} defaultdetail={undefined} defaultamount={undefined} defaultphone={defaultuserphone}/>
+                  <Payment_Core_Next15 userdata={userdata} selecteduser={undefined} childTabStateObj_1={undefined} tabCount={4} domain="netcoor.com" project_type="independent" module_type={"free"} defaultusername={defaultusername} defaultdetail={undefined} defaultamount={undefined} defaultphone={defaultuserphone}/>
                   
         </div>
   );

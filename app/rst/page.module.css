@@ -1,0 +1,12 @@
+.shell{
+  display: flex;
+  min-height: 100vh;
+  background-color: #ebebeb;
+  display: flex;
+  color: gray;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+}

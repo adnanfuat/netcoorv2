@@ -10,7 +10,7 @@ export async function POST(req:NextRequest) {
   
   try {
     
-       // console.log("11111::::::::::");
+        console.log("Girdim!!!!!!!!!!!!::::::::::");
       let body = await req.json();    
       let data = body?.data ?? {};
        

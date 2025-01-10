@@ -26,7 +26,7 @@ import { _userState } from "@/modules/constants/user";
 // import {open_sans} from "@/constants/fonts/index"
 import permissionsControlV3 from '@/modules/functions/permissionscontrolv3';
 import { Open_Sans } from 'next/font/google';
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from '@clerk/nextjs';
 const open_sans = Open_Sans({weight:"400",subsets:["latin","latin-ext"], variable:"--font-opensans"   }); 
 
 // const DynamicUploadCentral = dynamic(() => import("@/components/commonnew/uploadcentral"),{ loading: () => 'Loading...', });
@@ -86,10 +86,10 @@ export const LayoutLeft = (props) => {
         <div className={s.top}>
                     <div title="Çıkış" >
                                           <SignedOut>
-                                            <SignInButton/>
+                                            <RedirectToSignIn />
                                           </SignedOut>
-                                          <SignedIn>
-                                            <UserButton /> 
+                                          <SignedIn >
+                                            <UserButton  />                                             
                                           </SignedIn>
                 </div>
 

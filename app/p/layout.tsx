@@ -25,15 +25,13 @@ export default async function RootLayout(props: Readonly<{
   //   socialButtonsBlockButton: 'Sign In with11 {{provider|titleize}}',
   // }
    
-  return (<ClerkProvider><LayoutMain userdata={userdata}>
-                      
-                          {/* <LayoutMain userdata={userdata}> */}
+  return (<ClerkProvider>
+              <LayoutMain userdata={userdata}>                                                
                             <TanstackProvider>
                                       {props?.children}
-                              </TanstackProvider>
-                          {/* </LayoutMain> */}
-            
-          </LayoutMain>            </ClerkProvider>     
+                              </TanstackProvider>                                      
+              </LayoutMain>
+          </ClerkProvider>     
       );
 }
 
