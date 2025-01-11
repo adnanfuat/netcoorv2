@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { type NextRequest, NextResponse } from 'next/server'
 
 const isPublicRoute = createRouteMatcher(['/sign-in', '/sign-up', '/api(.*)', '/api/webhooks/clerk(.*)','/api/payment(.*)', '/api/paymentresult(.*)', 'accounts.(.*)']);
-const isPrivateRoute = createRouteMatcher(['/paaaa/']);
+const isPrivateRoute = createRouteMatcher(['/p/']);
 
 export default clerkMiddleware( async (auth, request) => {   
   
@@ -21,8 +21,8 @@ export default clerkMiddleware( async (auth, request) => {
     await auth.protect()
   }
   else {
-     console.log("Korunması gereken sayfa değil::: ", request?.url);
-  }
+        console.log("Korunması gereken sayfa değil::: ", request?.url);
+       }
 
 
 
