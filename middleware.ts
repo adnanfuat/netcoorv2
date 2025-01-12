@@ -21,7 +21,7 @@ export default clerkMiddleware( async (auth, request) => {
     await auth.protect()
   }
   else {
-        console.log("Korunması gereken sayfa değil::: ", request?.url);
+        //console.log("Korunması gereken sayfa değil::: ", request?.url);
        }
 
 
