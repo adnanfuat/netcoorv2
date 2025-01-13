@@ -28,7 +28,7 @@ export async function POST(req:NextRequest) {
         .setExpirationTime('2h')
         .sign(secret)
             
-         //console.log("fata::::::::::", jwt);
+        //  data?.type=="insert_myaccount_education" && console.log("fata::::::::::", data);
 
         let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});                   
     
