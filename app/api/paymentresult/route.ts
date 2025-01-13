@@ -18,7 +18,8 @@ export async function POST(req:NextRequest, res:NextResponse ) {       //NextReq
 
     try {
   
-          // console.log("geldimmm");
+          console.log("geldimmm", req?.method);
+          
           let data = await apipaymentresultfunc({req});
           if (data?.status==200)
           {                

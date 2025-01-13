@@ -220,7 +220,7 @@ export const LayoutLeft = (props) => {
                                     
                                 <Link href="/">
                                         <img
-                                          src="/images/common/logo.png"
+                                          src="/logo_netcoor.png"
                                           width={150}
                                           height={29}
                                           alt="Sakarya'yı seviyoruz. Sakarya için çalışıyoruz.'"
