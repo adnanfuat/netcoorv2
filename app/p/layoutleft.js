@@ -223,7 +223,7 @@ export const LayoutLeft = (props) => {
                                           src="/logo_netcoor.png"
                                           width={150}
                                           height={29}
-                                          alt="Sakarya'yı seviyoruz. Sakarya için çalışıyoruz.'"
+                                          alt="Sakarya'yı seviyoruz. Sakarya için çalışıyoruz :)'"
                                           
                                         />
                                 </Link>
