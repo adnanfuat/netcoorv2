@@ -19,8 +19,8 @@ const WebContent_Next15 = (props) => {
         const domain = searchParams.get('domain');
     
         const navigatonLevelObj = useState(); // deep, peak... // İleri geri butonları hangi saeviyedeki kategoriden tarama yapılacak...
-        let  editUrlPrefix = "webs/c";
-        let  listingUrlPrefix = "webs";
+        let  editUrlPrefix = "p/webs/c";
+        let  listingUrlPrefix = "p/webs";
         let  tab = "webs";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
         let  subtab = "contents";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için      
     
@@ -95,7 +95,7 @@ const WebContent_Next15 = (props) => {
                                                       //  console.log("datajsondatajson: ", datajson);                                                                 
                                                       queryClient.invalidateQueries();
                                                       addContentButtonState[1](true);    
-                                                      router.push(`/webs/c?domain=${domain}&id=${datajson?.id}`);                                                          
+                                                      router.push(`/p/webs/c?domain=${domain}&id=${datajson?.id}`);                                                          
                                                       return datajson;
 
                                                                        }
@@ -111,7 +111,7 @@ const WebContent_Next15 = (props) => {
       let {  text:web_content_editing }   =  langConverter({locale, keyword:"web_content_editing"});
       
         
-      const BackToContents = ()  => <Link href={`/webs`}  style={{fontWeight:"bold"}}> {domain} </Link>
+      const BackToContents = ()  => <Link href={`/p/webs`}  style={{fontWeight:"bold"}}> {domain} </Link>
   
       let {content, relatedcontents, indexOfThisContentOnLastParent, afterContent, beforeContent} = contentData ?? {}
         
@@ -146,7 +146,7 @@ const WebContent_Next15 = (props) => {
   return (
     <div>
         {contentData ? <CoreContent_Next15 {...props}/>:                             
-                                          isLoading ? <div> Yükleniyor </div> : <div> <Link href={"/webs"} >Böyle bir içerik yok!</Link> </div>                                                                                          
+                                          isLoading ? <div> Yükleniyor </div> : <div> <Link href={"/p/webs"} >Böyle bir içerik yok!</Link> </div>                                                                                          
                                       }
     </div>
   )
