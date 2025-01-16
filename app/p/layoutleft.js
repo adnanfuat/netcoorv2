@@ -1,9 +1,4 @@
 "use client"
-
-// import "react-responsive-modal/styles.css";
-
-// import { useSearchParams } from 'next/navigation';
-
 import s from "./layoutleft.module.css";
 // import UploadModal from "@/modules/selectimg/uploadmodal";
 // import { FlagsMenu } from "@/modules/common/flagsmenu";
@@ -104,7 +99,7 @@ export const LayoutLeft = (props) => {
         
               <div className={`${s.menuitem} flexrow`}>
                     <RiComputerFill />
-                    <Link href="/">Konsol</Link>
+                    <Link href="/p">Konsol</Link>
               </div>
           
               {upload_authority && (
@@ -116,7 +111,7 @@ export const LayoutLeft = (props) => {
 
               <div className={`${s.menuitem} flexrow`}> <RiAccountCircleFill /> <Link href="/p/myaccount">Hesabım</Link> </div>
 
-              <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill  /> <Link href="/p/myaccount?tab=memberships">Firmalarım</Link> </div>
+              <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill  /> <Link href="/p/memberships">Firmalarım</Link> </div>
 
               <div className={`${s.menuitem} flexrow`}> <RiNewspaperFill /> <Link href="/p/contents">Haberler</Link> </div>
 
@@ -126,7 +121,7 @@ export const LayoutLeft = (props) => {
 
               <div className={`${s.menuitem} flexrow`}> <RiMailFill   /> <Link href="/p/messages">Mesajlar</Link> </div>
 
-              <div className={`${s.menuitem} flexrow`}> <RiHome2Fill /> <Link href="/p/realestates">Emlak İlanları</Link> </div>
+              {/* <div className={`${s.menuitem} flexrow`}> <RiHome2Fill /> <Link href="/p/realestates">Emlak İlanları</Link> </div> */}
 
               <div className={`${s.menuitem} flexrow ${s.blink_me}`}> <RiMapPinUserFill /> <Link href="/p/jobadverts">İş İlanları</Link> </div>
 
@@ -186,18 +181,12 @@ export const LayoutLeft = (props) => {
 
 
 
-
               {permissionsControlV3({ askList: ["payments"], type: "some" }) && (
                 <div className={`${s.menuitem} flexrow`}>
                   <RiAdminFill />
                   <Link href="/p/expert">Panel</Link>
                 </div>
               )}
-
-
- 
-
-
 
                                    
       </div>

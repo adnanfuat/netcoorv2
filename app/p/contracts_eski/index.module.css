@@ -60,18 +60,7 @@
             ;            
 
       }     
-
-
-      .paymenttab{    
-            gap:10px;
-            display: flex;
-            flex-direction: column;                       
-            background-color: #e5eaec;
-            padding: 24px 16px;
-            border-radius: 4px;
-        }
-        
-
+      
 
 .imgdiv {                  
             grid-area: imgdiv;

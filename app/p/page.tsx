@@ -41,14 +41,14 @@ export default async function Home(context) {
      <div className={s.gridwr}>
     
      <div className={`${s.griditemwr}`}>
-                <Link href={`/myaccount?tab=adverts&type=js`}>
+                <Link href={`/p/jobadverts`}>
                       <div className={`${s.griditemicon} ${s.blink_me}`}><RiUser2Fill  size="30"/></div>                              
                       <div className={s.griditemtitle}>İş ilanı ekle</div>
                 </Link>
           </div>    
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=webs`}>
+                <Link href={`/p/webs`}>
                 <div className={s.griditemicon}><RiLinksFill size="30"/></div>                              
                 <div className={s.griditemtitle}>Web sitesi oluştur</div>
                 </Link>
@@ -68,39 +68,39 @@ export default async function Home(context) {
                 </Link>
           </div> 
     
-          <div className={s.griditemwr}>
+          {/* <div className={s.griditemwr}>
                 <Link href={`/myaccount?tab=adverts&type=realestates`}>
                 <div className={s.griditemicon}><RiHome3Fill  size="30"/></div>                              
                 <div className={s.griditemtitle}>Emlak ilanı ekle</div>
                 </Link>
-          </div>                        
+          </div>                         */}
     
                  
     
     
           <div className={s.griditemwr}>
-                <Link href={`/payment`}>
+                <Link href={`/p/payment`}>
                       <div className={s.griditemicon}><RiCoinFill  size="30"/></div>                              
                       <div className={s.griditemtitle}>Ödeme yap</div>
                 </Link>
           </div>    
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=personal&subtab=resumes`}>
+                <Link href={`/p/myaccount?tab=personal&subtab=resumes`}>
                       <div className={s.griditemicon}><RiUser2Fill size="30"/></div>                              
                       <div className={s.griditemtitle}>Özgeçmiş Oluştur</div>
                 </Link>
           </div>   
     
-          <div className={s.griditemwr}>
-                <Link href={`/notifications`}>
+          {/* <div className={s.griditemwr}>
+                <Link href={`/p/notifications`}>
                       <div className={s.griditemicon}><RiNotification2Fill size="30"/></div>                              
                       <div className={s.griditemtitle}>Bildirimler</div>
                 </Link>
-          </div>   
+          </div>    */}
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=messages`}>
+                <Link href={`/p/messages`}>
                       <div className={s.griditemicon}><RiMailFill size="30"/></div>                              
                       <div className={s.griditemtitle}>Mesajlar</div>
                 </Link>
@@ -109,7 +109,7 @@ export default async function Home(context) {
     
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount`}>
+                <Link href={`/p/myaccount`}>
                       <div className={s.griditemicon}><RiShieldUserFill size="30"/></div>                              
                       <div className={s.griditemtitle}>Hesabım</div>
                 </Link>
@@ -117,7 +117,7 @@ export default async function Home(context) {
     
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=personal&subtab=phones`}>
+                <Link href={`/p/myaccount?tab=personal&subtab=phones`}>
                       <div className={s.griditemicon}><RiPhoneFill size="30"/></div>                              
                       <div className={s.griditemtitle}>Telefonlarım</div>
                 </Link>
@@ -125,7 +125,7 @@ export default async function Home(context) {
     
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=contents`}>
+                <Link href={`/p/myaccount?tab=contents`}>
                       <div className={s.griditemicon}><RiPenNibFill size="30"/></div>                              
                       <div className={s.griditemtitle}>Kişisel İçeriklerim</div>
                 </Link>
