@@ -54,15 +54,10 @@ export default async function Home(context) {
                 </Link>
           </div>
     
-          <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=memberships`}>
-                  <div className={s.griditemicon}><RiDatabaseFill  size="30"/></div>                              
-                  <div className={s.griditemtitle}>Firma ekle</div>
-                </Link>
-          </div>
+          
     
           <div className={s.griditemwr}>
-                <Link href={`/myaccount?tab=memberships`} >
+                <Link href={`/p/memberships`} >
                       <div className={s.griditemicon}><RiBuilding4Fill size="30"/></div>                              
                       <div className={s.griditemtitle}>Firmalarım</div>
                 </Link>
@@ -75,8 +70,7 @@ export default async function Home(context) {
                 </Link>
           </div>                         */}
     
-                 
-    
+                     
     
           <div className={s.griditemwr}>
                 <Link href={`/p/payment`}>
