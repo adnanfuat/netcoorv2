@@ -5,11 +5,12 @@ import {_userState} from "@/modules/constants/user"
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
-import Memberships_Next15 from "@/modules/memberships_next15";
+import Payment_Core_Next15 from "@/modules/payment_core_next15";
+import { Packages_Core_Next15 } from "@/modules/packages_core_next15";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
-export default async function MembershipsPage(context) {
+export default async function PackagesPage(context) {
   
   let params = await context?.params;      
   let userdata =  await isloggedv4_clerk();
@@ -22,6 +23,7 @@ export default async function MembershipsPage(context) {
   let technicianAuth     =   userdata?.userscopes.isManager;        
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
+
       
   return (
       <div className={s.shell}> 
@@ -29,8 +31,9 @@ export default async function MembershipsPage(context) {
         { isTechnician ? <UserSelection userdata={userdata}/> : 
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
-        </div> }                                   
-              <Memberships_Next15 userdata={userdata} selecteduser={undefined} project={"sakaryarehberim.com"}/>
+        </div> }
+                  {/* <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/> */}
+                  <Packages_Core_Next15 userdata={userdata}/>
         </div>
   );
 }

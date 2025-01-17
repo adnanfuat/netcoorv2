@@ -4,7 +4,7 @@ import s from "./layoutleft.module.css";
 // import { FlagsMenu } from "@/modules/common/flagsmenu";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { RiComputerFill, RiMoneyCnyBoxFill, RiNotification2Fill, RiMailFill, RiAdminFill, RiShoppingCart2Fill      } from "react-icons/ri";
+import { RiComputerFill, RiMoneyCnyBoxFill, RiNotification2Fill, RiMailFill, RiAdminFill, RiShoppingCart2Fill, RiBox1Fill      } from "react-icons/ri";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { RiAccountCircleFill,RiBuilding3Fill  } from "react-icons/ri";
 import { RiNewspaperFill } from "react-icons/ri";
@@ -31,8 +31,8 @@ export const LayoutLeft = (props) => {
   let {uploadObj, userdata} = props ?? {};
   // console.log("xzxczxcxczxcz", uploadObj);
   // const userdata = isLogged();
-  let { user } = userdata ?? {};
-  let email = userdata?.user?.email;  
+  let { permissions } = userdata ?? {};
+  let email = userdata?.email;  
   // let showweb =
   //   user?.websites?.length > 0 ||
   //   user?.userinfo?.bigdata?.static?.authorizedwebs?.length > 0;
@@ -71,7 +71,6 @@ export const LayoutLeft = (props) => {
       // const searchParams = useSearchParams();
       // let userparam = searchParams.get('user');
 
-      let permissions=[]
 
       
   return (
@@ -110,22 +109,61 @@ export const LayoutLeft = (props) => {
               )}
 
               <div className={`${s.menuitem} flexrow`}> <RiAccountCircleFill /> <Link href="/p/myaccount">Hesabım</Link> </div>
+              
+              <div className={`${s.menuitem} flexrow ${s.blink_me}`}> <RiMapPinUserFill /> <Link href="/p/jobadverts">İş İlanları</Link> </div>
 
               <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill  /> <Link href="/p/memberships">Firmalarım</Link> </div>
+              
+              <div className={`${s.menuitem} flexrow`}> <RiNotification2Fill  /> <Link href="/p/notifications">Bildirimler</Link> </div>
+
+              <div className={`${s.menuitem} flexrow`}> <RiMailFill   /> <Link href="/p/messages">Mesajlar</Link> </div>
+              
+              { (
+                <div className={`${s.menuitem} flexrow`}>
+                  <RiMoneyCnyBoxFill />
+                  <Link href="/p/payment">Ödeme</Link>
+                </div>
+              )}
+
+
+              {permissionsControlV3({ askList: ["payments"], type: "some", permissions }) && (
+                <div className={`${s.menuitem} flexrow`}>
+                  <RiMoneyPoundBoxFill />
+                  <Link href="/p/payments">Ödemeler</Link>
+                </div>
+              )}
+
+                            
+              <div className={`${s.menuitem} flexrow`}>
+                  <RiBox1Fill />
+                  <Link href="/p/packages">Paketler</Link>
+                </div>
+
+
+                { (
+                <div className={`${s.menuitem} flexrow`}>
+                  <RiPagesFill />
+                  <Link href="/p/webs">Web siteleri</Link>
+                </div>
+              )}
+
+              { (
+                <div className={`${s.menuitem} flexrow`}>
+                  <RiShoppingCart2Fill/>
+                  <Link href="/p/webs?subtab=web_orders">Siparişler</Link>
+                </div>
+              )}
+              
 
               <div className={`${s.menuitem} flexrow`}> <RiNewspaperFill /> <Link href="/p/contents">Haberler</Link> </div>
 
               <div className={`${s.menuitem} flexrow`}> <RiGalleryFill /> <Link href="/p/cuffs">Manşetler</Link> </div>
 
-              <div className={`${s.menuitem} flexrow`}> <RiNotification2Fill  /> <Link href="/p/notifications">Bildirimler</Link> </div>
-
-              <div className={`${s.menuitem} flexrow`}> <RiMailFill   /> <Link href="/p/messages">Mesajlar</Link> </div>
-
               {/* <div className={`${s.menuitem} flexrow`}> <RiHome2Fill /> <Link href="/p/realestates">Emlak İlanları</Link> </div> */}
 
-              <div className={`${s.menuitem} flexrow ${s.blink_me}`}> <RiMapPinUserFill /> <Link href="/p/jobadverts">İş İlanları</Link> </div>
+              
 
-                { 1==1 && (
+                { 1==2 && (
                     <div className={`${s.menuitem} flexrow`}>
                       <RiTaskFill />
                       <Link href="/p/tasks">Görevler</Link>
@@ -141,19 +179,7 @@ export const LayoutLeft = (props) => {
               )}
 
 
-              { (
-                <div className={`${s.menuitem} flexrow`}>
-                  <RiPagesFill />
-                  <Link href="/p/webs">Web siteleri</Link>
-                </div>
-              )}
 
-              { (
-                <div className={`${s.menuitem} flexrow`}>
-                  <RiShoppingCart2Fill/>
-                  <Link href="/p/webs?subtab=web_orders">Siparişler</Link>
-                </div>
-              )}
 
 
               {test_manager && (
@@ -164,24 +190,8 @@ export const LayoutLeft = (props) => {
               )}
 
 
-                { (
-                <div className={`${s.menuitem} flexrow`}>
-                  <RiMoneyCnyBoxFill />
-                  <Link href="/p/payment">Ödeme</Link>
-                </div>
-              )}
-
 
               {permissionsControlV3({ askList: ["payments"], type: "some", permissions }) && (
-                <div className={`${s.menuitem} flexrow`}>
-                  <RiMoneyPoundBoxFill />
-                  <Link href="/p/payments">Ödemeler</Link>
-                </div>
-              )}
-
-
-
-              {permissionsControlV3({ askList: ["payments"], type: "some" }) && (
                 <div className={`${s.menuitem} flexrow`}>
                   <RiAdminFill />
                   <Link href="/p/expert">Panel</Link>

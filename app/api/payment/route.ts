@@ -13,7 +13,6 @@ export async function POST(req:NextRequest, res:NextResponse) {
 
     //console.log("aaaaaaaaaaa_r___ 0 ", req);
     let returndata = await apipaymentfunc({req,res});
-
     
     let result=returndata?.result;
     let status=returndata?.status;

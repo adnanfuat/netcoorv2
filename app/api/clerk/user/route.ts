@@ -17,13 +17,13 @@ export async function GET() {
 
   let emailAddressObj=emailAddresses[0];
   let emailAddress=emailAddressObj?.emailAddress;
-  //console.log("emailAddressObj::: ", emailAddress);
+  // console.log("emailAddressObj::: ", emailAddress);
   // return NextResponse.json({});
-  //return NextResponse.json({ emailAddressObj?.emailAddress}, { status: 401 })
+  // return NextResponse.json({ emailAddressObj?.emailAddress}, { status: 401 })
 
   if (!user?.id) {
-    return NextResponse.json({ message: "Not Authenticated" , user, id:user?.id }, { status: 401 });
-  }
+                    return NextResponse.json({ message: "Not Authenticated" , user, id:user?.id }, { status: 401 });
+                 }
 
 
   const secret = new TextEncoder().encode( process.env.JWT_SECRET, );
@@ -38,7 +38,6 @@ export async function GET() {
 
     const claims = jose.decodeJwt(jwt)
     
-
     let cachekey  =  `giveuserv2_${jwt}`;
     let {cached}  =  iscached({cachekey});
 
@@ -56,11 +55,9 @@ export async function GET() {
                         
         makecached({cachekey, value:userdata, ttl:50000});
 
-
     }
 
-    
-                          
+                              
      try {
        // verify token       
       //  const { payload, protectedHeader } = await jose.jwtVerify(jwt, secret, {
