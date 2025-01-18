@@ -16,7 +16,7 @@ export default function UsersCore  (props) {
 
   let {userdata} = props ?? {};
 
-  const searchParams = useState({ order:"", count:50});
+  const searchParams = useState({ order:2, count:50});
   let count = searchParams[0]?.count;
   let order = searchParams[0]?.order;
   let keyword = searchParams[0]?.keyword;
