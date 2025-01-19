@@ -32,9 +32,8 @@ let {userdata} = props ?? {}
 // };
              
   return (<div>
-  <div style={{backgroundColor:"#db2d2d", padding:12, paddingBottom:20, fontSize:10, color:"white"}}>
-    
-    Sistemimizde büyük bir güncelleme yapılmaktadır. Tüm servisleri geri getiriyoruz. İlk olarak iş ilanlarıyla ilgili bazı servisler devreye alınmıştır. Diğer servisleri de hızlıca açacağız. Kesintiden ötürü özür dileriz.
+  <div style={{backgroundColor:"#db2d2d", padding:12, paddingBottom:20, fontSize:10, color:"white"}}>    
+          Kesinti sonrası birçok servisi geri getirdik. Yaşadığınız sıkıntıları whatsapp üzerinden (05495440554) bize bildirebilirsiniz.
   </div>
                                                         
                                                                           <div className={s.shell}> 
