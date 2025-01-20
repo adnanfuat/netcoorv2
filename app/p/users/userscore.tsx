@@ -10,13 +10,14 @@ import s from "./userscore.module.css";
 import React, { useState } from 'react';
 
 import { RiLockUnlockLine, RiDragMove2Fill } from "react-icons/ri";
+import { usershook_next15 } from '@/modules/functions/usershook_next15';
 
 
 export default function UsersCore  (props) {
 
   let {userdata} = props ?? {};
 
-  const searchParams = useState({ order:2, count:50});
+  const searchParams = useState({ order:2, count:250});
   let count = searchParams[0]?.count;
   let order = searchParams[0]?.order;
   let keyword = searchParams[0]?.keyword;
@@ -27,13 +28,17 @@ export default function UsersCore  (props) {
   let auth_userinfo_view=permissions?.find(item=>item?.name=="userinfo_view");
   let auth_userinfo_mutate=permissions?.find(item=>item?.name=="userinfo_mutate");
 
-  const fetcher= async ()=> {
-          let res =  await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"users2", count, order, keyword  } }) } );      
-          res=await res.json();
-          return res
-  };
-                                      
-  const { isLoading, data } = useQuery( {queryKey:["users2", count, order, keyword ], queryFn:() => fetcher(), staleTime:2000000000000000});
+  // const fetcher= async ()=> {
+  //         let res =  await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"users2", count, order, keyword  } }) } );      
+  //         res=await res.json();
+  //         return res
+  // };
+
+  const { isLoading, data } = usershook_next15({count, order, keyword})
+  
+  //useQuery( {queryKey:["users2", count, order, keyword ], queryFn:() => fetcher(), staleTime:2000000000000000});
+
+  //return JSON.stringify(data)
 
   let users = data ?? [];
    
@@ -80,11 +85,11 @@ let router = useRouter();
                                                                                     
                                                                                     <div className={s.buttons}>
                                                                                       {auth_userinfo_mutate && <div><button  className={s.button} onClick={()=>{setIsOpen(true); setuseremail(user?.email)}}>Tıkla</button></div>}
-                                                                                      <div><button  className={s.button} onClick={()=>{_userState.myAccountUser.email=user?.slug_tr; setItem("ccuser", user?.slug_tr);  router.push("/myaccount")}}>Git</button></div>
-                                                                                      {user?.error && <div><button  className={`${s.button} ${s.usererror}`} onClick={()=>{ loginFixFunc({target:user?.email}) }} title="Fix Login Problem" >Fix</button></div>}
+                                                                                      <div><button  className={s.button} onClick={()=>{_userState.myAccountUser.email=user?.slug_tr;   router.push("/p/myaccount")}}>Git</button></div>
+                                                                                      {/* {user?.error && <div><button  className={`${s.button} ${s.usererror}`} onClick={()=>{ loginFixFunc({target:user?.email}) }} title="Fix Login Problem" >Fix</button></div>} */}
                                                                                       {<button  onClick={()=>{setusertransfer(user?.email); } } className={`${s.button} ${s.usererror}`} title="Taşı"><RiDragMove2Fill/></button>}
 
-                                                                                      {(user?.bigparent_key && user?.email!="yigitruzgaruzun@gmail.com" && user?.email!="kevseresen@sakaryarehberim.com"  ) && <div><button  className={`${s.button} ${s.usererror}`} onClick={()=>{ removePasswordFunc({target:user?.email}) }} title="Şifre Kaldır" ><RiLockUnlockLine/></button></div>}
+                                                                                      {/* {(user?.bigparent_key && user?.email!="yigitruzgaruzun@gmail.com" && user?.email!="kevseresen@sakaryarehberim.com"  ) && <div><button  className={`${s.button} ${s.usererror}`} onClick={()=>{ removePasswordFunc({target:user?.email}) }} title="Şifre Kaldır" ><RiLockUnlockLine/></button></div>} */}
                                                                                       
                                                                                     </div>
 

@@ -1,0 +1,94 @@
+
+.maintab {
+      display: flex;
+      flex-direction: column;            
+      background-color: #f1f1f1;
+      justify-content: flex-start;
+}
+
+.sub_header{
+      display: flex;
+      font-weight: bold;
+      padding: 10px 0px;
+}
+
+.shell {      
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+}
+
+.tabcontentwr {
+      display: flex;
+      background-color: aqua;
+      flex-direction: column;
+      padding: 20px;
+      gap:20px;
+      background-color: #ededed;
+}
+
+.detail_buttons {
+            display: flex;
+            gap:10px;
+            align-items: center;
+         }
+
+.name {
+            grid-area: name;
+      }
+
+
+.active {
+            grid-area: active;
+            right: 10px;
+            top:10px;
+        }
+
+.cuffs {
+            grid-area: cuffs;            
+      }      
+
+.firstimg {
+            grid-area: firstimg;               
+          }    
+          
+.metadata {
+            grid-area: metadata;                  
+          }              
+
+.category {
+            grid-area: category;                  
+          }            
+
+
+.contents {
+      grid-area: contents;      
+      /* background-color: rgb(221, 186, 186);       */
+}
+
+.navigator {
+      display: flex;
+      position: fixed;
+      right: 5px;
+      bottom: 25%;
+      /* background-color: rgb(221, 186, 186);    /    */
+}
+
+.buttons{
+      position: fixed;
+      display: flex;
+      right:0px;
+      bottom:0px;
+      gap:10px;
+      padding:10px;
+      flex-direction: column;   
+      z-index: 50;
+  }
+
+
+
+
+
+
+
+
