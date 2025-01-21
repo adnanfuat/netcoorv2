@@ -160,13 +160,12 @@ export const LayoutLeft = (props) => {
               <div className={`${s.menuitem} flexrow`}> <RiGalleryFill /> <Link href="/p/cuffs">Manşetler</Link> </div>
 
               {/* <div className={`${s.menuitem} flexrow`}> <RiHome2Fill /> <Link href="/p/realestates">Emlak İlanları</Link> </div> */}
-
               
 
-                { 1==2 && (
+                { 1==1 && (
                     <div className={`${s.menuitem} flexrow`}>
                       <RiTaskFill />
-                      <Link href="/p/tasks">Görevler</Link>
+                      <Link href="/p/task/list">Görevler</Link>
                     </div>
                 )}
 

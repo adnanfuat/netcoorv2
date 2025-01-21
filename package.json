@@ -25,6 +25,7 @@
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "date-fns": "^4.1.0",
+    "firebase": "^11.2.0",
     "formik": "^2.4.6",
     "framer-motion": "^11.15.0",
     "iconv-lite": "^0.6.3",
@@ -47,6 +48,7 @@
     "react-tabs": "^6.1.0",
     "slugify": "^1.6.6",
     "soap-as-promised": "^1.26.0",
+    "sonner": "^1.7.2",
     "svix": "^1.44.0",
     "truncate": "^3.0.0",
     "valtio": "^2.1.2"
