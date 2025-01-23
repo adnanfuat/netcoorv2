@@ -33,7 +33,7 @@ export default async function TaskCategoriesPage(context) {
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
         </div> }                  
-                  <TaskCategories userdata={userdata}/>
+                  <TaskList userdata={userdata}/>
         </div>
   );
 }
