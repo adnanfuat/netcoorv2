@@ -32,9 +32,9 @@ let {userdata} = props ?? {}
 // };
              
   return (<div>
-  <div style={{backgroundColor:"#db2d2d", padding:12, paddingBottom:20, fontSize:10, color:"white"}}>    
+  {/* <div style={{backgroundColor:"#db2d2d", padding:12, paddingBottom:20, fontSize:10, color:"white"}}>    
           Kesinti sonrası birçok servisi geri getirdik. Yaşadığınız sıkıntıları whatsapp üzerinden (05495440554) bize bildirebilirsiniz.
-  </div>
+  </div> */}
                                                         
                                                                           <div className={s.shell}> 
                                                                                     {/* {JSON.stringify(userdata)} */}

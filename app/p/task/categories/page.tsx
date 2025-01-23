@@ -5,11 +5,12 @@ import {_userState} from "@/modules/constants/user"
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
-import Payment_Core_Next15 from "@/modules/payment_core_next15";
+import TaskList from "@/modules/task/tasklist";
+import TaskCategories from "@/modules/task/taskcategories";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
-export default async function PaymentPage(context) {
+export default async function TasksListPage(context) {
   
   let params = await context?.params;      
   let userdata =  await isloggedv4_clerk();
@@ -24,20 +25,20 @@ export default async function PaymentPage(context) {
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
 
   let defaultusername= userdata?.myname? (userdata?.myname +" "+ userdata?.mysurname ?? "" ?? "")  : undefined
-  let defaultuserphone=userdata?.myphones?.[0]?.phone ?? "";
-
-      
+  let defaultuserphone=userdata?.myphones?.[0]?.phone ?? ""
+    
   return (
       <div className={s.shell}> 
         {/* {JSON.stringify(userdata)}                                                   */}
         { isTechnician ? <UserSelection userdata={userdata}/> : 
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
-        </div> }
-                  {/* <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/> */}
-                  <Payment_Core_Next15 userdata={userdata} selecteduser={undefined} childTabStateObj_1={undefined} tabCount={4} domain="netcoor.com" project_type="independent" module_type={"free"} defaultusername={defaultusername} defaultdetail={undefined} defaultamount={undefined} defaultphone={defaultuserphone}/>                  
+        </div> }                  
+                  <TaskCategories userdata={userdata} mode={"tasks"}/>
         </div>
   );
 }
+
+
 
 
