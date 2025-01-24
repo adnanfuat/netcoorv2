@@ -21,7 +21,8 @@ import { _userState } from "@/modules/constants/user";
 // import {open_sans} from "@/constants/fonts/index"
 import permissionsControlV3 from '@/modules/functions/permissionscontrolv3';
 import { Open_Sans } from 'next/font/google';
-import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from '@clerk/nextjs';
+import { ClerkLoading, ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from '@clerk/nextjs';
+import { Loading } from "@/modules/loadings/loading";
 const open_sans = Open_Sans({weight:"400",subsets:["latin","latin-ext"], variable:"--font-opensans"   }); 
 
 // const DynamicUploadCentral = dynamic(() => import("@/components/commonnew/uploadcentral"),{ loading: () => 'Loading...', });
@@ -78,11 +79,11 @@ export const LayoutLeft = (props) => {
     {/* {JSON.stringify(userdata)} */}
 
         <div className={s.top}>
-                    <div title="Çıkış" >
+                    <div title="Çıkış" >                                        
                                           <SignedOut>
                                             <RedirectToSignIn />
                                           </SignedOut>
-                                          <SignedIn >
+                                          <SignedIn>
                                             <UserButton  />                                             
                                           </SignedIn>
                 </div>
@@ -190,7 +191,7 @@ export const LayoutLeft = (props) => {
 
 
 
-              {permissionsControlV3({ askList: ["payments"], type: "some", permissions }) && (
+              {test_technician  && (
                 <div className={`${s.menuitem} flexrow`}>
                   <RiAdminFill />
                   <Link href="/p/expert">Panel</Link>
