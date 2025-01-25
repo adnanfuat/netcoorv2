@@ -6,10 +6,12 @@ import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
 import Payment_Core_Next15 from "@/modules/payment_core_next15";
+import Contracts_Next15 from "@/modules/contracts_next15";
+import ContractCategories_Next15 from "@/modules/contractcategories_next15";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
-export default async function RegionsPage(context) {
+export default async function ContractCategoriesPage(context) {
   
   let params = await context?.params;      
   let userdata =  await isloggedv4_clerk();
@@ -22,15 +24,16 @@ export default async function RegionsPage(context) {
   let technicianAuth     =   userdata?.userscopes.isManager;        
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
-
-  let defaultusername= userdata?.myname? (userdata?.myname +" "+ userdata?.mysurname ?? "" ?? "")  : undefined
-  let defaultuserphone=userdata?.myphones?.[0]?.phone ?? "";
-
-      
+    
   return (
       <div className={s.shell}> 
-        
-      </div>
+        {/* {JSON.stringify(userdata)}                                                   */}
+        { isTechnician ? <UserSelection userdata={userdata}/> : 
+        <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
+        {userdata?.email}
+        </div> }                  
+                  <ContractCategories_Next15 userdata={userdata} selecteduser={undefined} />
+        </div>
   );
 }
 

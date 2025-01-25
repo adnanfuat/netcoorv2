@@ -1,0 +1,229 @@
+.copyinput{
+    width:60px;    
+}
+
+.inputrowgroup{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+
+
+.inputswr{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+
+.inputwr{
+    display: flex;
+    flex-direction: column;
+    width: 100%;    
+    gap:10px;
+    position: relative;
+}
+
+
+
+.inputtitle {
+    display: flex;
+    position: relative;
+    font-size: 0.8rem;
+    color: rgb(82, 82, 82);
+    
+}
+
+.inputtitle > :nth-child(1) {
+                                    background-color: rgb(233, 233, 233);
+                            }
+
+
+.inputtitle > :nth-child(2) {
+                                    position: absolute;
+                                    top:-10px;
+                                    right:-10px;
+                            }
+
+
+.inputtitle > :nth-child(1) {                                
+                                position: absolute;
+                                top:-10px;
+                                right: 0px;
+                            }                            
+
+
+.inputrow {
+    display: flex;
+    gap:40px;
+    width: 100%;
+}                            
+
+
+.countryshell {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #c9c9c9;
+    border-radius: 4px;
+    gap:12px;
+    display: flex;
+    flex-direction: column;
+}           
+
+.cityshell {
+    padding: 2px 48px;
+    background-color: #c9c9c9;
+    border-radius: 4px;
+    gap:2px;
+    display: flex;
+    flex-direction: column;
+}  
+
+
+
+.citieswr{
+    display: flex;
+    flex-direction: column;
+}
+
+.titlewr {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #dedede;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    user-select: none;
+}     
+ 
+.titlewr:hover {
+        border: 2px solid rgb(73, 145, 204);
+}
+
+
+.button {
+    cursor: pointer;
+}
+
+.citytitlewr {
+    padding: 4px 12px;
+    font-size: 16px;
+    background-color: #f1d7a3;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+}   
+
+
+.citytitlewr:hover {
+    border: 2px solid rgb(73, 145, 204);
+}
+
+
+.districttitlewr {
+    padding: 4px 12px;
+    font-size: 16px;
+    background-color: #f6ead1;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+}   
+
+
+.districttitlewr:hover {
+    border: 2px solid #d6a63d;
+}
+
+
+
+.subdistricttitlewr {
+    padding: 4px 12px;
+    font-size: 16px;
+    background-color: #f7fff2;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+}   
+
+
+.subdistricttitlewr:hover {
+    border: 2px solid #f9fff5;
+}
+
+
+
+.body {    
+    background-color: #dedede;    
+    padding: 10px;
+    border-radius: 4px;    
+    display: flex;
+    gap:20px;
+}                            
+
+.iconsrightwr{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+
+.slugicon{
+    display: flex;
+    position: absolute;
+    right:0px
+}
+
+
+.countriesshell {
+                    display: flex;
+                    flex-direction: column;
+                    gap:10px;                    
+                }
+
+
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    padding: 80px;
+}
+
+
+.modaltitle {
+    display: flex;
+    font-weight: bold;
+}
+
+
+
+.modaltext {
+    display: flex;
+}
+
+.addwr{
+    display: flex;
+    align-items: center;
+    gap:6px;
+    cursor: pointer;
+}
+
+.addwr:hover{
+color: rgb(2, 58, 95);
+}
+
+.scicon {
+    user-select: none;
+    cursor: pointer;
+}
+

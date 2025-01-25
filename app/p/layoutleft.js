@@ -174,7 +174,7 @@ export const LayoutLeft = (props) => {
               {test_manager && (
                 <div className={`${s.menuitem} flexrow`}>
                   <RiListSettingsFill />
-                  <Link href="/p/contracts">Sözleşmeler</Link>
+                  <Link href="/p/contract/list">Sözleşmeler</Link>
                 </div>
               )}
 
