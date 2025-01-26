@@ -1,0 +1,195 @@
+.shell {
+    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap:10px;    
+}
+
+.itemswr {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding:  20px;
+}
+
+.menuwr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:20px;
+    background-color: antiquewhite;
+    padding: 10px;
+    border: 1px solid gray;
+    align-items: center;        
+}
+
+.caution {
+    font-size: 13px;
+}
+
+.info {
+    display: flex;
+    gap:20px;
+    flex-direction: column;
+    
+
+    
+
+    }
+
+.info_buttons {
+    display: flex;
+    gap:20px;
+    align-items: center;
+    
+}    
+
+.items{
+    background-color: antiquewhite;
+    padding: 10px;    
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+    .run {
+        background-color: rgb(163, 0, 0);
+        font-size: 0.7rem;
+        padding: 6px 16px;
+        border-radius: 6px;
+        border: 2px solid black;
+        min-width: 220px;    
+        justify-content: center;
+        display: flex;
+    }
+    .run a {
+        color: white;
+    }
+        
+    .tabcontents {
+        font-size: 0.8rem;
+        border:1px solid gray;        
+        background-color: rgb(230, 230, 230);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+    
+    .numberinput {
+        width:80px; 
+        text-align: center; 
+        font-weight: bold;
+    }    
+
+    .textinput {
+        width:180px; 
+        text-align: center; 
+        font-weight: bold;
+    }        
+
+    .buildrow {
+
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 4fr 1fr 13fr 5fr 3fr 1fr;
+        font-size: 0.8rem;
+    }
+
+    .select {
+        padding: 10px;
+    }
+    
+    .inputwr {
+        display: flex;
+        flex-direction: column;
+        gap:10px
+    }
+
+    .icon{
+        font-size: 20px;
+        cursor: pointer;
+        color: brown;
+    }
+
+    .delete{
+        font-size: 30px;
+        cursor: pointer;
+        color: brown;
+        position: absolute;
+        top: -10px;
+        right: 0px;
+    }
+
+
+    .projects{
+        font-size: 30px;
+        cursor: pointer;
+        color: brown;
+        position: absolute;
+        top: -10px;
+        right: 60px;
+    }
+
+
+
+    .ulstyle {
+        display: flex;
+        flex-direction: column;
+        gap:6px;
+        padding: 0px 20px ;
+        border:1px solid gray;
+        border-width:0px 1px 0px 0px;        
+        
+        margin: 0;
+        padding: 0;
+    }
+
+    .ulstyle > li {
+        padding: 12px;
+        border-radius: 6px;
+        
+        
+    }
+
+    .ulstyle > li {
+        margin-right: 50px;        
+        display: flex;
+        align-items: center;
+        gap:9px;
+    }    
+
+
+    .noteswr {
+        display: flex;
+        flex-direction: column;
+        gap:10px
+    }
+    
+    .note {
+        min-height: 30px;
+        background-color:#dfdfdf;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        
+    }
+
+    .maintab_1  {
+        background-color: #dddddd;        
+        
+        /* border:2px #cecece solid */
+    }
+
+    .maintab_2 {
+        background-color: #ffffff;
+        /* padding: 10px; */
+        /* border:2px #b6b6b6 solid */
+    }
+
+    .maintab_2_wr {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 4px;
+    }

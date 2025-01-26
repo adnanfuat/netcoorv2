@@ -1,0 +1,6 @@
+Sektör, altsektör gibi sayfalar için build listesi oluşturmaya yarar...
+Bu listeleri kullanarak
+
+1.) "Build aşamasında getstaticpaths için bu veriler kullanılır..."
+2.)  Site haritası oluştururken bu veriler kullanılır...
+3.)  Ön yüzde popüler alanları gösterirken bu veriler kullanılır.

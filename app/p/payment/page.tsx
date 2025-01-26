@@ -29,7 +29,13 @@ export default async function RegionsPage(context) {
       
   return (
       <div className={s.shell}> 
-        
+                {/* {JSON.stringify(userdata)}                                                   */}
+                { isTechnician ? <UserSelection userdata={userdata}/> : 
+        <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
+        {userdata?.email}
+        </div> }
+                  {/* <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/> */}
+                  <Payment_Core_Next15 userdata={userdata} selecteduser={undefined} childTabStateObj_1={undefined} tabCount={4} domain="netcoor.com" project_type="independent" module_type={"free"} defaultusername={defaultusername} defaultdetail={undefined} defaultamount={undefined} defaultphone={defaultuserphone}/> 
       </div>
   );
 }
