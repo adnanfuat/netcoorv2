@@ -16,7 +16,7 @@ const WebContent_Next15 = (props) => {
     
         const searchParams = useSearchParams();
         const content_id = searchParams.get('id');
-        const domain = searchParams.get('domain');
+        // const domain = searchParams.get('domain');
     
         const navigatonLevelObj = useState(); // deep, peak... // İleri geri butonları hangi saeviyedeki kategoriden tarama yapılacak...
         let  editUrlPrefix = "p/webs/c";
@@ -31,7 +31,7 @@ const WebContent_Next15 = (props) => {
       
         // return JSON.stringify("contentData")
         let fetcher_WebContent_Backend = async () => {       
-                                                        let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontent_backend_next15",domain, id:content_id, level:navigatonLevelObj[0]} }) } ); 
+                                                        let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontent_backend_next15", id:content_id, level:navigatonLevelObj[0]} }) } ); 
                                                         let datajson =  await res?.json();   
                                                         // console.log("datajsondatajson1:", datajson);                                                             
                                                         // datajson = datajson?.fetcheddata;     
@@ -39,6 +39,9 @@ const WebContent_Next15 = (props) => {
                                                     }
                   
           const { data:contentData, isLoading } = useQuery({queryKey:["webcontent_backend_next15", content_id, navigatonLevelObj[0]], queryFn:() => fetcher_WebContent_Backend(), placeholderData:keepPreviousData }); // { enabled:(!!userdata && !!domain) }
+
+          let domain = contentData?.content?.domain;
+
           const addContentButtonState = useState(true); // Ekleme butonları ekleme esnasında disable yapmak için..
           let fetcher_ContentsInTheSameCategory_Backend = async ({parentskeys}) => {  // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.     
 
@@ -53,15 +56,7 @@ const WebContent_Next15 = (props) => {
    
   const fetcher_webcategories = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"web_categories_next15", domain } }) } ); res =  await res?.json(); return res; };
     
-  let { data:categories } = useQuery( {queryKey:["web_categories_next15" ], queryFn:() => fetcher_webcategories()} 
-                                                                                                                // {                                                          
-                                                                                                                //     enabled:!!userdata?.email,
-                                                                                                                //     refetchOnWindowFocus:false,  
-                                                                                                                //     refetchOnReconnect: false,
-                                                                                                                //     retry: false,
-                                                                                                                //     staleTime: 6000,
-                                                                                                                // }
-                                    );
+  let { data:categories } = useQuery( {queryKey:["web_categories_next15", domain ], queryFn:() => fetcher_webcategories()} );
                                                                         
     const updateWebContent =async ({values})=>{        
         
@@ -72,7 +67,8 @@ const WebContent_Next15 = (props) => {
                                                           body: JSON.stringify({ data:{ ...values, type:"websavecontent", domain } }),
                                                           }                                                                        
                                                                       );                                                                      
-                                                          let datajson =  await res.json();                                                                                                                          
+                                                          let datajson =  await res.json();     
+                                                          queryClient.invalidateQueries();                                                                                                                     
                                                           return datajson?.data;                                                                                                                                    
                                               };    
   
@@ -95,7 +91,7 @@ const WebContent_Next15 = (props) => {
                                                       //  console.log("datajsondatajson: ", datajson);                                                                 
                                                       queryClient.invalidateQueries();
                                                       addContentButtonState[1](true);    
-                                                      router.push(`/p/webs/c?domain=${domain}&id=${datajson?.id}`);                                                          
+                                                      router.push(`/p/webs/c?id=${datajson?.id}`);                                                          
                                                       return datajson;
 
                                                                        }
@@ -144,7 +140,8 @@ const WebContent_Next15 = (props) => {
 
     
   return (
-    <div>
+    <div> 
+      {/* {JSON.stringify(content?.domain)} */}
         {contentData ? <CoreContent_Next15 {...props}/>:                             
                                           isLoading ? <div> Yükleniyor </div> : <div> <Link href={"/p/webs"} >Böyle bir içerik yok!</Link> </div>                                                                                          
                                       }

@@ -27,7 +27,7 @@ export async function POST(req:NextRequest) {
         .sign(secret)
             
     let result = await perfectqueryv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:data?.undefinedreturn ?? []});                   
-    data?.type=="sectorsandsubsectors_next15" && console.log("perfectquery_next15:______ ", result,  data?.type);
+    // data?.type=="sectorsandsubsectors_next15" && console.log("perfectquery_next15:______ ", result,  data?.type);
     
     // console.log("perfectquery_next15:______ ", result,  data?.type);
 

@@ -17,33 +17,20 @@ const MyAccountContent_Next15 = (props) => {
     
         const searchParams = useSearchParams();
         const content_id = searchParams.get('id');
-        const domain = searchParams.get('domain');
-
-
-        let editUrlPrefix="mycontent";
-        let listingUrlPrefix="myaccount";
+        
+        let editUrlPrefix="p/myaccount/content/c";
+        let listingUrlPrefix="p/myaccount";
         let tab="contents";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
         let subtab="x";  // x:önemsiz bir değer. Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için.. MyAccount > Content için gerek yok. Zaten content en üst seviyede...
   
         let router=useRouter();
                     
-        const filtered_categoriesFunc = ({value}) => { console.log("zxcxzxcxzccxzcxz", value);  _userState.myaccount_contents_filtered_categories  =value; }
-  
+        const filtered_categoriesFunc = ({value}) => { _userState.myaccount_contents_filtered_categories  =value; }                  
         
-          // const { isLoading, data:myaccount } = giveuserv2hook_next15({anotheruser:selecteduser, enabled:!!selecteduser})
-          
-          
-                                     
-  
-        const queryClient = useQueryClient();
-  
-  
-        // const fetcher_myaccountcategories = async () => { let res= await fetch(`/api/swissarmyknifequery`, { method: "POST", body: JSON.stringify({ data:{ type:"myaccount_categories", email:selecteduser } }) } ); res =  await res?.json(); return res; };
-  
-        // let { data:categories } = useQuery({queryKey:["myaccount_categories", selecteduser ], queryFn:() => fetcher_myaccountcategories() }); 
-  
-  
-  
+                                                           
+        const queryClient = useQueryClient();    
+
+      
   
         let fetcher_Myaccount_Content_Backend = async () => {       
   
@@ -52,10 +39,9 @@ const MyAccountContent_Next15 = (props) => {
                                                             // Şimdilik yukarıdan okuyorum...
                                                             // return contents?.find(a=>a.id==content_id)
   
-                                                            let res= await fetch(`/api/myaccount_content_backend`, { method: "POST", body: JSON.stringify({ data:{selecteduser:undefined, id:content_id} }) } );            
-                                                            let datajson =  await res?.json();
-                                                            datajson = datajson?.fetcheddata;
-                                                            queryClient.invalidateQueries();
+                                                            let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"myaccount_content_backend",  id:content_id} }) } );            
+                                                            let datajson =  await res?.json();                                                            
+                                                            
   
                                                             return datajson;                                                              
                                                      }
@@ -63,8 +49,14 @@ const MyAccountContent_Next15 = (props) => {
   
         //  let {} fetcher_contentsinthesamecategory_backend_hook                                                   
                       
-        const { data:contentData } = useQuery({queryKey: ["contentdata", content_id], queryFn:() => fetcher_Myaccount_Content_Backend() } 
-                                             );         
+        const { data:contentData, isLoading } = useQuery({queryKey: ["contentdata", content_id], queryFn:() => fetcher_Myaccount_Content_Backend() }  );      
+        let contentowner = contentData?.content?.user
+
+        // return JSON.stringify(contentData)
+                                             
+                                             
+        const fetcher_myaccountcategories = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"myaccount_categories", email:contentowner } }) } ); res =  await res?.json(); return res; };  
+        let { data:categories } = useQuery({queryKey:["myaccount_categories", contentData?.user ], queryFn:() => fetcher_myaccountcategories() , enabled:!!contentowner });                                              
   
        const addContentButtonState = useState(true);   // Ekleme butonları ekleme esnasında disable yapmak için..
   
@@ -72,19 +64,20 @@ const MyAccountContent_Next15 = (props) => {
        let fetcher_ContentsInTheSameCategory_Backend = async ({parentskeys}) => {  // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.     
         
                                                                           console.log("parentskeysparentskeys: ",parentskeys);
-                                                                          let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"myaccount_contentsinthesamecategory_backend", email:"selecteduser", parentskeys} }) } );            
+                                                                          let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"myaccount_contentsinthesamecategory_backend", email:contentowner, parentskeys} }) } );            
                                                                           let datajson =  await res?.json();                                                                             
                                                                           return datajson;     
                                                                         }
   
   
-  
+        const { data:myaccount } = giveuserv2hook_next15({anotheruser:contentowner, enabled:!!contentowner})
   
   
         const updateMyContent =async ({values})=>{                                                                                                           
                                                           // console.log("dsasasadsdsadsad ",  {...values.content, selecteduser});  
-                                                          let res= await fetch(`/api/perfectmutation_next15`, { method: "POST", body: JSON.stringify({ data: { type:"myaccount_savecontent", content:values.content, selecteduser:"selecteduser" }}), } );  
-                                                          let datajson =  await res?.json();                                                             
+                                                          let res= await fetch(`/api/perfectmutation_next15`, { method: "POST", body: JSON.stringify({ data: { type:"myaccount_savecontent", content:values.content }}), } );  
+                                                          let datajson =  await res?.json();
+                                                          console.log("datajson::::", datajson);
                                                           queryClient.invalidateQueries();                                                                                                                                            
                                                           return datajson                                                          
                                                   };    
@@ -99,16 +92,15 @@ const MyAccountContent_Next15 = (props) => {
                                                           method: "POST",      
                                                           // headers: { "Content-Type": "application/json", "authorization": `Bearer ${session?.user?.accessToken}` },
                                                           body: JSON.stringify({                                                          
-                                                            data:{type:"myaccount_addcontent", selecteduser:"selecteduser", willSendParents}
+                                                            data:{type:"myaccount_addcontent", selecteduser:contentowner, willSendParents}
                                                           }),
                                                         }                                                  
                                                         );            
-                                                        let datajson =  await res?.json();   
-                                                        datajson = datajson?.fetcheddata;
+                                                        let datajson =  await res?.json();                                                           
                                                             
                                                         queryClient.invalidateQueries()                                                      
                                                         addContentButtonState[1](true);    
-                                                        router.push(`/mycontent/${"selecteduser"}/${datajson?.id}`)                                                      
+                                                        router.push(`/p/myaccount/content/c?selecteduser=${contentowner}&id=${datajson?.id}`)                                                      
                                                             
                                                         return datajson;
       
@@ -127,139 +119,14 @@ const MyAccountContent_Next15 = (props) => {
   
           let {content, relatedcontents, indexOfThisContentOnLastParent, afterContent, beforeContent} = contentData ?? {}
 
-
-
     
-  //       const navigatonLevelObj = useState(); // deep, peak... // İleri geri butonları hangi saeviyedeki kategoriden tarama yapılacak...
-  //       let  editUrlPrefix = "p/myaccount/content/c";
-  //       let  listingUrlPrefix = "p/myaccount/content";
-  //       let  tab = "web????";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
-  //       let  subtab = "contents????";  // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için      
-    
-  //       const filtered_categoriesFunc = ({value}) => { _userState.web_contents_filtered_categories  =value; }
-
-  //       const queryClient = useQueryClient();
-  //       let router = useRouter();
-      
-  //       // return JSON.stringify("contentData")
-  //       let fetcher_WebContent_Backend = async () => {       
-  //                                                       let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontent_backend_next15",domain, id:content_id, level:navigatonLevelObj[0]} }) } ); 
-  //                                                       let datajson =  await res?.json();   
-  //                                                       // console.log("datajsondatajson1:", datajson);                                                             
-  //                                                       // datajson = datajson?.fetcheddata;     
-  //                                                       return datajson;                                                      
-  //                                                   }
-                  
-  //         const { data:contentData, isLoading } = useQuery({queryKey:["webcontent_backend_next15", content_id, navigatonLevelObj[0]], queryFn:() => fetcher_WebContent_Backend(), placeholderData:keepPreviousData }); // { enabled:(!!userdata && !!domain) }
-  //         const addContentButtonState = useState(true); // Ekleme butonları ekleme esnasında disable yapmak için..
-  //         let fetcher_ContentsInTheSameCategory_Backend = async ({parentskeys}) => {  // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.     
-
-  //         let res = await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{type:"webcontentsinthesamecategory_backend", domain, parentskeys} }) } );            
-  //         let datajson =  await res?.json();      
-  //         // console.log("datajsondatajso1n", datajson);
-          
-  //         return datajson;
-  // }
-
-  // // return JSON.stringify(contentData)
-   
-  // const fetcher_webcategories = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"web_categories_next15", domain } }) } ); res =  await res?.json(); return res; };
-    
-  // let { data:categories } = useQuery( {queryKey:["web_categories_next15" ], queryFn:() => fetcher_webcategories()} 
-  //                                                                                                               // {                                                          
-  //                                                                                                               //     enabled:!!userdata?.email,
-  //                                                                                                               //     refetchOnWindowFocus:false,  
-  //                                                                                                               //     refetchOnReconnect: false,
-  //                                                                                                               //     retry: false,
-  //                                                                                                               //     staleTime: 6000,
-  //                                                                                                               // }
-  //                                   );
-                                                                        
-  //   const updateWebContent =async ({values})=>{        
-        
-  //                                                   //console.log("aaaaaaaaaaaaaaaaaaaaaaa____",values, domain );
-
-  //                                                   let res= await fetch("/api/perfectmutation_next15", {
-  //                                                         method: "POST",                                                          
-  //                                                         body: JSON.stringify({ data:{ ...values, type:"websavecontent", domain } }),
-  //                                                         }                                                                        
-  //                                                                     );                                                                      
-  //                                                         let datajson =  await res.json();                                                                                                                          
-  //                                                         return datajson?.data;                                                                                                                                    
-  //                                             };    
-  
-  //   let webAddContent= async ({willSendParents}) => {       
-  
-  //                                                   addContentButtonState[1](false);
-                                                                                  
-  //                                                     let res= await fetch(`/api/web_addcontent`,
-  //                                                     {
-  //                                                       method: "POST",      
-  //                                                       // headers: { "Content-Type": "application/json", "authorization": `Bearer ${session?.user?.accessToken}` },
-  //                                                       body: JSON.stringify({
-  //                                                         // query: SwissArmyKnifeMutation,
-  //                                                         data:{domain, willSendParents}
-  //                                                       }),
-  //                                                     }                                                  
-  //                                                     );            
-  //                                                     let datajson =  await res?.json();                                                         
-  //                                                     datajson = datajson?.fetcheddata;    
-  //                                                     //  console.log("datajsondatajson: ", datajson);                                                                 
-  //                                                     queryClient.invalidateQueries();
-  //                                                     addContentButtonState[1](true);    
-  //                                                     router.push(`/p/webs/c?domain=${domain}&id=${datajson?.id}`);                                                          
-  //                                                     return datajson;
-
-  //                                                                      }
-                                                                   
-                                                                                                                                  
-  //   const routeChangerFunc = ({value}) =>          {                                                                                                                                                  
-  //                                                       _userState.myaccount_contents_filtered_categories = value;              
-  //                                                       router.push(`/${listingUrlPrefix}?subtab=${subtab}&p=${value?.join(",")}`, undefined, { shallow: true });
-  //                                                  }  
-  
-                                                            
-               
-  //     let {  text:web_content_editing }   =  langConverter({locale, keyword:"web_content_editing"});
-      
-        
-  //     const BackToContents = ()  => <Link href={`/p/webs`}  style={{fontWeight:"bold"}}> {domain} </Link>
-  
-  //     let {content, relatedcontents, indexOfThisContentOnLastParent, afterContent, beforeContent} = contentData ?? {}
-        
-       
-
-    //     props = {
-    //             // domain:web?.slug_tr,
-    //             content,
-    //             isLoading, 
-    //             // contents,
-    //             categories,
-    //             BackToContents,      // Tüm İçeriklere geri dönme komponenti
-    //             updateContentFunc:updateWebContent,   // 
-    //             indexOfThisContentOnLastParent, // Bu içerin breadcrrumbı (parentsları) arasında, bu içeriğin kaçıncı index'te olduğu. İleri geri butonları buna göre çalışacak...
-    //             relatedcontents,
-    //             afterContent,
-    //             beforeContent,
-    //             addContentFunc:webAddContent, // Sağ üstteki ekle butonundan ekleme yapmak için...
-    //             addContentButtonState, // Ekleme butonlarının disabled durumlarını kontrol için state...                  
-    //             filtered_categoriesFunc,
-    //             fetcher_ContentsInTheSameCategory_Backend, // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.      
-    //             editUrlPrefix, // İleri geri butonlarında kullanılıyor...
-    //             listingUrlPrefix, // Sağ üstteki breadcrumta kullanılıyor
-    //             tab, // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
-    //             subtab, // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
-    //             routeChangerFunc, //Breadcrumta kullanıyorum..
-    //             navigatonLevelObj,
-    //             userdata
-    // }
+     const navigatonLevelObj = useState(); // deep, peak... // İleri geri butonları hangi saeviyedeki kategoriden tarama yapılacak...
 
 
     props = {
       // domain:web?.slug_tr,
       content,
-      isLoading:false,  // Şimdilik false yaptım...
-      // contents,
+      isLoading:false,  // Şimdilik false yaptım...      
       categories,
       BackToContents,      // Tüm İçeriklere geri dönme komponenti
       updateContentFunc:updateMyContent,   // 
@@ -272,10 +139,12 @@ const MyAccountContent_Next15 = (props) => {
       filtered_categoriesFunc,
       fetcher_ContentsInTheSameCategory_Backend, // Web > İçerikler > İçerik > Sağ Üst Breadcrumb > "Bu içeriğinde bulunduğu ilgili kategoride kaç kayıt var" ---> Sorusunun cevabını verir bu servis.      
       routeChangerFunc, // Breadcrumbtaki linklere tıkladığımda vatliod'daki 
-      listingUrlPrefix, // webs, myaccount gibi ana url prefixleri.. Breadcrumbtan geri dönerken lazım olacak
-      tab, 
-      subtab, 
+      listingUrlPrefix, // webs, myaccount gibi ana url prefixleri.. Breadcrumbtan geri dönerken lazım olacak // Sağ üstteki breadcrumta kullanılıyor
+      tab, // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
+      subtab, // Sağ üstteki breadcrumta kullanılıyor. Geri dönüşler için
       editUrlPrefix, // İleri geri butonları için lazım...
+      navigatonLevelObj,
+      userdata,
 }
     
   return (
