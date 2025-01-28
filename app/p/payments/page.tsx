@@ -12,16 +12,14 @@ const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }
 
 export default async function PaymentsPage(context) {
   
-  let params = await context?.params;      
+  let params = await context?.params;
   let userdata =  await isloggedv4_clerk();
 
   let { userscopes } = userdata ?? {};  
   let isTechnician = userscopes?.isTechnician;
+      
+  return ( <PaymentsCore userdata={userdata}/> );
   
-    
-  return (
-          <PaymentsCore userdata={userdata}/>    
-        );
 }
 
 

@@ -3,6 +3,7 @@
     display: grid;
     gap: 30px;
     grid-template-columns: 1fr 1fr 1fr;
+    padding: 38px 0px;
     
 }
 
@@ -35,18 +36,47 @@
     justify-content: center;
 }
 
+.titlerightwr {
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
 .itemtitle {
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 10px;
 }
 
+.defacto {            
+    color: gray;
+    font-size: 11px;
+    padding: 10px 0px;
+}
+
+
+.gsm {            
+    color: gray;
+    font-size: 11px;
+    padding: 10px 0px;
+}
+
+.urlwr {
+    display: flex;
+    justify-content: right;
+    gap:20px;
+}
+
+
 .itemdetails
 {
-background-color: #e9e9e9;
 padding: 10px;
 border-radius: 8px;
+border:1px solid rgb(217, 217, 217);
+padding: 20px;
+
 }
+
 .itemdetail{
     border-bottom: 1px solid rgb(198, 198, 198);
     padding: 5px 0px;
@@ -151,4 +181,65 @@ border-radius: 8px;
     font-weight: bold;    
     font-size: 1.3rem;
     color:green;
+    background-color: #dfdfdf;
+    padding: 10px 20px;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 250;
+    opacity: 1;
+    border-radius: 0px 0px 0px 20px;
+    user-select: none;
+}
+
+.userswr{
+    display: flex;
+    align-items: center;
+    gap:8px;
+}
+
+.titlewr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonwr{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.buttonwr:hover{
+color: rgb(15, 82, 196);
+}
+
+.modalshell{
+    display: flex;
+    gap:40px;
+    flex-direction: column;
+}
+
+.modaltitle{    
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.modalbutton{
+    background-color: #dddede;
+    padding:7px 16px;
+    border-radius: 4px;
+}
+
+.modalbutton:hover{
+background-color: #aeaeae;
+}
+
+
+.modalinputs{
+    display: flex;
+    flex-direction: column;
+    gap:14px
+}
+
+.lockedbutton{
+    font-size: 34px;
 }
