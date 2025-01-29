@@ -68,13 +68,11 @@
 }
 
 
-.itemdetails
+.timeandurls
 {
-padding: 10px;
-border-radius: 8px;
-border:1px solid rgb(217, 217, 217);
-padding: 20px;
-
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .itemdetail{
@@ -242,4 +240,11 @@ background-color: #aeaeae;
 
 .lockedbutton{
     font-size: 34px;
+}
+
+.emptymodal{
+    display: flex;
+    min-height: 500px;
+    align-items: center;
+    justify-content: center;
 }

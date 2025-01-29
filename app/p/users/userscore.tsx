@@ -9,7 +9,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import s from "./userscore.module.css";
 import React, { useState } from 'react';
 
-import { RiLockUnlockLine, RiDragMove2Fill } from "react-icons/ri";
+import { RiDragMove2Fill } from "react-icons/ri";
 import { usershook_next15 } from '@/modules/functions/usershook_next15';
 
 

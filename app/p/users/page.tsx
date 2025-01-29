@@ -22,7 +22,7 @@ export default async function UsersPage(context) {
   let patreonAuth        =   userscopes?.isPatreon;
   let technicianAuth     =   userdata?.userscopes.isManager;        
   
-  if (!manegerAuth) return undefined
+  if (!technicianAuth) return undefined
     
   return (
       <UsersCore userdaa={userdata} />

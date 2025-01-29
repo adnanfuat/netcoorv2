@@ -1,6 +1,6 @@
 "use client"
 import s from "./layoutleft.module.css";
-// import UploadModal from "@/modules/selectimg/uploadmodal";
+ import UploadModal from "@/modules/selectimg/uploadmodal";
 // import { FlagsMenu } from "@/modules/common/flagsmenu";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -29,8 +29,8 @@ const open_sans = Open_Sans({weight:"400",subsets:["latin","latin-ext"], variabl
 
 export const LayoutLeft = (props) => {
 
-  let {uploadObj, userdata} = props ?? {};
-  // console.log("xzxczxcxczxcz", uploadObj);
+  let {modalState, userdata} = props ?? {};
+  // console.log("xzxczxcxczxcz", modalState);
   // const userdata = isLogged();
   let { permissions } = userdata ?? {};
   let email = userdata?.email;  
@@ -102,10 +102,10 @@ export const LayoutLeft = (props) => {
                     <Link href="/p">Konsol</Link>
               </div>
           
-              {upload_authority && (
+              {(upload_authority || test_technician) && (
                 <div className={`${s.menuitem} flexrow`}>
                     <RiUploadCloud2Fill />
-                    <a onClick={() => uploadObj[1]((old) => !old)}>Resim yükle</a>
+                    <a onClick={() => modalState[1]((old) => !old)}>Resim yükle</a>
                 </div>
               )}
 
@@ -234,7 +234,7 @@ export const LayoutLeft = (props) => {
       {/* {test_boss && <div ><RiFileTextLine/><Link href="#">Harcamalarım</Link></div>} */}
 
         <div className={s.upload}>        
-              {/* <UploadModal props={{ upload:uploadObj[0], setupload:uploadObj[1] }}/> */}
+              <UploadModal props={{  modalState, userdata }}/>
         </div>
 
     </div>

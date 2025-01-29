@@ -2,7 +2,7 @@
 import {webProxy} from "@/modules/constants/states/web";
 import { useSearchParams } from 'next/navigation';
 import {useSnapshot} from "valtio";
-import {keepPreviousData, useQuery} from "@tanstack/react-query";
+import {keepPreviousData, QueryClient, useQuery, useQueryClient} from "@tanstack/react-query";
 import s from "./userselection.module.css";
 import React, { useEffect, useState } from "react";
 import 'react-tabs/style/react-tabs.css';
@@ -23,9 +23,13 @@ const UserSelection = (props) => {
   let updateaccount= permissions?.find(p=>p?.name=="updateaccount")?.whichcanedit=="all" ? true : false;      
   let selecteduser = useSnapshot(_userState).myAccountUser.email;
 
+  const queryClient = useQueryClient()
+
   setselecteduserhook({selecteduser, loggeduser:email})
   
   const [ newusermail, setnewusermail ] = useState();
+
+  const submittingState = useState(false);
    
 
        let getUsersFunc= async () => {                                                                            
@@ -38,6 +42,18 @@ const UserSelection = (props) => {
 let { data:users, refetch, isLoading:isLoading_Users, isFetching:isFetching_Users } = useQuery( {queryKey:["usersquery", filter?.keyword ],  queryFn:() =>  getUsersFunc(), staleTime:1200000000000, placeholderData:keepPreviousData  }); 
 
 let processing = isLoading_Users || isFetching_Users;
+
+let initializeuserFunc= async ({email}) => {    
+
+        submittingState[1](true);
+        let res= await fetch(`/api/perfectmutation_next15`, { method: "POST", body: JSON.stringify({ data:{email, type:"initializenewuser"} })});
+        let datajson =  await res?.json();                 
+        submittingState[1](false);
+        queryClient.invalidateQueries() 
+        _userState.myAccountUser.email=email
+        // console.log("res:::.", datajson);        
+        return datajson;
+}
 
 
      return <div className={s.toolwr}>
@@ -80,8 +96,8 @@ let processing = isLoading_Users || isFetching_Users;
                                                           // webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
                                                       }} type="button" title="Ben" style={{padding:4}}><RiAccountPinBoxLine   size={20}/></button>
 
-                                                       <input placeholder="Kullanıcının mail adresini yaz" type={"text"} value={newusermail} onChange={(e)=>setnewusermail(e.target.value)} className={s.newuserinput}/>
-                                                       <button onClick={()=>createUserInfo({user:undefined, email:newusermail})} type="button" title="Yeni kullanıcı oluştur"  className={s.newuserbutton}>Yeni Kullanıcı</button>
+                                                       <input placeholder="Mail adresi yaz" type={"text"} value={newusermail} onChange={(e)=>setnewusermail(e.target.value)} className={s.newuserinput}  style={{padding:4, backgroundColor:"#dedede", padding:10, borderRadius:4}}/>
+                                                       <button onClick={()=>initializeuserFunc({ email:newusermail })} type="button" title="Yeni kullanıcı oluştur"  className={s.newuserbutton}  style={{padding:4, backgroundColor:"#dedede", padding:10, borderRadius:4, color:submittingState[0]? "gray" : "black" }} disabled={submittingState[0]}>Yeni Kullanıcı</button>
                                                        
                                                 </div>}
 
@@ -115,7 +131,7 @@ const createUserInfo = async ({user, email}) => {
         body: JSON.stringify({
           query: SwissArmyKnifeMutation,
           variables: {data:{
-            type:"initializenewuser", // Backendde slug olarak alıyormuş...
+            type:"", // Backendde slug olarak alıyormuş...
             email
       }},
         }),

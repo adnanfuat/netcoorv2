@@ -22,7 +22,7 @@ interface TanstackProviderProps {
 export const LayoutMain = (props: TanstackProviderProps) => {  
 
 
-const uploadObj = useState(false);
+const modalState = useState(false);
 const [left, setleft] = useState(false);
 
 let {userdata} = props ?? {}
@@ -38,10 +38,10 @@ let {userdata} = props ?? {}
                                                         
                                                                           <div className={s.shell}> 
                                                                                     {/* {JSON.stringify(userdata)} */}
-                                                                                    <div className={s.left}> <LayoutLeft  uploadObj={uploadObj} userdata={userdata}/> </div> 
+                                                                                    <div className={s.left}> <LayoutLeft  modalState={modalState} userdata={userdata}/> </div> 
 
                                                                                                 {left && <div className={s.left_mobile}  onClick={()=>setleft(false)}>                
-                                                                                                            <LayoutLeft uploadObj={uploadObj} userdata={userdata}/>
+                                                                                                            <LayoutLeft modalState={modalState} userdata={userdata}/>
                                                                                                             {left && <div className={s.left_mobile_close_button} onClick={()=>setleft(false)}> <RiCloseLine size={30}/> </div>} 
                                                                                                 </div>} 
                                                                                                 <div style={{width:"100%", padding:20}}> {props?.children} </div>
