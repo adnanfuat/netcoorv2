@@ -30,7 +30,8 @@ export async function POST(req:NextRequest) {
             
         //  data?.type=="insert_myaccount_education" && console.log("fata::::::::::", data);
 
-        let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});                   
+        let result = await perfectmutationv2_clerk({data, session:{user:{accessToken:jwt}}, undefinedreturn:[]});          
+        data?.type!=="" && console.log("data?.type", data?.type);         
     
       return NextResponse.json(
         result,
