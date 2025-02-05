@@ -12,4 +12,10 @@
   flex-direction: column;
   gap:14px;
   user-select: none;
+  cursor: pointer;
+  border: 80px solid transparent;
+}
+
+.shell:hover{
+  border-color: rgb(219, 219, 219);
 }

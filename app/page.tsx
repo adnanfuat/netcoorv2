@@ -13,11 +13,11 @@ export default async function Home(context) {
 
 
   return (
-    <div className={s.shell}>            
-                <a href="/p"><img src="logo_netcoor.png"/></a>
-                <a href="/p">GİRİŞ</a>
-    </div>
-  );
+          <a href="/p"><div className={s.shell}>
+                                                    <a href="/p"><img src="logo_netcoor.png"/></a>
+                                                    GİRİŞ
+          </div></a>
+         );
 }
 
 

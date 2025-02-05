@@ -7,6 +7,7 @@ import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
 import {Webs} from "@/modules/webs_core_next15/webs";
+import { Webs_Next15 } from "@/modules/webs_core_next15/webs_next15";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
@@ -32,8 +33,14 @@ export default async function WebsPage(context) {
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
         </div> }
-
-                  <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/>                                                      
+             
+               <Webs_Next15   
+                              selecteduser={undefined} 
+                              childTabStateObj_1={undefined} 
+                              userdata={userdata}                               
+                              contenturlprefix="/p/webs/c"      // Mobiweb:"/panel/webs/c", Netcoor: "/p/webs/c"
+                              listingurlprefix="/p/webs?"  // Netcoor: listingurlprefix="/p/webs?",  Mobiweb: "/panel/webs?"
+                              />
         </div>
   );
 }
