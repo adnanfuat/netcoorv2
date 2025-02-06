@@ -182,7 +182,7 @@ export const LayoutLeft = (props) => {
 
 
 
-              {test_manager && (
+              {test_technician && (
                 <div className={`${s.menuitem} flexrow`}>
                   <RiUser3Fill />
                   <Link href="/p/users">Kullanıcılar</Link>

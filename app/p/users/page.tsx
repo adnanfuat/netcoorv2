@@ -19,10 +19,9 @@ export default async function UsersPage(context) {
   let email = userdata?.email;  
   let isTechnician       =   userscopes?.isTechnician;
   let manegerAuth        =   userscopes?.isManager;
-  let patreonAuth        =   userscopes?.isPatreon;
-  let technicianAuth     =   userdata?.userscopes.isManager;        
+  let patreonAuth        =   userscopes?.isPatreon;   
   
-  if (!technicianAuth) return undefined
+  if (!isTechnician) return undefined
     
   return (
       <UsersCore userdaa={userdata} />
