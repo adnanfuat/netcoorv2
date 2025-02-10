@@ -40,6 +40,7 @@ export const config = {
     '/api/perfectquery_next15(.*)',
     '/api/upload(.*)',
     '/api/payment/(.*)',
+    '/api/paymentresult/(.*)',
     '/api/webhooks/(.*)',
     '/p(.*)',    
   ],

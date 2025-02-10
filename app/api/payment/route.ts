@@ -11,7 +11,7 @@ export async function POST(req:NextRequest, res:NextResponse) {
   try {
 
 
-    //console.log("aaaaaaaaaaa_r___ 0 ", req);
+    // console.log("aaaaaaaaaaa_r___ 0 ", req);
     let returndata = await apipaymentfunc({req,res});
     
     let result=returndata?.result;
@@ -25,7 +25,7 @@ export async function POST(req:NextRequest, res:NextResponse) {
 
   } catch (error) {
 
-    console.log("erroooor:", error);
+    console.log("erroooo222r:", error);
   }
 
 }
