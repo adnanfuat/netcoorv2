@@ -15,15 +15,22 @@ const UserSelection = (props) => {
 
   let {userdata} = props ?? {};
 
+  let user_email = userdata?.email;
       
   let [searchkeyword, setSearchKeyword] = useState("");
   let [filter, setFilter] = useState({keyword:undefined});
   
   let {name, permissions, userscopes, email} = userdata;
   let updateaccount= permissions?.find(p=>p?.name=="updateaccount")?.whichcanedit=="all" ? true : false;      
+  
   let selecteduser = useSnapshot(_userState).myAccountUser.email;
 
-  const queryClient = useQueryClient()
+  if (!selecteduser) // server componentlerden gelirken, valtio kullanılamıyor. O nedenle içerinden de alma özelliği yaptım.
+  {                                              
+    _userState.myAccountUser.email=user_email;                
+  } 
+
+  const queryClient = useQueryClient();
 
   setselecteduserhook({selecteduser, loggeduser:email})
   
@@ -56,8 +63,14 @@ let initializeuserFunc= async ({email}) => {
 }
 
 
-     return <div className={s.toolwr}>
-                                     {/* { JSON.stringify(userdata)} */}
+
+
+
+
+        
+
+     return <div className={s.toolwr}> 
+                                            {/* {JSON.stringify(selecteduser)} - {user_email} */}
                                           {updateaccount && <div className={s.searchuser}>
                                             <input value={searchkeyword} onChange={e=>setSearchKeyword(e.target.value)} placeholder="Arama kelimesini yaz, enter tuşuna bas"/>
                                             <button onClick={e=>{setFilter(old=>old={...old, keyword:searchkeyword }); refetch()}} disabled={processing}> {processing ? "Aranıyor" :  "Ara" }</button>
@@ -67,7 +80,7 @@ let initializeuserFunc= async ({email}) => {
                                                                    _userState.myAccountUser.email=e?.target?.value;
                                                                   // _userState.task_system_datakey=undefined;                                                                  
                                                                   //setItem("ccuser", e?.target?.value);
-                                                                  // console.log("çalıştım", sesUser, e?.target?.value);
+                                                                   //console.log("çalıştım:::111:: ", e?.target?.value);
                                                                   //localStorage.removeItem("web"); // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
                                                                   // webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
                                                                   }} value={selecteduser} className={s.select}>

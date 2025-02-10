@@ -23,8 +23,7 @@ export default async function MyAccount() {
   return ( 
             <div className={s.shell}>             
                   { isTechnician ? <UserSelection userdata={userdata}/> : 
-                  <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
-                  {userdata?.email}
+                  <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>    {userdata?.email}              
                   </div> }
                   <MyAccount_Shell userdata={userdata}/>
             </div>
