@@ -48,8 +48,6 @@ export async function POST(request) {
       // not sure why I have to override the types here
       const Body = (await file.arrayBuffer());      
       console.log("formData:::2", Bucket, file.name, Body);      
-      
-      
           
 
       let clerkuser = await currentUser();

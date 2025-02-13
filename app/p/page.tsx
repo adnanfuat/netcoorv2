@@ -15,20 +15,19 @@ export default async function Home(context) {
 //   let params = await context?.params;
   let userdata = await isloggedv4_clerk();
 
-  let {userscopes } = userdata ?? {};
+  let { userscopes } = userdata ?? {};
   let email = userdata?.email;  
   let isTechnician  = userscopes?.isTechnician;
   let manegerAuth  =  userscopes?.isManager;
   let patreonAuth  =  userscopes?.isPatreon;
-  let technicianAuth  =  userdata?.userscopes.isManager;
-        
+  let technicianAuth  =  userdata?.userscopes.isManager;        
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
   
   return (
     <div className={s.shell}>
 
-    {/* {JSON.stringify("params")}     */}
+    {/* {JSON.stringify(userdata)}     */}
     <div className={s.mainwr}>  
     {/* {those_waiting_for_your_control} */}
     

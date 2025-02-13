@@ -8,14 +8,12 @@ const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }
 
 export default async function Home(context) {
   
-//   let params = await context?.params;
+// let params = await context?.params;
   
-
-
   return (
           <a href="/p"><div className={s.shell}>
-                                                    <a href="/p"><img src="logo_netcoor.png"/></a>
-                                                    GİRİŞ
+                              <a href="/p"><img src="logo_netcoor.png"/></a>
+                              GİRİŞ
           </div></a>
          );
 }

@@ -31,8 +31,6 @@ export default async function RootLayout(props: Readonly<{
   //   socialButtonsBlockButton: 'Sign In with11 {{provider|titleize}}',
   // }
 
-
-
    
   return (<html lang="en"><body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>                       
                               {props?.children}                                           
