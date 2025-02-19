@@ -1,7 +1,7 @@
 "use client"
 import {_userState} from "@/modules/constants/user"
 import Modal from 'react-modal';
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import {  useQueryClient } from "@tanstack/react-query";
 import s from "./payments_core.module.css";
 import React, { useState } from "react";
 import Head from 'next/head';
@@ -10,7 +10,6 @@ import { Textarea, Textfield } from '@/modules/common/reuseable';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import { datetimeFunc } from '@/modules/functions/datetimefunc';
-import { giveuserv2hook_next15 } from '@/modules/functions/giveuserv2hook_next15';
 import { usershook_next15 } from '@/modules/functions/usershook_next15';
 import {  useRouter } from "next/navigation";
 import { getpaymentshook_next15 } from "@/modules/functions/getpaymentshook_next15";
@@ -21,6 +20,8 @@ export default function PaymentsCore(props) {
       let {userdata} = props ?? {};
 
       let { data:payments, isLoading} = getpaymentshook_next15();
+
+      const searchParams = useState({ order:2, count:250});
       // return JSON.stringify(payments)
       
       let amounts=payments?.map(a=>Number(a?.i_key_1)) ?? []
@@ -104,7 +105,7 @@ export default function PaymentsCore(props) {
                                         { (payments?.length==0 && !isLoading) && <div>~</div> } 
                                         { (!!isLoading) && <div>Yükleniyor</div> }                                           
 
-                                        <MyModal props={{ modalstate, userdata }}/>
+                                        <MyModal props={{ modalstate, userdata, searchParams }}/>
                             </div>                                                                            
                 </div>            
             );
@@ -130,7 +131,7 @@ const customStyles = {
     
     const MyModal = ({props}) => {
 
-      let { modalstate,userdata } = props;    
+      let { modalstate,userdata, searchParams } = props;    
       
       let { data:payment, isLoading} = getpaymenthook_next15({id:modalstate[0]?.id})
 
@@ -164,7 +165,7 @@ const customStyles = {
 
           let savebuttonactive=!locked || patreonAuth;
 
-          let { data:users, isLoading:usersLoading } =  usershook_next15({count:5000});
+          let { data:users, isLoading:usersLoading } =  usershook_next15({count:searchParams[0]?.count, order:searchParams[0]?.order, keyword:searchParams[0]?.keyword});
 
           let usersoptions = users?.map((c) => { return <option value={c?.email} key={`user-${c?.email}`}>{c?.email}</option>; });
 
@@ -173,7 +174,7 @@ const customStyles = {
           
               
           return (
-            <div>        
+            <div>
                                                         <Modal
                                                         isOpen={!!modalstate?.[0]?.id}                                                      
                                                         onRequestClose={()=>modalstate[1](undefined)}
@@ -185,11 +186,11 @@ const customStyles = {
                                                                     {/* { JSON.stringify(users?.[0]) } */}
                                                                     <div className={s.modaltitle}>Ödeme Düzenleme      </div>                                                                    
 
-                                                                    {/* { JSON.stringify(payment)} */}
+                                                                    {/* {JSON.stringify(searchParams)} */}
 
                                                                     <div className={s.modalinputs}>
                                                                         
-                                                                        <Textarea formik={formik} name={`o_key_1.detail`} label={"Detay"} value={payment?.o_key_1?.detail} style={{backgroundColor:"#dedede", fontSize:14}}/> 
+                                                                        <Textarea formik={formik} name={`o_key_1.detail`} label={"Detay"} value={payment?.o_key_1?.detail} style={{backgroundColor:"#dedede", fontSize:14}} row={3}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link1`} label={"Link1"} value={link1} style={{backgroundColor:"#dedede", fontSize:14}}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link2`} label={"Link2"} value={link2} style={{backgroundColor:"#dedede", fontSize:14}}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link3`} label={"Link3"} value={link3} style={{backgroundColor:"#dedede", fontSize:14}}/> 
@@ -200,9 +201,11 @@ const customStyles = {
                                                                               {link3 && <Link href={link3} target='_blank'><RiExternalLinkLine size="30"  title="Url 3"/></Link>}
                                                                         </div>}
 
+                                                                        <Filter_Categories searchParams={searchParams}/>
+
                                                                         <div className={s.userswr}>       
                                                                               <RiFileUserFill size={34} onClick={()=> {_userState.myAccountUser.email=payment?.user; router.push("/p/myaccount");}}/>
-                                                                              {usersLoading ? <div>Yükleniyor</div>:
+                                                                              {(usersLoading) ? <div>Yükleniyor</div>:  usersoptions?.length>0 ?
                                                                               
                                                                                     <select
                                                                                     id="user_email"
@@ -212,7 +215,13 @@ const customStyles = {
                                                                                     onChange={(e)=>{formik.setFieldValue("user", e?.target.value)}}                                                                                
                                                                                     >                                                                                
                                                                                     {usersoptions}
-                                                                                    </select> }  
+                                                                                    </select>
+                                                                                    :
+                                                                                    undefined
+                                                                                    
+                                                                                    }  
+
+                                                                               {(!usersLoading && usersoptions?.length==0)? <div>Kullanıcı bulunamadı</div> : undefined}     
                                                                         </div>      
 
                                                                         
@@ -239,3 +248,33 @@ const customStyles = {
             </div>
           )
     }
+
+    const Filter_Categories = (props) => {
+
+      const { searchParams } = props ?? {};
+      
+      return (
+              <div style={{display:"flex", gap:10, flexDirection:"column", border:"1px solid gray", padding:8}}>
+                  {/* {JSON.stringify(sectorStateObj?.[0])} */}
+                                                            
+               <div style={{display:"flex", gap:10}}>
+    
+                  <select value={searchParams[0]?.order}  onChange={ (e)=>{searchParams[1](old=>old = {...old, order:Number(e?.target?.value) }) }} key={`000-${"deep"}-${"siralama"}`} style={inputstyle}>
+                            <option value={0}>    A'dan Z'ye     </option>
+                            <option value={1}>    Z'den A'ya     </option>
+                            <option value={2}>    Sondan başa     </option>
+                            <option value={3}>    Baştan sona     </option>
+                  </select>              
+                  <input value={searchParams[0]?.count} onChange={(e)=>{searchParams[1](old=>old = {...old, count:Number(e?.target?.value) }) }} placeholder="Kaç adet kayıt?" type="number" style={inputstyle}/>
+    
+                  <input value={searchParams[0]?.keyword} onChange={(e)=>{searchParams[1](old=>old = {...old, keyword:e?.target?.value }) }} placeholder="Kelime" type="text" style={inputstyle}/>
+    
+                  </div>
+              </div>
+              )
+    }
+    
+    
+
+
+    let inputstyle={width:100, fontSize:12};

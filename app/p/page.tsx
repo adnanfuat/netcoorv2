@@ -24,6 +24,11 @@ export default async function Home(context) {
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
   
+  if (!email)
+  {
+      <div className={s.shell}> Login olmanız gerekmektedir. </div>
+  }
+  else
   return (
     <div className={s.shell}>
 

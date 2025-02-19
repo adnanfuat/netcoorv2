@@ -76,7 +76,7 @@ export const LayoutLeft = (props) => {
       
   return (
     <div className={`${open_sans?.className} ${s.shell}`} > 
-    {/* {JSON.stringify(userdata)} */}
+    {/* {JSON.stringify(email)} */}
 
         <div className={s.top}>
                     <div title="Çıkış" >                                        
