@@ -18,9 +18,9 @@ export default async function MembershipPage(props) {
   let patreonAuth       =   userscopes?.isPatreon;
   let technicianAuth    =   userdata?.userscopes.isManager;        
   
-        // console.log("data::::assasa",  noncontrolleds_count);  
-        let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
-        // return (JSON.stringify(userdata?.permissions));
+  // console.log("data::::assasa",  noncontrolleds_count);  
+  let cache = permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
+  // return (JSON.stringify(userdata?.permissions));
 
   return ( <Company_Admin userdata={userdata}/> )
   
