@@ -25,8 +25,7 @@ export default async function Home(props) {
   let technicianAuth  =   userdata?.userscopes.isManager;        
   // console.log("data::::assasa",  noncontrolleds_count)
   
-  let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
-    
+  let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
   // return (JSON.stringify(userdata?.permissions));
 
   return ( <Content_Core userdata={userdata}/> )
