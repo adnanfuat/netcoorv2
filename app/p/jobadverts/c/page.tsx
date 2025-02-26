@@ -28,7 +28,13 @@ export default async function Home() {
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
     
 
-  return ( <JobAdvert_Core_Next15 userdata={userdata}/> )
+  return ( <JobAdvert_Core_Next15 
+                                    userdata={userdata}
+                                    mypackageslink={"/p/packages?c1=0&c2=0"}  // c1="Satın Aldıklarım" / c1="Tüm Paketler"
+                                    allpackageslink={"/p/packages?c1=1&c2=0"} // c1="Satın Aldıklarım" / c1="Tüm Paketler"
+                                    listingPageUrl="/p/jobadverts"
+                                    dataPageUrl="/p/jobadverts/c"
+                                    /> )
 }
 
 
