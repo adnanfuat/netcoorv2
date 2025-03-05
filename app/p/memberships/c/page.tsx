@@ -22,7 +22,17 @@ export default async function MembershipPage(props) {
   let cache = permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
   // return (JSON.stringify(userdata?.permissions));
 
-  return ( <Company_Admin userdata={userdata}/> )
+  return ( <Company_Admin 
+                            userdata={userdata}
+                            cclassesPanel={true}
+                            labelsPanel={true}
+                            galleryPanel={true}
+                            realestatesPanel={true}
+                            jobadvertsPanel={true}
+                            contractsPanel={true}
+                            listingPath={`/myaccount?tab=memberships`}
+                            
+                            /> )
   
 }
 
