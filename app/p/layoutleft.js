@@ -113,11 +113,14 @@ export const LayoutLeft = (props) => {
               
               <div className={`${s.menuitem} flexrow ${s.blink_me}`}> <RiMapPinUserFill /> <Link href="/p/jobadverts">İş İlanları</Link> </div>
 
-              <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill  /> <Link href="/p/memberships">Firmalarım</Link> </div>
+              <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill/> <Link href="/p/memberships">Firmalarım</Link> </div>
               
-              <div className={`${s.menuitem} flexrow`}> <RiNotification2Fill  /> <Link href="/p/notifications">Bildirimler</Link> </div>
+              <div className={`${s.menuitem} flexrow`}> <RiNotification2Fill/> <Link href="/p/notifications">Bildirimler</Link> </div>
 
-              <div className={`${s.menuitem} flexrow`}> <RiMailFill   /> <Link href="/p/messages">Mesajlar</Link> </div>
+              <div className={`${s.menuitem} flexrow`}> <RiMailFill/> <Link href="/p/messages">Mesajlar</Link> </div>
+
+              <div className={`${s.menuitem} flexrow`}> <RiMailFill/> <Link href="/p/forms">Formlar</Link> </div>
+              
               
               { (
                 <div className={`${s.menuitem} flexrow`}>
