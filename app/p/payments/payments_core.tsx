@@ -21,7 +21,7 @@ export default function PaymentsCore(props) {
 
       let { data:payments, isLoading} = getpaymentshook_next15();
 
-      const searchParams = useState({ order:2, count:250});
+      const searchParams = useState({ order:0, count:500});
       // return JSON.stringify(payments)
       
       let amounts=payments?.map(a=>Number(a?.i_key_1)) ?? []
@@ -29,10 +29,9 @@ export default function PaymentsCore(props) {
       //console.log("paymentsssss", sum);
       sum = sum ? `${sum} TL` : ""
 
-
       const modalstate    =  useState(false); // Country ekleme
       let closeModal = () => modalstate[1](false);
-      // console.log("paymentspayments!: ",payments, error);      
+      // console.log("paymentspayments!: ",payments, error);
       let router=useRouter();
 
       return (<div>
@@ -174,7 +173,7 @@ const customStyles = {
           
               
           return (
-            <div>
+            <div> 
                                                         <Modal
                                                         isOpen={!!modalstate?.[0]?.id}                                                      
                                                         onRequestClose={()=>modalstate[1](undefined)}
@@ -184,7 +183,7 @@ const customStyles = {
                                                         >                                                      
                                                               {(!isLoading && payment?.id) ?<div className={s.modalshell}>
                                                                     {/* { JSON.stringify(users?.[0]) } */}
-                                                                    <div className={s.modaltitle}>Ödeme Düzenleme      </div>                                                                    
+                                                                    <div className={s.modaltitle}>Ödeme Düzenleme      </div> 
 
                                                                     {/* {JSON.stringify(searchParams)} */}
 

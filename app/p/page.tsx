@@ -8,6 +8,8 @@ import Home_Tasks from "@/src/components/home/home_tasks";
 import Home_Contracts from "@/src/components/home/home_contracts";
 import { Inter } from "next/font/google";
 
+
+
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
 export default async function Home(context) {
@@ -31,6 +33,7 @@ export default async function Home(context) {
   else
   return (
     <div className={s.shell}>
+      
 
     {/* {JSON.stringify(userdata)}     */}
     <div className={s.mainwr}>  
