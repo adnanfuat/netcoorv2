@@ -1,9 +1,9 @@
 "use client"
 import s from "./layoutleft.module.css";
  import UploadModal from "@/modules/selectimg/uploadmodal";
-// import { FlagsMenu } from "@/modules/common/flagsmenu";
+ import { FlagsMenu } from "@/modules/common/flagsmenu";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+
 import { RiComputerFill, RiMoneyCnyBoxFill, RiNotification2Fill, RiMailFill, RiAdminFill, RiShoppingCart2Fill, RiBox1Fill      } from "react-icons/ri";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { RiAccountCircleFill,RiBuilding3Fill  } from "react-icons/ri";
@@ -30,19 +30,10 @@ const open_sans = Open_Sans({weight:"400",subsets:["latin","latin-ext"], variabl
 export const LayoutLeft = (props) => {
 
   let {modalState, userdata} = props ?? {};
-  // console.log("xzxczxcxczxcz", modalState);
-  // const userdata = isLogged();
+  
   let { permissions } = userdata ?? {};
   let email = userdata?.email;  
-  // let showweb =
-  //   user?.websites?.length > 0 ||
-  //   user?.userinfo?.bigdata?.static?.authorizedwebs?.length > 0;
-
-  // let upload_authority = permissionsControl({
-  //     askList: ["upload"],
-  //     type: "some",
-  // }); // parça yetkilere göre hareket etmek için sorgulama___ // slug değişimi hassas konu___
-
+    
   let upload_authority = permissionsControlV3({
     askList: ["upload"],
     type: "some",
@@ -67,12 +58,6 @@ export const LayoutLeft = (props) => {
      email == "info@sakaryarehberim.com" || email == "yigitruzgaruzun@gmail.com" 
   );
 
-  
-      
-      // const searchParams = useSearchParams();
-      // let userparam = searchParams.get('user');
-
-
       
   return (
     <div className={`${open_sans?.className} ${s.shell}`} > 
@@ -88,7 +73,7 @@ export const LayoutLeft = (props) => {
                                           </SignedIn>
                 </div>
 
-                 {/* <FlagsMenu /> */}
+                 <FlagsMenu />
                  {/* {`https://---wa.me/+905495440554?text="Merhaba, size Sakaryarehberim.com üzerinden ulaşıyorum. "`} */}
                 <Link href={`https://web.whatsapp.com/send?phone=905495440554&text=Merhaba, size Sakaryarehberim.com üzerinden ulaşıyorum.`} aria-label="Whatsapp" target="_blank"  className={s.wapp} >                                                                                
                                             <div title="Destek Al"><RiWhatsappFill  style={{fontSize:20}} /></div>

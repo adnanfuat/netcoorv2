@@ -13,7 +13,7 @@ import { giveuserv2hook_next15 } from "@/modules/functions/giveuserv2hook_next15
 const MyAccountContent_Next15 = (props) => {
 
         let {userdata} = props;
-        let locale="tr";
+        let locale = useSnapshot(_userState).locale;
     
         const searchParams = useSearchParams();
         const content_id = searchParams.get('id');
