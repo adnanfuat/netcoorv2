@@ -12,7 +12,8 @@ export default async function Home(context) {
 // let params = await context?.params;
   
   return (
-          <a href="/p"><div className={s.shell}> <div className="text-8xl font-bold underline bg-amber-400">Hello, Next.js!</div>
+          <a href="/p"><div className={s.shell}>
+                              {/* <div className="text-8xl font-bold underline bg-amber-400">Hello, Next.js!</div> */}
                               <a href="/p"><img src="logo_netcoor.png"/></a>
                               GİRİŞ
 

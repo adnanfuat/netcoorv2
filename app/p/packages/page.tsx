@@ -34,8 +34,19 @@ export default async function PackagesPage(context) {
         </div> }
                   {/* <Webs selecteduser={undefined} childTabStateObj_1={undefined} userdata={userdata}/> */}
                   <Packages_Core_Next15 userdata={userdata}/>
+
+
+                {patreonAuth ? <div style={style}>
+                      Paketleri düzenleme sayfamız yok. Aşağıdaki kodu kullanarak bigdata'yı manipule edersin. (bigdata)
+                      <br/>
+                      SELECT * FROM richcontents WHERE parent_slug="paketler_superelemancom"
+                </div> : undefined}
+
         </div>
   );
 }
 
 
+
+
+let style={fontSize:12}

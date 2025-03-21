@@ -1,5 +1,5 @@
 import JobAdvert from "@/components/job/jobadvert";
-import { LayoutMain } from "@/app/layoutmain";
+// import { LayoutMain } from "@/app/layoutmain";
 import s from "./page.module.css";
 
 import {_userState} from "@/modules/constants/user"

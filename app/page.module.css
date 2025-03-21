@@ -14,8 +14,13 @@
   user-select: none;
   cursor: pointer;
   border: 80px solid transparent;
+  text-decoration: none;  
 }
 
 .shell:hover{
   border-color: rgb(219, 219, 219);
 }
+
+/* .shell a {
+  
+} */
