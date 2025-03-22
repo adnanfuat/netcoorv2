@@ -25,12 +25,11 @@ export default async function MembershipsPage(context) {
       
   return (
       <div className={s.shell}> 
-        {/* {JSON.stringify(userdata)}                                                   */}
-        { isTechnician ? <UserSelection userdata={userdata}/> : 
-        <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
-        {userdata?.email}
-        </div> }                                   
-        
+              {/* {JSON.stringify(userdata)}                                                   */}
+              { isTechnician ? <UserSelection userdata={userdata}/> : 
+              <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
+              {userdata?.email}
+              </div> }                                           
               <Memberships_Next15 userdata={userdata} selecteduser={undefined} project={"sakaryarehberim.com"}/>
         </div>
   );
