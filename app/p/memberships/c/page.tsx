@@ -3,7 +3,7 @@ import {_userState} from "@/modules/constants/user"
 import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
-import Company_Admin from "@/modules/company_admin";
+import Company_Admin_Edit from "@/modules/company_admin_edit";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
@@ -22,7 +22,7 @@ export default async function MembershipPage(props) {
   let cache = permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
   // return (JSON.stringify(userdata?.permissions));
 
-  return ( <Company_Admin 
+  return ( <Company_Admin_Edit 
                             userdata={userdata}
                             cclassesPanel={true}
                             labelsPanel={true}

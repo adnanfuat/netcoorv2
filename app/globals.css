@@ -25,6 +25,59 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+/****************************** Modal (s) */
+
+/* .rrm_customOverlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+.rrm_customModal {
+  background: rgb(255, 255, 255);
+  width: auto;
+}
+
+.rrm_customModal2 {
+  background: white;
+  min-width: 90%;
+  min-height: 300px;
+  border: 5px black solid;
+  margin: 120px 10px;
+}
+
+.rrm_customModal3 {
+  background: rgb(172, 172, 172);
+  min-width: 50%;
+  min-height: 80%;
+  font-family: var(--font-inter);
+}
+
+@media only screen and (max-width: 800px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .rrm_customModal2 {
+    width: -webkit-fill-available;
+    min-width: 200px;
+    margin: 80px 30px;
+  }
+
+  .rrm_customModal {
+    width: -webkit-fill-available;
+  }
+
+  .react-responsive-modal-modal {
+    padding: 10px;
+  }
+} */
+
+/****************************** Modal (f) */
+
+
  a:hover{
   text-decoration: underline;
  }
