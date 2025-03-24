@@ -23,18 +23,14 @@ export default async function CompanyPage(props) {
   // console.log("data::::assasa",  noncontrolleds_count);  
   let cache = permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
 
-
-
   let {params} = props ?? {};
   params = await params;  
   let data = await getserversidepropsfunction({params, project:process.env.NEXT_PUBLIC_PROJECT}) ?? {};   // { generatedData, locale } 
-
   
   // return (JSON.stringify(userdata?.permissions));
 
   return ( <Company_Admin_View 
-                                userdata={userdata}
-                            
+                                userdata={userdata}                            
                                 datakeyForMessage = "srcompany-message"  // Mesaşlaşma için bigparent_key
                                 datakeyForComment = "srcompany-comment"  // Yorum için bigparent_key                                                                    
                                 showrealestatespanel = {true} // Emlak paneli gösterilsin mi?

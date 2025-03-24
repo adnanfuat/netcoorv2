@@ -7,6 +7,7 @@ import Menu from "./menu";
 import Login from "../login";
 import { ClerkProvider } from "@clerk/nextjs";
 
+// Bu kullanılıyor mu??????
 
 export const Header = ({props}) => {
 

@@ -30,7 +30,12 @@ export default async function MembershipsPage(context) {
               <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
               {userdata?.email}
               </div> }                                           
-              <Memberships_Next15 userdata={userdata} selecteduser={undefined} project={"sakaryarehberim.com"}/>
+              <Memberships_Next15 
+                                  userdata={userdata} 
+                                  selecteduser={undefined} 
+                                  project={"sakaryarehberim.com"}                                  
+                                  urlprefix="/p/memberships"                                                                  
+                                />
         </div>
   );
 }

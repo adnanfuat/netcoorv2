@@ -30,7 +30,7 @@ export default async function MembershipPage(props) {
                             realestatesPanel={true}
                             jobadvertsPanel={true}
                             contractsPanel={true}
-                            listingPath={`/myaccount?tab=memberships`}
+                            listingPath={`/p/memberships`}
                             
                             /> )
   
