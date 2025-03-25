@@ -9,7 +9,7 @@ import Memberships_Next15 from "@/modules/memberships_next15";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
-export default async function GuidePage(context) {
+export default async function DirectoryPage(context) {
   
   let params = await context?.params;      
   let userdata =  await isloggedv4_clerk();
@@ -31,10 +31,7 @@ export default async function GuidePage(context) {
                         userdata={userdata} 
                         selecteduser={undefined} 
                         project={"sakaryarehberim.com"} 
-                        membershipEditUrl="qqqqaaaaaaaaaaaaaaaaaaa" // Zaten bu proje üzerindeyiz ya, o nedenle boş bıraktım.
-
-                        
-                        
+                        membershipEditUrl="qqqqaaaaaaaaaaaaaaaaaaa" // Zaten bu proje üzerindeyiz ya, o nedenle boş bıraktım.                                                
                         />
         </div>
   );

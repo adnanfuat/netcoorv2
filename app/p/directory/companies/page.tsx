@@ -9,7 +9,7 @@ import Memberships_Next15 from "@/modules/memberships_next15";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
-export default async function MembershipsPage(context) {
+export default async function CompaniesPage(context) {
   
   let params = await context?.params;      
   let userdata =  await isloggedv4_clerk();
@@ -22,23 +22,24 @@ export default async function MembershipsPage(context) {
   let technicianAuth     =   userdata?.userscopes.isManager;        
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
-      
+  
+  // return (JSON.stringify("Proje seçimi +++ Sektörler Sayfası+ Alt sektörler sayfası aynı yere gitsin.... "));
+
   return (
-      <div className={s.shell}> 
-              {/* {JSON.stringify(userdata)}                                                   */}
-              { isTechnician ? <UserSelection userdata={userdata}/> : 
-              <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
-              {userdata?.email}
-              </div> }                                           
-              <Memberships_Next15 
-                                  userdata={userdata} 
-                                  selecteduser={undefined} 
-                                  title="Firmalarım"
-                                  project={"sakaryarehberim.com"}                                  
-                                  urlprefix="/p/memberships"                                                                  
-                                />
+      <div className={s.shell}>                 
+                <Memberships_Next15 
+                        title="Firmalar"
+                        userdata={userdata} 
+                        selecteduser={undefined} 
+                        project={"sakaryarehberim.com"}                         
+                        urlprefix="/p/directory"
+                        mode="allcompanies"                                        
+                        />
         </div>
   );
 }
 
+
+
+// membershipEditUrl=router.push(`${membershipEditUrl}${membershipsPath}/c?id=${newcompany?.id}`);
 

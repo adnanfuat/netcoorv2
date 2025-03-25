@@ -35,9 +35,9 @@ export default async function CompanyPage(props) {
                                 datakeyForComment = "srcompany-comment"  // Yorum için bigparent_key                                                                    
                                 showrealestatespanel = {true} // Emlak paneli gösterilsin mi?
                                 showjobadvertspanel = {true} // Emlak paneli gösterilsin mi?
-                                shownewspanel = {true} // Emlak paneli gösterilsin mi?
-                            
-                            /> )
+                                shownewspanel = {true} // Emlak paneli gösterilsin mi?                            
+                            />
+        )
   
 }
 
