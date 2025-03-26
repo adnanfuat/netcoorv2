@@ -26,11 +26,11 @@ export default async function RootLayout(props: Readonly<{
   // }
    
   return (<ClerkProvider>
-                            <TanstackProvider>
-              <LayoutMain userdata={userdata}>                                                
-                                      {props?.children}
-              </LayoutMain>
-                              </TanstackProvider>                                      
+                          <TanstackProvider>
+                                      <LayoutMain userdata={userdata}>                                                
+                                                              {props?.children}
+                                      </LayoutMain>
+                          </TanstackProvider>                                      
           </ClerkProvider>     
       );
 }
