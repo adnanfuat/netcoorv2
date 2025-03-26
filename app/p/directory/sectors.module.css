@@ -7,10 +7,18 @@
 
 .shell {    
 /* background-color: antiquewhite; */
-display: grid;    
-grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-gap:40px
+display: flex;
+flex-direction: column;
+gap:20px;
+padding: 14px 0px;;
 }
+
+.list {    
+    /* background-color: antiquewhite; */
+    display: grid;    
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap:40px
+    }
 
 .row {
 background-color: #dddddd;

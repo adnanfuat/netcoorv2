@@ -6,6 +6,8 @@ import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
 import UserSelection from "@/components/myaccount/userselection"
 import Memberships_Next15 from "@/modules/memberships_next15";
+import Link from "next/link";
+import { RiBookReadLine } from "react-icons/ri";
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],
 
@@ -27,6 +29,9 @@ export default async function CompaniesPage(context) {
 
   return (
       <div className={s.shell}>                 
+
+                <div style={{display:"flex", flexDirection:"column", textAlign:"right", position:"absolute", right:-20, top:-20}}><Link href="/p/directory"><RiBookReadLine size={20}/></Link></div>
+
                 <Memberships_Next15 
                         title="Firmalar"
                         userdata={userdata} 
@@ -42,4 +47,6 @@ export default async function CompaniesPage(context) {
 
 
 // membershipEditUrl=router.push(`${membershipEditUrl}${membershipsPath}/c?id=${newcompany?.id}`);
+
+
 
