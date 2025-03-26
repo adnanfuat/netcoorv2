@@ -6,7 +6,7 @@ const isPrivateRoute = createRouteMatcher(['/p/']);
 
 export default clerkMiddleware( async (auth, request) => {   
   
-   // console.log("RQLL::: , ", request?.url);    
+    // console.log("RQLL::: , ", request?.url);    
    
    // if (!isPublicRoute(request)) {
    //   // console.log("Korunması gereken sayfa::: ", request?.url);
@@ -26,7 +26,7 @@ export default clerkMiddleware( async (auth, request) => {
 
 
 
-}
+},
 // { debug: true }, 
 )
 
