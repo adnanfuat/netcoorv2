@@ -30,7 +30,9 @@ export default async function MembershipPage(props) {
                             realestatesPanel={true}
                             jobadvertsPanel={true}
                             contractsPanel={true}
+                            viewCompanyInConsole={true}
                             listingPath={`/p/memberships`}
+                            viewCompanyPrefix={`/p/directory/c`}
                             
                             /> )
   

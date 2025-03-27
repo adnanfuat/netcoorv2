@@ -35,7 +35,8 @@ export default async function MembershipsPage(context) {
                                   selecteduser={undefined} 
                                   title="Firmalarım"
                                   project={"sakaryarehberim.com"}                                  
-                                  urlprefix="/p/memberships"                                                                  
+                                  urlprefix="/p/memberships"
+                                  viewCompanyInConsole={true}
                                 />
         </div>
   );

@@ -18,24 +18,22 @@ export default async function CompanyPage(props) {
   let isTechnician      =   userscopes?.isTechnician;
   let manegerAuth       =   userscopes?.isManager;
   let patreonAuth       =   userscopes?.isPatreon;
-  let technicianAuth    =   userdata?.userscopes.isManager;        
-  
+  let technicianAuth    =   userdata?.userscopes.isManager;          
   // console.log("data::::assasa",  noncontrolleds_count);  
   let cache = permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});    
-
   let {params} = props ?? {};
   params = await params;  
   let data = await getserversidepropsfunction({params, project:process.env.NEXT_PUBLIC_PROJECT}) ?? {};   // { generatedData, locale } 
   
   // return (JSON.stringify(userdata?.permissions));
-
   return ( <Company_Admin_View 
                                 userdata={userdata}                            
                                 datakeyForMessage = "srcompany-message"  // Mesaşlaşma için bigparent_key
                                 datakeyForComment = "srcompany-comment"  // Yorum için bigparent_key                                                                    
                                 showrealestatespanel = {true} // Emlak paneli gösterilsin mi?
                                 showjobadvertspanel = {true} // Emlak paneli gösterilsin mi?
-                                shownewspanel = {true} // Emlak paneli gösterilsin mi?                            
+                                shownewspanel = {true} // Emlak paneli gösterilsin mi?          
+                                consolelink_personal={`/p/myaccount`}
                             />
         )
   

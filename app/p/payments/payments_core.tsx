@@ -132,7 +132,7 @@ const customStyles = {
 
       let { modalstate,userdata, searchParams } = props;    
       
-      let { data:payment, isLoading} = getpaymenthook_next15({id:modalstate[0]?.id})
+      let { data:payment, isLoading} = getpaymenthook_next15({id:modalstate[0]?.id, enabled:true})
 
       // return JSON.stringify(payment)
       let submittingState = useState(false)
@@ -164,13 +164,23 @@ const customStyles = {
 
           let savebuttonactive=!locked || patreonAuth;
 
+          
           let { data:users, isLoading:usersLoading } =  usershook_next15({count:searchParams[0]?.count, order:searchParams[0]?.order, keyword:searchParams[0]?.keyword});
+          
+          let usersoptions = users?.map((c) => { return <option value={c?.email} key={`user-${c?.email}`}>{c?.email}</option>; }) ?? [];
 
-          let usersoptions = users?.map((c) => { return <option value={c?.email} key={`user-${c?.email}`}>{c?.email}</option>; });
+          if (!!payment?.user && !users?.find(u=> u?.email==payment?.user)) // Ödeme  yapan bir kullanıcı var ama kullanıcılar arasında bu kullanıcı yoksa bu options'a ödeme yapan kullanıcıyı da ekleyelim. Çünkü, Kullanıcıların bir kısmı çekiliyor. Tammamı çekilmiyor. Örnek 300 tanesi. Bu 300 tane içinde ödeme yapan kullanıcı olmayabilir.
+            {
+                  usersoptions = [<option value={payment?.user}>{payment?.user}</option>, ...usersoptions]
+            }
+
+          
+          
 
             let router=useRouter()
           
           
+            
               
           return (
             <div> 
@@ -183,13 +193,13 @@ const customStyles = {
                                                         >                                                      
                                                               {(!isLoading && payment?.id) ?<div className={s.modalshell}>
                                                                     {/* { JSON.stringify(users?.[0]) } */}
-                                                                    <div className={s.modaltitle}>Ödeme Düzenleme      </div> 
+                                                                    <div className={s.modaltitle}>Ödeme Düzenleme!      </div> 
 
-                                                                    {/* {JSON.stringify(searchParams)} */}
+                                                                    
 
                                                                     <div className={s.modalinputs}>
                                                                         
-                                                                        <Textarea formik={formik} name={`o_key_1.detail`} label={"Detay"} value={payment?.o_key_1?.detail} style={{backgroundColor:"#dedede", fontSize:14}} row={3}/> 
+                                                                        <Textarea formik={formik} name={`o_key_1.detail`} label={"Detay"} value={payment?.o_key_1?.detail} style={{backgroundColor:"#dedede", fontSize:14}} row={5}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link1`} label={"Link1"} value={link1} style={{backgroundColor:"#dedede", fontSize:14}}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link2`} label={"Link2"} value={link2} style={{backgroundColor:"#dedede", fontSize:14}}/> 
                                                                         <Textfield formik={formik} name={`o_key_1.link3`} label={"Link3"} value={link3} style={{backgroundColor:"#dedede", fontSize:14}}/> 
@@ -202,18 +212,21 @@ const customStyles = {
 
                                                                         <Filter_Categories searchParams={searchParams}/>
 
-                                                                        <div className={s.userswr}>       
+                                                                        {/* {payment?.user} - {usersoptions[0]} */}
+
+                                                                        <div className={s.userswr}>     
                                                                               <RiFileUserFill size={34} onClick={()=> {_userState.myAccountUser.email=payment?.user; router.push("/p/myaccount");}}/>
                                                                               {(usersLoading) ? <div>Yükleniyor</div>:  usersoptions?.length>0 ?
                                                                               
                                                                                     <select
-                                                                                    id="user_email"
-                                                                                    name="[user_email]"                                                                                
-                                                                                    value={payment?.user}
-                                                                                    disabled={!savebuttonactive}
-                                                                                    onChange={(e)=>{formik.setFieldValue("user", e?.target.value)}}                                                                                
-                                                                                    >                                                                                
-                                                                                    {usersoptions}
+                                                                                          id="user_email"
+                                                                                          name="[user_email]"                                                                                
+                                                                                          value={payment?.user}
+                                                                                          disabled={!savebuttonactive}
+                                                                                          onChange={(e)=>{formik.setFieldValue("user", e?.target.value)}}                                                                                
+                                                                                    >             
+                                                                                    <option>Seçiniz</option>                                                                   
+                                                                                                {usersoptions}
                                                                                     </select>
                                                                                     :
                                                                                     undefined

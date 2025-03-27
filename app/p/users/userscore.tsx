@@ -2,13 +2,10 @@
 import Modal from 'react-modal';
 import { useRouter } from "next/navigation";
 import {_userState} from "@/modules/constants/user";
-// import { JsonViewer, createDataType } from '@textea/json-viewer'
 import Head from 'next/head';
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-
 import s from "./userscore.module.css";
 import React, { useState } from 'react';
-
 import { RiDragMove2Fill } from "react-icons/ri";
 import { usershook_next15 } from '@/modules/functions/usershook_next15';
 
@@ -18,9 +15,9 @@ export default function UsersCore  (props) {
   let {userdata} = props ?? {};
 
   const searchParams = useState({ order:2, count:250});
-  let count = searchParams[0]?.count;
-  let order = searchParams[0]?.order;
-  let keyword = searchParams[0]?.keyword;
+  let  count = searchParams[0]?.count;
+  let  order = searchParams[0]?.order;
+  let  keyword = searchParams[0]?.keyword;
   
   const [usertransfer, setusertransfer] = useState();
   let permissions = userdata?.permissions ?? [];
