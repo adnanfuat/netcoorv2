@@ -205,9 +205,9 @@ const customStyles = {
                                                                         <Textfield formik={formik} name={`o_key_1.link3`} label={"Link3"} value={link3} style={{backgroundColor:"#dedede", fontSize:14}}/> 
                                                                         
                                                                         {link1 && <div className={s.urlwr}>
-                                                                              <Link href={link1} target='_blank'><RiExternalLinkLine size="30" title="Url 1"/></Link>
-                                                                              {link2 && <Link href={link2} target='_blank'><RiExternalLinkLine size="30" title="Url 2"/></Link>}
-                                                                              {link3 && <Link href={link3} target='_blank'><RiExternalLinkLine size="30"  title="Url 3"/></Link>}
+                                                                                          <Link href={link1} target='_blank'><RiExternalLinkLine size="30" title="Url 1"/></Link>
+                                                                                          {link2 && <Link href={link2} target='_blank'><RiExternalLinkLine size="30" title="Url 2"/></Link>}
+                                                                                          {link3 && <Link href={link3} target='_blank'><RiExternalLinkLine size="30"  title="Url 3"/></Link>}
                                                                         </div>}
 
                                                                         <Filter_Categories searchParams={searchParams}/>
