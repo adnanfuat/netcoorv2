@@ -1,0 +1,135 @@
+.coreshell {    
+/* background-color: antiquewhite; */
+}
+
+.shell {    
+    display: grid;
+    position: relative;
+    padding: 20px;        
+    gap:20px;    
+    grid-template-areas: 
+    "ads         ads          ads            ads           ads"
+    "name       name        name          name         name"
+    "desctop     desctop      desctop        desctop       desctop"
+    "members     members      members        members       rightbar "    
+    "descbottom  descbottom   descbottom     descbottom    descbottom"
+    "descmulti  descmulti   descmulti     descmulti    descmulti"
+    "meta        meta         meta           meta          meta"
+    ;
+    
+}
+
+
+
+@media only screen and (max-width: 900px)   {
+    .shell {            
+            grid-template-areas: 
+            "ads        ads        ads"
+            "name      name      name"
+            "desctop    desctop    desctop"
+            "descmulti    descmulti    descmulti"
+            "members    members    rightbar "   
+            "descbottom descbottom descbottom" 
+            "meta       meta       meta"
+            ;                
+    }
+}
+
+
+@media only screen and (max-width: 600px)   {
+    .shell {            
+            grid-template-areas: 
+            "ads"
+            "name   "
+            "desctop"
+            "descmulti"
+            "members  "  
+            "descbottom  "
+            "meta"
+            ;                
+    }
+    .rightbar {
+        display: none;
+    }
+}
+
+
+.meta {
+    grid-area: meta;
+}
+
+.ads {
+    grid-area: ads;
+}
+
+.name {
+    grid-area: name;
+    position: relative;
+}
+
+.adsbutton {    
+    position: absolute;
+    right: 0px;
+    top:-20px;
+    display: flex;
+    gap:10px
+}
+
+.titlewr{
+            background-color: antiquewhite;
+            padding: 10px 5px;
+            cursor: pointer;
+            border: 2px solid rgb(255, 255, 255);
+            user-select: none;            
+            display: flex;
+            gap:6px;
+        }
+
+.titlewr:hover {
+    border: 2px solid rgb(53, 53, 53);
+}
+
+.desctop {
+    grid-area: desctop;    
+    overflow-y: auto;    
+}
+
+.descmulti {
+    grid-area: descmulti;    
+    overflow-y: auto;    
+    padding: 20px;
+    border: 2px solid gray;
+    background-color: #fffceb;
+}
+
+.descbottom {
+    grid-area: descbottom;    
+    overflow-y: auto;    
+}
+
+.members {
+    grid-area: members;
+}
+
+.rightbar {
+    grid-area: rightbar;
+}
+
+.buttons{
+    position: fixed;
+    display: flex;
+    right:0px;
+    bottom:0px;
+    gap:10px;
+    padding:10px;
+    flex-direction: column;
+}
+
+
+.navigator {
+    display: flex;
+    position: fixed;
+    right:0px;
+    bottom:0px;      
+    margin: 10px;
+}

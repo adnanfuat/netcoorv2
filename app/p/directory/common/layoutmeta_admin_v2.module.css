@@ -1,0 +1,34 @@
+
+.selectcompanywr {
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    align-items: center;
+    font-size: small;
+}
+
+.company_textwr {
+    display: flex;    
+    gap:40px;
+    flex-direction: column;
+    padding: 30px 10px;
+}
+
+.selectwr {
+    display: flex;
+    position: relative;
+}
+
+.selectlength {
+    position: absolute;
+    right:0px;
+    top:-20px;
+    font-size: 0.7rem;
+}
+
+.select {
+    font-size: 0.8rem;
+    width: 190px;
+    padding: 10px;
+    min-height: 40px;
+}

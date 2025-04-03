@@ -4,6 +4,35 @@
 
 @custom-variant dark (&:is(.dark *));
 
+input {
+  background-color:#ececec;
+  border-radius: 2px;
+  height: 40px;
+  padding: 4px;
+}
+
+
+textarea {
+  background-color:#ececec;
+  border-radius: 2px;  
+  padding: 4px;
+}
+
+
+button {
+  background-color:#ececec;
+  border-radius: 2px;
+  height: 40px;
+  padding: 4px;
+}
+
+select {
+  background-color:#ececec;
+  border-radius: 2px;  
+  height: 40px;
+  padding: 4px;
+}
+
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
