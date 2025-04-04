@@ -49,7 +49,7 @@ export default function  Subsector (props) {
 
   let loginAndAuthorized  = user?.email && !permissionReject;
   
-  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"subsectorv4", id, locale, defaultLocale } }) } ); res = await res?.json(); return res; };
+  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"subsector", id } }) } ); res = await res?.json(); return res; };
   const {  data:subsectorclient, isLoading } = useQuery( {queryKey:["subsectorquery"], queryFn:() => fetcher()});
 
   const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:subsectorclient?.datakey, parent_type:"subsector", project:subsectorclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
@@ -97,9 +97,6 @@ let contents_removed_fn = `subsector.contents_removed`;
 let contents_keywords_and = eval(`subsector?.contents_keywords_and`) ?? [];
 let contents_keywords_and_fn = `subsector.contents_keywords_and`;
 
-// let regional_descriptions = eval(`subsector?.regional_descriptions`) ?? [];
-// let regional_descriptions_fn = `subsector.regional_descriptions`;
-
 let contents_keywords_not = eval(`subsector?.contents_keywords_not`) ?? [];
 let contents_keywords_not_fn = `subsector.contents_keywords_not`;
 
@@ -145,6 +142,8 @@ let googlerank_fn=    `subsector.googlerank`;
 
 let note = subsector?.note;
 let note_fn=    `subsector.note`;
+
+let pathObj={sector:subsector?.sector, subsector:subsector?.slug_tr};
 
 let { prefix } = titlePrefixer({type:"subsector", countries, slug }); prefix = capitalizeFirstLetter(prefix);
 
@@ -195,9 +194,11 @@ if (subdistrict_slug)
   advlink=advlink+`&subdistrict_slug=${subdistrict_slug}` 
 }
 
+
+
   // return (<div>{JSON.stringify(subsectorclient?.project)}</div>)
 
-if (!subsector) return "......."
+if (!subsector) return "~"
 if (isLoading) return <Loading/>
 
 // <LayoutMain layout_title={name} suptitle={`Alt Sektör ${country_slug ?? ""} ${city_slug ?? ""} ${district_slug ?? ""} ${subdistrict_slug ?? ""}`}>
@@ -264,6 +265,7 @@ if (isLoading) return <Loading/>
                                               project:subsector?.project,
 
                                               userdata,
+                                              pathObj,
 
                                             }}/>
                                             

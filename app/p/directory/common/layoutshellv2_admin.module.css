@@ -70,9 +70,11 @@
 .adsbutton {    
     position: absolute;
     right: 0px;
-    top:-20px;
+    top:-20px;        
     display: flex;
-    gap:10px
+    gap:20px; 
+    align-items: center;   
+    
 }
 
 .titlewr{

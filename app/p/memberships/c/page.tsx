@@ -23,16 +23,16 @@ export default async function MembershipPage(props) {
   // return (JSON.stringify(userdata?.permissions));
 
   return ( <Company_Admin_Edit 
-                            userdata={userdata}
-                            cclassesPanel={true}
-                            labelsPanel={true}
-                            galleryPanel={true}
-                            realestatesPanel={true}
-                            jobadvertsPanel={true}
-                            contractsPanel={true}
-                            viewCompanyInConsole={true}
-                            listingPath={`/p/memberships`}
-                            viewCompanyPrefix={`/p/directory/c`}
+                              userdata={userdata}
+                              cclassesPanel={true}
+                              labelsPanel={true}
+                              galleryPanel={true}
+                              realestatesPanel={true}
+                              jobadvertsPanel={true}
+                              contractsPanel={true}
+                              viewCompanyInConsole={true}
+                              listingPath={`/p/memberships`}
+                              viewCompanyPrefix={`/p/directory/c`}
                             
                             /> )
   

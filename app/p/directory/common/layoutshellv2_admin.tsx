@@ -8,11 +8,13 @@ import { SingleSelect } from "@/modules/common/reuseable/select/singleselect";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Region from "@/modules/common/region";
-import { RiExchangeFundsFill } from "react-icons/ri";
+import { RiExchangeFundsFill, RiEye2Line, RiListUnordered } from "react-icons/ri";
 import LayoutMeta_Admin_V2 from "./layoutmeta_admin_v2"
 import { useSearchParams } from "next/navigation";
 import { OperatorButtonV2 } from "@/modules/common/reuseable/button/operatorbuttonv2";
 import { cachecountriesv3hook_next15 } from "@/modules/functions/cachecountriesv3hook_next15";
+import Link from "next/link";
+
 
 export const LayoutShellV2_Admin = ({props}) => {
 
@@ -68,31 +70,35 @@ export const LayoutShellV2_Admin = ({props}) => {
           cityStateObj,
           districtStateObj,
           subdistrictStateObj,
-          userdata
+          userdata,
+          pathObj,
           
        } = props;
       
-//        return JSON.stringify(props)
+        // return JSON.stringify(pathObj)
 
-let router = useRouter();
+ let router = useRouter();
 
- const searchParams = useSearchParams();
- 
+ const searchParams = useSearchParams(); 
+
  const country_slug = searchParams.get('country_slug');
  const city_slug = searchParams.get('city_slug');
  const district_slug = searchParams.get('district_slug');
  const subdistrict_slug = searchParams.get('subdistrict_slug');
+
  const id = searchParams.get('id');
 
-let locale="tr";
+ let locale="tr";
 
-let isTechnician  =  userdata?.userscopes.isTechnician;
-let patreonAuth  =  userdata?.userscopes.isPatreon;
-locked = !patreonAuth ? true : locked; // Yedek: !category_authority ? true : locked; // Eğer kullanıcının category düzeşeöe yetkisi yoksa komple locked konumuna getir. Sadece reklamlar linkine tıklasın yeter.. // Bir negatifi. Düzenle butonu kilitli gözüküyor. // Sanki gerçekten o kategori kilitli gibi. Bir mantık hatası gibi durum var. Ama çok önemli değil...s
+ let isTechnician  =  userdata?.userscopes.isTechnician;
+ let patreonAuth  =  userdata?.userscopes.isPatreon;
+ locked = !patreonAuth ? true : locked; // Yedek: !category_authority ? true : locked; // Eğer kullanıcının category düzeşeöe yetkisi yoksa komple locked konumuna getir. Sadece reklamlar linkine tıklasın yeter.. // Bir negatifi. Düzenle butonu kilitli gözüküyor. // Sanki gerçekten o kategori kilitli gibi. Bir mantık hatası gibi durum var. Ama çok önemli değil...s
 
 
 if (!isTechnician) return undefined      
 // return (<div>{JSON.stringify(regional_contents)}</div>)
+
+
 
 return ( 
 <form onSubmit={formik.handleSubmit}>
@@ -102,12 +108,17 @@ return (
         <div className={s.name}>
 
                 {adv_authority && <div className={s.adsbutton}>
-                        
+                                        
+                        {/* <Link href={listingPath} className={s.visit} title="Konsol > Firmalarım"><RiListUnordered/></Link> */}
+                        {(active) ? <Link href={`/p/directory/companies?sector=${pathObj?.sector}&subsector=${pathObj?.subsector}&cclass=${pathObj?.cclass}&label=${pathObj?.label}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}                                                                                                
+                        {(active && project=="sakaryarehberim.com" ) ? <Link href={`${project}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> SR </Link> : undefined}   
+                        {(active && project=="yurtarama.com" ) ? <Link href={`${project}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> YA </Link> : undefined}                                                             
+
                 <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
                         
                 <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/></div> }
                 
-                <Textfield  formik={formik} name={selectedlang_name_fn} label={"İsim"} value={selectedlang_name} disabled={locked} style={{backgroundColor:"#ececec"}}/>
+                <Textfield  formik={formik} name={selectedlang_name_fn} label={"İsim"} value={selectedlang_name} disabled={locked} style={{backgroundColor:"#ececec", fontWeight:"bold", fontSize:20}}/>
 
         </div>
 
@@ -118,7 +129,10 @@ return (
 
         <Regional_Contents regional_contents={regional_contents} locked={locked} locale={locale} save_regional_contentfunc={save_regional_contentfunc} add_regional_contentfunc={add_regional_contentfunc} countryStateObj={countryStateObj} cityStateObj={cityStateObj} districtStateObj={districtStateObj} subdistrictStateObj={subdistrictStateObj}/>
         
-        
+
+        {/* {JSON.stringify(contents_linked)}        */}
+        {/* {console.log("!!!!!!!!!!!!!::::::::: ", contents_linked)} */}
+
         <div className={s.meta}> <LayoutMeta_Admin_V2 props={{project, meta_title, meta_description, meta_keywords, rank, formik,  meta_title_fn, meta_description_fn, rank_fn, name, canonicalLangProblem, prefix, locked_fn, active_fn, locked, active, slug_authority, locked_authority,  slug_fn, slug, googlerank_fn, googlerank, note_fn, note, contents_linked_fn, contents_linked, contents_removed_fn, contents_removed, contents_keywords_and_fn, contents_keywords_and, contents_keywords_not_fn, contents_keywords_not,  searchkeyword_fn, searchkeyword, }}/> </div>
 
 

@@ -33,17 +33,17 @@ export default function LayoutMeta_Admin_V2  ({props})  {
 
                        <Textfield id={"googlerank"} type="number" formik={formik} name={googlerank_fn} label={"Google Rank"} value={googlerank} forceNumber={true}  disabled={locked}/>
 
-                       <Textarea id={"note"} formik={formik} name={note_fn} label={"Yönetici notu"} value={note} row={8}  disabled={locked}/>
+                       {/* <Textarea id={"note"} formik={formik} name={note_fn} label={"Yönetici notu"} value={note} row={8}  disabled={locked}/> */}
                                               
                        {/* searchArticles={searchArticles} */}
 
                        <Contents_Linked formik={formik} contents_linked_fn={contents_linked_fn} contents_linked={contents_linked} locked={locked} articlesObj={articlesObj} searchkeyword_fn={searchkeyword_fn} searchkeyword={searchkeyword}/>
 
-                       <Contents_Removed formik={formik} contents_removed_fn={contents_removed_fn} contents_removed={contents_removed} locked={locked}  articlesObj={articlesObj} searchkeyword_fn={searchkeyword_fn} searchkeyword={searchkeyword} />
+                       {/* <Contents_Removed formik={formik} contents_removed_fn={contents_removed_fn} contents_removed={contents_removed} locked={locked}  articlesObj={articlesObj} searchkeyword_fn={searchkeyword_fn} searchkeyword={searchkeyword} /> */}
 
-                       <Contents_Keywords_And formik={formik} contents_keywords_and_fn={contents_keywords_and_fn} contents_keywords_and={contents_keywords_and} locked={locked} />
+                       {/* <Contents_Keywords_And formik={formik} contents_keywords_and_fn={contents_keywords_and_fn} contents_keywords_and={contents_keywords_and} locked={locked} /> */}
 
-                       <Contents_Keywords_Not formik={formik} contents_keywords_not_fn={contents_keywords_not_fn} contents_keywords_not={contents_keywords_not} locked={locked} />
+                       {/* <Contents_Keywords_Not formik={formik} contents_keywords_not_fn={contents_keywords_not_fn} contents_keywords_not={contents_keywords_not} locked={locked} /> */}
 
 
 
@@ -104,7 +104,7 @@ export default function LayoutMeta_Admin_V2  ({props})  {
                     <div style={{display:"flex", flexDirection:"column", gap:20}}>
                          
 
-                              {contents_removed?.map((content_removed, index)=> {
+                              {contents_removed?.length>0 && contents_removed?.map((content_removed, index)=> {
 
                               const moveUp = () => { formik?.setFieldValue(contents_removed_fn, arrayMoveImmutable(contents_removed, index, index-1) ) /* Silme... */ }
                               const moveDown = () => { formik?.setFieldValue(contents_removed_fn, arrayMoveImmutable(contents_removed, index, index+1) ) /* Silme... */ }                        
@@ -183,7 +183,7 @@ export default function LayoutMeta_Admin_V2  ({props})  {
                          <div style={{display:"flex", flexDirection:"column", gap:20}}>
                               
                               
-                                   {contents_linked?.map((content_linked, index)=> {
+                                   {contents_linked?.length>0 && contents_linked?.map((content_linked, index)=> {
 
                                                                  const moveUp = () => { formik?.setFieldValue(contents_linked_fn, arrayMoveImmutable(contents_linked, index, index-1) ) /* Silme... */ }
                                                                  const moveDown = () => { formik?.setFieldValue(contents_linked_fn, arrayMoveImmutable(contents_linked, index, index+1) ) /* Silme... */ }                        
@@ -265,7 +265,7 @@ export default function LayoutMeta_Admin_V2  ({props})  {
                
                     <div style={{display:"flex", flexDirection:"column", gap:20}}>
 
-                              {contents_keywords_and?.map((content, index)=> {
+                              {contents_keywords_and?.length>0 && contents_keywords_and?.map((content, index)=> {
                                                                                                                    
                                                             let content_keyword_fn = `${contents_keywords_and_fn}[${index}]`;
                                                             let content_keyword_value = content; // eval(`formik?.values?.subsector?.contents_keywords_and?.[`+index+`]?.datakey`);                                                                                                                        
@@ -305,7 +305,7 @@ const Contents_Keywords_Not = (props) => {
                
                     <div style={{display:"flex", flexDirection:"column", gap:20}}>
 
-                              {contents_keywords_not?.map((content, index)=> {
+                              {contents_keywords_not?.length>0 && contents_keywords_not?.map((content, index)=> {
                                                                                                                    
                                                             let content_keyword_fn = `${contents_keywords_not_fn}[${index}]`;
                                                             let content_keyword_value = content; // eval(`formik?.values?.subsector?.contents_keywords_not?.[`+index+`]?.datakey`);                                                                                                                        

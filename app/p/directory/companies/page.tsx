@@ -40,6 +40,7 @@ export default async function CompaniesPage(context) {
                         urlprefix="/p/directory"
                         mode="allcompanies"                                        
                         />
+                        
         </div>
   );
 }
