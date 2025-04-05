@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 import { OperatorButtonV2 } from "@/modules/common/reuseable/button/operatorbuttonv2";
 import { cachecountriesv3hook_next15 } from "@/modules/functions/cachecountriesv3hook_next15";
 import Link from "next/link";
+import projectbasedurl from "@/modules/functions/projectbasedurl";
 
 
 export const LayoutShellV2_Admin = ({props}) => {
@@ -95,9 +96,10 @@ export const LayoutShellV2_Admin = ({props}) => {
  locked = !patreonAuth ? true : locked; // Yedek: !category_authority ? true : locked; // Eğer kullanıcının category düzeşeöe yetkisi yoksa komple locked konumuna getir. Sadece reklamlar linkine tıklasın yeter.. // Bir negatifi. Düzenle butonu kilitli gözüküyor. // Sanki gerçekten o kategori kilitli gibi. Bir mantık hatası gibi durum var. Ama çok önemli değil...s
 
 
-if (!isTechnician) return undefined      
-// return (<div>{JSON.stringify(regional_contents)}</div>)
+ if (!isTechnician) return undefined      
+ // return (<div>{JSON.stringify(regional_contents)}</div>)
 
+ let url = projectbasedurl({project})
 
 
 return ( 
@@ -107,12 +109,12 @@ return (
         
         <div className={s.name}>
 
-                {adv_authority && <div className={s.adsbutton}>
+                {adv_authority && <div className={s.adsbutton}> 
                                         
                         {/* <Link href={listingPath} className={s.visit} title="Konsol > Firmalarım"><RiListUnordered/></Link> */}
                         {(active) ? <Link href={`/p/directory/companies?sector=${pathObj?.sector}&subsector=${pathObj?.subsector}&cclass=${pathObj?.cclass}&label=${pathObj?.label}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}                                                                                                
-                        {(active && project=="sakaryarehberim.com" ) ? <Link href={`${project}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> SR </Link> : undefined}   
-                        {(active && project=="yurtarama.com" ) ? <Link href={`${project}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> YA </Link> : undefined}                                                             
+                        {(active && project=="sakaryarehberim.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> SR </Link> : undefined}   
+                        {(active && project=="yurtarama.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> YA </Link> : undefined}                                                             
 
                 <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
                         
@@ -147,9 +149,6 @@ return (
                 {/* Kaydet butonu */}
                 {!locked ?<OperatorButtonV2 props={{ icon:"Save", handleClick:formik?.handleSubmit,  button_text:{enabled:"Kaydet", disabled:"Kaydediliyor"}, disable: (formik?.isSubmitting || !formik?.dirty) }} /> : undefined }
 
-                {/* {livelink} */}
-                {/* İzle/Düzenle butonu */}
-                <OperatorButtonV2 props={{ icon:"Eye", backgroundColor:"#2db6ff", handleClick:()=>router.push(livelink),  button_text:{enabled: "İzle" , disabled:"Kaydet ya da temizle"}, disable:formik?.dirty }} /> 
                            
         </div>
 

@@ -74,7 +74,7 @@ export default function  Subsector (props) {
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/subsectormutation_update", { method: "POST", body: JSON.stringify({ data:{type:"subsectormutation_update", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"subsectorupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
 
                 const formik = useFormik({
                                             enableReinitialize: true, initialValues: { subsector:subsectorclient, regional_contents },
@@ -193,7 +193,6 @@ if (subdistrict_slug)
 {
   advlink=advlink+`&subdistrict_slug=${subdistrict_slug}` 
 }
-
 
 
   // return (<div>{JSON.stringify(subsectorclient?.project)}</div>)
