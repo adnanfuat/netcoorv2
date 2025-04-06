@@ -73,6 +73,7 @@ export const LayoutShellV2_Admin = ({props}) => {
           subdistrictStateObj,
           userdata,
           pathObj,
+          pagetype, // Sector mü Subsector mü, Label mı?
           
        } = props;
       
@@ -101,24 +102,67 @@ export const LayoutShellV2_Admin = ({props}) => {
 
  let url = projectbasedurl({project})
 
+ let companiesParams=undefined;
+
+ if (pathObj?.sector)
+ {
+        companiesParams= `sector=${pathObj?.sector}`;
+
+        if (pathObj?.subsector)
+                {
+                        companiesParams= companiesParams+"&"+`subsector=${pathObj?.subsector}`;
+                }        
+ }
+ 
+ if (pathObj?.cclass)
+        {
+               companiesParams= companiesParams+"&"+`sector=${pathObj?.cclass}`;
+        }
+ if (pathObj?.label)
+                {
+                       companiesParams= companiesParams+"&"+`sector=${pathObj?.label}`;
+                }
+
+                // return JSON.stringify(props)
+
+                let title=undefined;
+                if (pagetype=="sector")
+                        {
+                               title="Sektör Düzenleme"
+                        }
+                else if (pagetype=="subsector")
+                                {
+                                       title="Alt Sektör Düzenleme"
+                                }
+                else if (pagetype=="cclass")
+                        {
+                                title="Sınıflandırma Düzenleme"
+                        }
+                else if (pagetype=="label")
+                        {
+                                title="Etiket Düzenleme"
+                        }
 
 return ( 
 <form onSubmit={formik.handleSubmit}>
 
-<div className={s.shell}>
+<div className={s.shell}> 
         
         <div className={s.name}>
 
                 {adv_authority && <div className={s.adsbutton}> 
                                         
                         {/* <Link href={listingPath} className={s.visit} title="Konsol > Firmalarım"><RiListUnordered/></Link> */}
-                        {(active) ? <Link href={`/p/directory/companies?sector=${pathObj?.sector}&subsector=${pathObj?.subsector}&cclass=${pathObj?.cclass}&label=${pathObj?.label}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}                                                                                                
+                        {(active) ? <Link href={`/p/directory/companies?${companiesParams}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}
                         {(active && project=="sakaryarehberim.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> SR </Link> : undefined}   
                         {(active && project=="yurtarama.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> YA </Link> : undefined}                                                             
-
-                <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
+                        <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
+                        <div style={{fontWeight:"bold", backgroundColor:"black", padding:"8px 16px", borderRadius:4, color:"orange"}}>{title}</div>
                         
-                <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/></div> }
+                {/* <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> */}
+
+
+                </div> }
                 
                 <Textfield  formik={formik} name={selectedlang_name_fn} label={"İsim"} value={selectedlang_name} disabled={locked} style={{backgroundColor:"#ececec", fontWeight:"bold", fontSize:20}}/>
 
@@ -188,7 +232,7 @@ return (<div style={{display:"flex", flexDirection:"column", gap:20, marginTop:5
 
           <div style={{backgroundColor:"#cee3ea", padding:10, borderRadius:8, display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                 
-                 <div>
+                 <div style={{display:"flex", flexDirection:"column", gap:8}}>
                         <div>Bölgesel Açıklamalar</div>
 
                         {countryStateObj ? <Region countryStateObj={countryStateObj} cityStateObj={cityStateObj} districtStateObj={districtStateObj} subdistrictStateObj={subdistrictStateObj}  /> : null}

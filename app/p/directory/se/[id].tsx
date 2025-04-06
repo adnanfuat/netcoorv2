@@ -8,7 +8,6 @@ import {LayoutShellV2_Admin} from '@/components/layouts/layoutshellv2_admin';
 import {titlePrefixer } from '@/components/commonnew/titleprefixer';
 import {capitalizeFirstLetter } from '@/components/utilsnew/capitalizefirstletter';
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
-import {isLogged} from "@/components/hooksnew/islogged";
 import { LayoutMain } from "@/layouts/console/layoutmain";
 import { layoutShellV2_Admin_GiveLiveLink } from '@/layouts/layoutshellv2_admin_givelivelink';
 import { useEffect, useState } from 'react';
@@ -17,77 +16,9 @@ import { useEffect, useState } from 'react';
 
 export default function  Sector_Core ({props}) {
 
-
   const router = useRouter();
   const {locale, defaultLocale, query:{id, country_slug, city_slug, district_slug, subdistrict_slug}}= router;    
-
-
-  const countryStateObj =  useState(country_slug);
-  const cityStateObj =  useState(city_slug);
-  const districtStateObj =  useState(district_slug);
-  const subdistrictStateObj =  useState(subdistrict_slug);
-
-
-
-useEffect(() => {
-    countryStateObj[1](country_slug)
-}, [country_slug])
-
-useEffect(() => {
-    cityStateObj[1](city_slug)
-}, [city_slug])
-
-useEffect(() => {
-    districtStateObj[1](district_slug)
-}, [district_slug])      
-
-useEffect(() => {
-    subdistrictStateObj[1](subdistrict_slug)
-}, [subdistrict_slug])   
-
-
-
-  let pathname = `/se/${id}`;
-  // console.log("routerrouter: ", router);
-
-  //return <div onClick={()=>router?.replace({pathname:`/se/${id}` ,query:undefined})}>asdasd</div>
-  // return country_slug
   
-  const queryClient = useQueryClient();  
-  let { countries} = props ?? {};
-  
-  const { user, permissions} = isLogged();
-  
-  let permissionReject=true; // varsayılan olarak reddedilmiş kabul et...
-  ["category","advertisement"]?.map(w=>{           
-                                let found = permissions?.find(item=>item?.name==w);      // input olarak gelen yetkiyi kullancının yetkileri içinde ara                                                 
-                                if (found) { permissionReject=false}                     // demekki her firma için yetkisi var..                                                                            
-                            }
-  );  // whichPermissions ile gelen yetkilerden biri yoksa o zaman o kaydı find ile ulmuş olacak ve  reject sonucu döndürecek...            
-
-  let loginAndAuthorized  = user?.email && !permissionReject ; // permissions?.includes(10);
-  
-      
-  const fetcher = async () => { let res= await fetch(`/api/sector_admin`, { method: "POST", body: JSON.stringify({ data:{ id, locale, defaultLocale } }) } ); res =  await res?.json(); return res; };                  
-  const { data:sectorclient, isLoading } = useQuery( ["sectorquery"], () => fetcher() , { enabled:(!!id && loginAndAuthorized)});
-
-  const fetcher_rc = async () => { let res= await fetch(`/api/swissarmyknifequery_tunnel`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:sectorclient?.datakey, parent_type:"sector", project:sectorclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
-  const { data:regional_contents, isLoading:isLoading_regional_contents } = useQuery( ["isLoading_regional_contents", countryStateObj[0], cityStateObj[0], districtStateObj[0], subdistrictStateObj[0], ], () => fetcher_rc() , { enabled:!!sectorclient, keepPreviousData:true  } );
-                          
-  // console.log("regional_contentsregional_contents: ", sectorclient);
-
-            //  return (<div>{JSON.stringify(regional_contents)}</div>)
-
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/sectormutation_update", { method: "POST", body: JSON.stringify({ data:{type:"sectormutation_update", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
-
-                const formik = useFormik({
-                                enableReinitialize: true, initialValues: { sector:sectorclient },
-                                onSubmit: async (values, {setSubmitting}) => {  setSubmitting(true);  await updateFunc({values}); setSubmitting(false);    },   // .then(()=>{ queryClient.invalidateQueries(); setSubmitting(false) })
-                              });   
-      
-let sector=formik?.values?.sector;
-
-
   
 /////////--- (s)
 

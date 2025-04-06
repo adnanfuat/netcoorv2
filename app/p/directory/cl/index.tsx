@@ -11,7 +11,7 @@ import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
 
-export default function  Subsector (props) {
+export default function  Cclass (props) {
 
  let { userdata } = props ?? {};
 
@@ -25,9 +25,31 @@ export default function  Subsector (props) {
  const city_slug = searchParams.get('city_slug');
  const district_slug = searchParams.get('district_slug');
  const subdistrict_slug = searchParams.get('subdistrict_slug');
+
+ 
+ // Eskisinden kalma.. Belki ihtiyaç olmayabilir...
+
+//  useEffect(() => {
+//      countryStateObj[1](country_slug)
+//  }, [country_slug])
+ 
+//  useEffect(() => {
+//      cityStateObj[1](city_slug)
+//  }, [city_slug])
+ 
+//  useEffect(() => {
+//      districtStateObj[1](district_slug)
+//  }, [district_slug])      
+ 
+//  useEffect(() => {
+//      subdistrictStateObj[1](subdistrict_slug)
+//  }, [subdistrict_slug])   
+
+
+
  const id = searchParams.get('id');
-   
-  let pathname = `/su/${id}`;
+
+ let pathname = `/cl/${id}`;
 
   const countryStateObj =  useState(country_slug);
   const cityStateObj =  useState(city_slug);
@@ -35,7 +57,7 @@ export default function  Subsector (props) {
   const subdistrictStateObj =  useState(subdistrict_slug);
     
   const queryClient = useQueryClient();  
-  let { countries } = props ?? {};
+  let { countries} = props ?? {};
   
   let permissions = userdata?.permissions ?? [];
   let user=userdata ?.email;
@@ -49,18 +71,22 @@ export default function  Subsector (props) {
 
   let loginAndAuthorized  = user?.email && !permissionReject;
   
-  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"subsector", id } }) } ); res = await res?.json(); return res; };
-  const {  data:subsectorclient, isLoading } = useQuery( {queryKey:["subsectorquery"], queryFn:() => fetcher()});
+  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"cclass", id } }) } ); res = await res?.json(); return res; };
+  const {  data:cclassclient, isLoading } = useQuery( {queryKey:["cclass"], queryFn:() => fetcher()});
 
-  const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:subsectorclient?.datakey, parent_type:"subsector", project:subsectorclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
-  const {  data:regional_contents, isLoading:isLoading_regional_contents } = useQuery( {queryKey:["isLoading_regional_contents", countryStateObj[0], cityStateObj[0], districtStateObj[0], subdistrictStateObj[0], subsectorclient?.project ], queryFn:() => fetcher_rc()});
+
+  //  return JSON.stringify(cclassclient)
+
+
+  const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:cclassclient?.datakey, parent_type:"cclass", project:cclassclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
+  const {  data:regional_contents, isLoading:isLoading_regional_contents } = useQuery( {queryKey:["isLoading_regional_contents", countryStateObj[0], cityStateObj[0], districtStateObj[0], subdistrictStateObj[0], cclassclient?.project ], queryFn:() => fetcher_rc()});
                     
   let save_regional_contentfunc = async (data) => {
                                                                   let { regional_content } = data ?? {};
                                                                   // var datakey = keygen._({ forceLowercase: true, specials: false, sticks: false, chars: true, length: 8 });                                                                                          
                                                                   // formik?.setFieldValue(regional_descriptions_fn, [...regional_contents, {datakey, tr:{description:""}  }]);
                                                                   // console.log("sdasddassda", id, type, domain, parent_datakey, parent_type);
-                                                                  let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"save_regional_content", ...data, parent_datakey:subsectorclient?.datakey, parent_type:"subsector", domain:subsectorclient?.project } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
+                                                                  let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"save_regional_content", ...data, parent_datakey:cclassclient?.datakey, parent_type:"sector", domain:cclassclient?.project } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
 
                                                               }
 
@@ -69,46 +95,46 @@ export default function  Subsector (props) {
                                                                   var datakey = keygen._({ forceLowercase: true, specials: false, sticks: false, chars: true, length: 8 });                                                                                          
                                                                 //  formik?.setFieldValue(regional_descriptions_fn, [...regional_contents, {datakey, tr:{description:""}  }]);
                                                                 //  console.log("sdasddassda", id, type, domain, parent_datakey, parent_type);
-                                                                let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{country_slug, city_slug, district_slug, subdistrict_slug, type:"add_regional_content", parent_datakey:subsectorclient?.datakey, parent_type:"subsector", domain:subsectorclient?.project, datakey } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
+                                                                let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{country_slug, city_slug, district_slug, subdistrict_slug, type:"add_regional_content", parent_datakey:cclassclient?.datakey, parent_type:"sector", domain:cclassclient?.project, datakey } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
                                                                 
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"subsectorupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"sectorupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
 
                 const formik = useFormik({
-                                            enableReinitialize: true, initialValues: { subsector:subsectorclient, regional_contents },
+                                            enableReinitialize: true, initialValues: { sector:cclassclient, regional_contents },
                                             onSubmit: async (values, {setSubmitting}) => {  setSubmitting(true);  await updateFunc({values}); setSubmitting(false); },   // .then(()=>{ queryClient.invalidateQueries(); setSubmitting(false) })
                                         });   
       
-let subsector=formik?.values?.subsector;
+let cclass=formik?.values?.cclass;
   
 /////////--- (s)
 
-let contents_linked = eval(`subsector?.contents_linked`) ?? [];
-let contents_linked_fn = `subsector.contents_linked`;
+let contents_linked = eval(`cclass?.contents_linked`) ?? [];
+let contents_linked_fn = `cclass.contents_linked`;
 
-let searchkeyword = eval(`subsector?.searchkeyword`) ?? undefined;
-let searchkeyword_fn = `subsector.searchkeyword`;
+let searchkeyword = eval(`cclass?.searchkeyword`) ?? undefined;
+let searchkeyword_fn = `cclass.searchkeyword`;
 
-let contents_removed = eval(`subsector?.contents_removed`) ?? [];
-let contents_removed_fn = `subsector.contents_removed`;
+let contents_removed = eval(`cclass?.contents_removed`) ?? [];
+let contents_removed_fn = `cclass.contents_removed`;
 
-let contents_keywords_and = eval(`subsector?.contents_keywords_and`) ?? [];
-let contents_keywords_and_fn = `subsector.contents_keywords_and`;
+let contents_keywords_and = eval(`cclass?.contents_keywords_and`) ?? [];
+let contents_keywords_and_fn = `cclass.contents_keywords_and`;
 
-let contents_keywords_not = eval(`subsector?.contents_keywords_not`) ?? [];
-let contents_keywords_not_fn = `subsector.contents_keywords_not`;
+let contents_keywords_not = eval(`cclass?.contents_keywords_not`) ?? [];
+let contents_keywords_not_fn = `cclass.contents_keywords_not`;
 
-let pagedetail1 = eval(`subsector?.detail1_${locale}`)
-let pagedetail2 = eval(`subsector?.detail2_${locale}`)
+let pagedetail1 = eval(`cclass?.detail1_${locale}`)
+let pagedetail2 = eval(`cclass?.detail2_${locale}`)
 
-let pagedetail1_fn= `subsector.detail1_${locale}`;
-let pagedetail2_fn= `subsector.detail2_${locale}`;
+let pagedetail1_fn= `cclass.detail1_${locale}`;
+let pagedetail2_fn= `cclass.detail2_${locale}`;
 
-let selectedlang_name_fn = `subsector.title_${locale}`;
-let selectedlang_name = eval(`subsector?.title_${locale}`);
-let defaultlang_name = eval(`subsector?.title_${defaultLocale}`);
+let selectedlang_name_fn = `cclass.title_${locale}`;
+let selectedlang_name = eval(`cclass?.title_${locale}`);
+let defaultlang_name = eval(`cclass?.title_${defaultLocale}`);
 
 let name = selectedlang_name ??  defaultlang_name;
 
@@ -119,33 +145,33 @@ let canonicalLangProblem= (!selectedlang_name   || (selectedlang_name && (select
 
 
 ///////xxxx --- (s)
-let meta_title = eval(`subsector?.meta_${locale}?.title`) ?? ""  
-let meta_title_fn = `subsector.meta_${locale}.title`
+let meta_title = eval(`cclass?.meta_${locale}?.title`) ?? ""  
+let meta_title_fn = `cclass.meta_${locale}.title`
 
-let meta_description = eval(`subsector?.meta_${locale}?.description`)
-let meta_description_fn = `subsector.meta_${locale}.description`; 
-let meta_keywords = eval(`subsector?.meta_${locale}?.keywords`)
+let meta_description = eval(`cclass?.meta_${locale}?.description`)
+let meta_description_fn = `cclass.meta_${locale}.description`; 
+let meta_keywords = eval(`cclass?.meta_${locale}?.keywords`)
 
-let rank = eval(`subsector?.rank`) ?? 0 ;
-let rank_fn = `subsector.rank`;
-let locked = eval(`subsector?.locked`);
-let locked_fn = `subsector.locked`;
+let rank = eval(`cclass?.rank`) ?? 0 ;
+let rank_fn = `cclass.rank`;
+let locked = eval(`cclass?.locked`);
+let locked_fn = `cclass.locked`;
 
-let active = eval(`subsector?.active`);
-let active_fn = `subsector.active`;
+let active = eval(`cclass?.active`);
+let active_fn = `cclass.active`;
 
-let slug = eval(`subsector?.slug_${locale}`);
-let slug_fn=    `subsector.slug_${locale}`;
+let slug = eval(`cclass?.slug_${locale}`);
+let slug_fn=    `cclass.slug_${locale}`;
 
-let googlerank = subsector?.googlerank;
-let googlerank_fn=    `subsector.googlerank`;
+let googlerank = cclass?.googlerank;
+let googlerank_fn=    `cclass.googlerank`;
 
-let note = subsector?.note;
-let note_fn=    `subsector.note`;
+let note = cclass?.note;
+let note_fn=    `cclass.note`;
 
-let pathObj={sector:subsector?.sector, subsector:subsector?.slug_tr};
+let pathObj={sector:cclass?.sector, sector:cclass?.slug_tr};
 
-let { prefix } = titlePrefixer({type:"subsector", countries, slug }); prefix = capitalizeFirstLetter(prefix);
+let { prefix } = titlePrefixer({type:"sector", countries, slug }); prefix = capitalizeFirstLetter(prefix);
 
 let slug_authority=permissionsControlV3({askList:["category_slug"], type:"some", permissions});  // Slug değiştirme yetkisi...?
 let locked_authority=permissionsControlV3({askList:["category_lock"], type:"some", permissions});  // Categoryleri kiteleme yetkisi?
@@ -155,26 +181,26 @@ let category_authority=permissionsControlV3({askList:["category"], type:"some", 
 
 let FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_FRONTEND_DOMAIN;
 let livelink=undefined;
-if (subsector?.project=="sakaryarehberim.com") 
+if (cclass?.project=="sakaryarehberim.com") 
 {
       FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_FRONTEND_DOMAIN;
-      livelink=`${FRONTEND_DOMAIN}/su/${subsector?.slug_tr}`;
+      livelink=`${FRONTEND_DOMAIN}/su/${cclass?.slug_tr}`;
 
 }
-else if (subsector?.project=="yurtarama.com") 
+else if (cclass?.project=="yurtarama.com") 
 {
       FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_YA_DOMAIN;
-      livelink=`${FRONTEND_DOMAIN}/${subsector?.slug_tr}`;
+      livelink=`${FRONTEND_DOMAIN}/${cclass?.slug_tr}`;
 }
 
-let project=subsector?.project;
+let project=cclass?.project;
 
-//let livelink=project=="yurtarama.com" ? `${FRONTEND_DOMAIN}/${subsector?.slug_tr}` : `${FRONTEND_DOMAIN}/su/${subsector?.slug_tr}`;//yurtarama.com için link yapısı farklı
-livelink = givelivelink({country_slug, city_slug, district_slug, subdistrict_slug, project:subsector?.project, livelink})
+//let livelink=project=="yurtarama.com" ? `${FRONTEND_DOMAIN}/${cclass?.slug_tr}` : `${FRONTEND_DOMAIN}/su/${cclass?.slug_tr}`;//yurtarama.com için link yapısı farklı
+livelink = givelivelink({country_slug, city_slug, district_slug, subdistrict_slug, project:cclass?.project, livelink})
 
-let pagetype="subsector";
-let eadvlink=`/p/promo/edit?pagetype=${pagetype}&parent_slug=${slug}&parent_id=${subsector?.id}`; // Reklamlara yönlendiren link
-let advlink=`/p/categoricalads?project=${subsector?.project}&sector=${subsector?.sector}&subsector=${subsector?.slug_tr}`; // Reklamlara yönlendiren link
+let pagetype="cclass";
+let eadvlink=`/p/promo/edit?pagetype=${pagetype}&parent_slug=${slug}&parent_id=${cclass?.id}`; // Reklamlara yönlendiren link
+let advlink=`/p/categoricalads?project=${cclass?.project}&sector=${cclass?.sector}&sector=${cclass?.slug_tr}`; // Reklamlara yönlendiren link
 
 
 if (country_slug) // Yurtarama illere göre listelendiği için bu önemli..
@@ -194,10 +220,9 @@ if (subdistrict_slug)
   advlink=advlink+`&subdistrict_slug=${subdistrict_slug}` 
 }
 
+// return (<div>{JSON.stringify(cclassclient?.project)}</div>)
 
-  // return (<div>{JSON.stringify(subsectorclient?.project)}</div>)
-
-if (!subsector) return "~"
+if (!cclass) return "~"
 if (isLoading) return <Loading/>
 
 // <LayoutMain layout_title={name} suptitle={`Alt Sektör ${country_slug ?? ""} ${city_slug ?? ""} ${district_slug ?? ""} ${subdistrict_slug ?? ""}`}>
@@ -261,28 +286,17 @@ if (isLoading) return <Loading/>
 
                                               pathname,
                                               countryStateObj, cityStateObj, districtStateObj, subdistrictStateObj,
-                                              project:subsector?.project,
+                                              project:cclass?.project,
 
                                               userdata,
                                               pathObj,
-
-                                              pagetype:"subsector"
+                                              pagetype:"cclass"
 
                                             }}/>
                                             
-
           //  </LayoutMain>
-
   );
 
 }
-
-
-
-
-
-
-
-  
   
 
