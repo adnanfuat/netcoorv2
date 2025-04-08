@@ -21,22 +21,44 @@ padding: 14px 0px;;
     }
 
 .row {
-background-color: #dddddd;
-display: flex;
-align-items: center;
-gap:20px;
-padding: 10px 20px;
-border-radius: 6px 6px 0px 0px;
+        background-color: #dddddd;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap:10px;
+        padding: 6px 8px;
+        border-radius: 6px 6px 0px 0px;
+    }
 
+.rankswr{
+    display: flex;
+    gap:6px;
+    font-size: 11px;    
+}
+.rankswr span{
+    width:24px;
+    border-radius: 4px;
+    text-align: center;
+    padding: 2px;
+    font-size: 9px;
 }
 
+.rank{
+                                background-color: #ff778e;
+}
+
+.googlerank  {
+                                background-color: #5aa9ff;
+                           }
+
+    
 .s_shell {
 background-color:#efefef;
 display: flex;
 flex-direction: column;
 gap: 10px;
 height: 224px;
-padding: 20px;
+padding: 12px;
 overflow-y: scroll;
 border-radius: 0px 0px 6px 6px;
 box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;

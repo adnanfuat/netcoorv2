@@ -28,72 +28,9 @@ export default async function DirectoryPage(context) {
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
   //  return (JSON.stringify(sectors));
 
-  return ( <Sectors />);
+  return ( <Sectors userdata={userdata} />);
 }
 
-
-
-
-// const List = (props) =>{
-
-//   let {sectors} = props ?? {}
-
-
-//   return <div className={s.shell}   > 
-      
-//   {/*  {listsectors?.length} vvvv {sectors?.length}  */}
-//   {/*  <HeadComp props={{pagetype:"directory"}}/>    */}
-
-//       {sectors?.map((a,i)=>            
-//                                     {      
-                                                                                  
-//                                      return (
-//                                        <div key={i}>             
-//                                                     <div className={s.row}> 
-//                                                             <Image
-//                                                                 src={a?.img}
-//                                                                 alt={a?.title}
-//                                                                 width={66}
-//                                                                 height={44}        
-//                                                                 style={{
-//                                                                   objectFit: "cover",
-//                                                                   maxWidth: "100%",
-//                                                                   height: "auto",
-//                                                                   border: "1px solid rgb(184, 184, 184)"
-
-//                                                                         }} 
-//                                                                 />
-
-//                                                                 <Link
-//                                                                   href={`/se/${a?.slug}/${redirect_postfix}`}
-//                                                                   prefetch={false}
-//                                                                   style={{fontWeight:"bold"}}>
-//                                                                   {` ${a?.title}`}
-//                                                                 </Link>
-//                                                       </div>
-
-//                                                       <div className={s.s_shell}>
-
-//                                                               {a?.subsectors?.map((s,j)=>
-//                                                                                     <Link href={`/su/${s?.slug}/${redirect_postfix}`} key={j}>
-//                                                                                           <div style={{display:"flex",  alignItems:"center"}}>                                                                                                  
-//                                                                                                     <FaCaretRight/>
-//                                                                                                     {s?.title}
-//                                                                                           </div>
-//                                                                                     </Link>
-//                                                               )}
-
-//                                                       </div>      
-
-//                                         </div>
-//                                      );
-//                                     }
-
-//                                   )
-                                  
-//                                   }
-//                </div>
-// }
 
 
 

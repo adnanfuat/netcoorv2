@@ -11,7 +11,7 @@ import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
 
-export default function  Cclass (props) {
+export default function  Label(props) {
 
  let { userdata } = props ?? {};
 
@@ -26,30 +26,9 @@ export default function  Cclass (props) {
  const district_slug = searchParams.get('district_slug');
  const subdistrict_slug = searchParams.get('subdistrict_slug');
 
- 
- // Eskisinden kalma.. Belki ihtiyaç olmayabilir...
-
-//  useEffect(() => {
-//      countryStateObj[1](country_slug)
-//  }, [country_slug])
- 
-//  useEffect(() => {
-//      cityStateObj[1](city_slug)
-//  }, [city_slug])
- 
-//  useEffect(() => {
-//      districtStateObj[1](district_slug)
-//  }, [district_slug])      
- 
-//  useEffect(() => {
-//      subdistrictStateObj[1](subdistrict_slug)
-//  }, [subdistrict_slug])   
-
-
-
  const id = searchParams.get('id');
 
- let pathname = `/cl/${id}`;
+ let pathname = `/label/${id}`;
 
   const countryStateObj =  useState(country_slug);
   const cityStateObj =  useState(city_slug);
@@ -71,22 +50,22 @@ export default function  Cclass (props) {
 
   let loginAndAuthorized  = user?.email && !permissionReject;
   
-  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"cclass", id,  } }) } ); res = await res?.json(); return res; };
-  const {  data:cclassclient, isLoading } = useQuery( {queryKey:["cclass"], queryFn:() => fetcher()});
+  const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"label", id } }) } ); res = await res?.json(); return res; };
+  const {  data:labelclient, isLoading } = useQuery( {queryKey:["labelquery"], queryFn:() => fetcher()});
 
 
-    
+  // return JSON.stringify(labelclient)
 
 
-  const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:cclassclient?.datakey, parent_type:"cclass", project:cclassclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
-  const {  data:regional_contents, isLoading:isLoading_regional_contents } = useQuery( {queryKey:["isLoading_regional_contents", countryStateObj[0], cityStateObj[0], districtStateObj[0], subdistrictStateObj[0], cclassclient?.project ], queryFn:() => fetcher_rc()});
+  const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:labelclient?.datakey, parent_type:"label", project:labelclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
+  const {  data:regional_contents, isLoading:isLoading_regional_contents } = useQuery( {queryKey:["isLoading_regional_contents", countryStateObj[0], cityStateObj[0], districtStateObj[0], subdistrictStateObj[0], labelclient?.project ], queryFn:() => fetcher_rc()});
                     
   let save_regional_contentfunc = async (data) => {
                                                                   let { regional_content } = data ?? {};
                                                                   // var datakey = keygen._({ forceLowercase: true, specials: false, sticks: false, chars: true, length: 8 });                                                                                          
                                                                   // formik?.setFieldValue(regional_descriptions_fn, [...regional_contents, {datakey, tr:{description:""}  }]);
                                                                   // console.log("sdasddassda", id, type, domain, parent_datakey, parent_type);
-                                                                  let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"save_regional_content", ...data, parent_datakey:cclassclient?.datakey, parent_type:"sector", domain:cclassclient?.project } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
+                                                                  let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"save_regional_content", ...data, parent_datakey:labelclient?.datakey, parent_type:"label", domain:labelclient?.project } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
 
                                                               }
 
@@ -95,48 +74,46 @@ export default function  Cclass (props) {
                                                                   var datakey = keygen._({ forceLowercase: true, specials: false, sticks: false, chars: true, length: 8 });                                                                                          
                                                                 //  formik?.setFieldValue(regional_descriptions_fn, [...regional_contents, {datakey, tr:{description:""}  }]);
                                                                 //  console.log("sdasddassda", id, type, domain, parent_datakey, parent_type);
-                                                                let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{country_slug, city_slug, district_slug, subdistrict_slug, type:"add_regional_content", parent_datakey:cclassclient?.datakey, parent_type:"sector", domain:cclassclient?.project, datakey } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
+                                                                let res =await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{country_slug, city_slug, district_slug, subdistrict_slug, type:"add_regional_content", parent_datakey:labelclient?.datakey, parent_type:"label", domain:labelclient?.project, datakey } }) });  res = await res.json(); setTimeout(() => { queryClient.invalidateQueries(); }, 2000); return res; 
                                                                 
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"cclassupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"labelupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
 
                 const formik = useFormik({
-                                            enableReinitialize: true, initialValues: { cclass:cclassclient, regional_contents },
+                                            enableReinitialize: true, initialValues: { label:labelclient, regional_contents },
                                             onSubmit: async (values, {setSubmitting}) => {  setSubmitting(true);  await updateFunc({values}); setSubmitting(false); },   // .then(()=>{ queryClient.invalidateQueries(); setSubmitting(false) })
                                         });   
       
-let cclass=formik?.values?.cclass;
-
-// return JSON.stringify(cclass)
+let label=formik?.values?.label;
   
 /////////--- (s)
 
-let contents_linked = eval(`cclass?.contents_linked`) ?? [];
-let contents_linked_fn = `cclass.contents_linked`;
+let contents_linked = eval(`label?.contents_linked`) ?? [];
+let contents_linked_fn = `label.contents_linked`;
 
-let searchkeyword = eval(`cclass?.searchkeyword`) ?? undefined;
-let searchkeyword_fn = `cclass.searchkeyword`;
+let searchkeyword = eval(`label?.searchkeyword`) ?? undefined;
+let searchkeyword_fn = `label.searchkeyword`;
 
-let contents_removed = eval(`cclass?.contents_removed`) ?? [];
-let contents_removed_fn = `cclass.contents_removed`;
+let contents_removed = eval(`label?.contents_removed`) ?? [];
+let contents_removed_fn = `label.contents_removed`;
 
-let contents_keywords_and = eval(`cclass?.contents_keywords_and`) ?? [];
-let contents_keywords_and_fn = `cclass.contents_keywords_and`;
+let contents_keywords_and = eval(`label?.contents_keywords_and`) ?? [];
+let contents_keywords_and_fn = `label.contents_keywords_and`;
 
-let contents_keywords_not = eval(`cclass?.contents_keywords_not`) ?? [];
-let contents_keywords_not_fn = `cclass.contents_keywords_not`;
+let contents_keywords_not = eval(`label?.contents_keywords_not`) ?? [];
+let contents_keywords_not_fn = `label.contents_keywords_not`;
 
-let pagedetail1 = eval(`cclass?.detail1_${locale}`)
-let pagedetail2 = eval(`cclass?.detail2_${locale}`)
+let pagedetail1 = eval(`label?.detail1_${locale}`)
+let pagedetail2 = eval(`label?.detail2_${locale}`)
 
-let pagedetail1_fn= `cclass.detail1_${locale}`;
-let pagedetail2_fn= `cclass.detail2_${locale}`;
+let pagedetail1_fn= `label.detail1_${locale}`;
+let pagedetail2_fn= `label.detail2_${locale}`;
 
-let selectedlang_name_fn = `cclass.title_${locale}`;
-let selectedlang_name = eval(`cclass?.title_${locale}`);
-let defaultlang_name = eval(`cclass?.title_${defaultLocale}`);
+let selectedlang_name_fn = `label.title_${locale}`;
+let selectedlang_name = eval(`label?.title_${locale}`);
+let defaultlang_name = eval(`label?.title_${defaultLocale}`);
 
 let name = selectedlang_name ??  defaultlang_name;
 
@@ -147,33 +124,33 @@ let canonicalLangProblem= (!selectedlang_name   || (selectedlang_name && (select
 
 
 ///////xxxx --- (s)
-let meta_title = eval(`cclass?.meta_${locale}?.title`) ?? ""  
-let meta_title_fn = `cclass.meta_${locale}.title`
+let meta_title = eval(`label?.meta_${locale}?.title`) ?? ""  
+let meta_title_fn = `label.meta_${locale}.title`
 
-let meta_description = eval(`cclass?.meta_${locale}?.description`)
-let meta_description_fn = `cclass.meta_${locale}.description`; 
-let meta_keywords = eval(`cclass?.meta_${locale}?.keywords`)
+let meta_description = eval(`label?.meta_${locale}?.description`)
+let meta_description_fn = `label.meta_${locale}.description`; 
+let meta_keywords = eval(`label?.meta_${locale}?.keywords`)
 
-let rank = eval(`cclass?.rank`) ?? 0 ;
-let rank_fn = `cclass.rank`;
-let locked = eval(`cclass?.locked`);
-let locked_fn = `cclass.locked`;
+let rank = eval(`label?.rank`) ?? 0 ;
+let rank_fn = `label.rank`;
+let locked = eval(`label?.locked`);
+let locked_fn = `label.locked`;
 
-let active = eval(`cclass?.active`);
-let active_fn = `cclass.active`;
+let active = eval(`label?.active`);
+let active_fn = `label.active`;
 
-let slug = eval(`cclass?.slug_${locale}`);
-let slug_fn=    `cclass.slug_${locale}`;
+let slug = eval(`label?.slug_${locale}`);
+let slug_fn=    `label.slug_${locale}`;
 
-let googlerank = cclass?.googlerank;
-let googlerank_fn=    `cclass.googlerank`;
+let googlerank = label?.googlerank;
+let googlerank_fn=    `label.googlerank`;
 
-let note = cclass?.note;
-let note_fn=    `cclass.note`;
+let note = label?.note;
+let note_fn=    `label.note`;
 
-let pathObj={sector:cclass?.sector, subsector:cclass?.subsector, cclass:cclass?.slug_tr};
+let pathObj={label:label?.slug_tr, sector:undefined};
 
-let { prefix } = titlePrefixer({type:"sector", countries, slug }); prefix = capitalizeFirstLetter(prefix);
+let { prefix } = titlePrefixer({type:"label", countries, slug }); prefix = capitalizeFirstLetter(prefix);
 
 let slug_authority=permissionsControlV3({askList:["category_slug"], type:"some", permissions});  // Slug değiştirme yetkisi...?
 let locked_authority=permissionsControlV3({askList:["category_lock"], type:"some", permissions});  // Categoryleri kiteleme yetkisi?
@@ -183,26 +160,26 @@ let category_authority=permissionsControlV3({askList:["category"], type:"some", 
 
 let FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_FRONTEND_DOMAIN;
 let livelink=undefined;
-if (cclass?.project=="sakaryarehberim.com") 
+if (label?.project=="sakaryarehberim.com") 
 {
       FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_FRONTEND_DOMAIN;
-      livelink=`${FRONTEND_DOMAIN}/su/${cclass?.slug_tr}`;
+      livelink=`${FRONTEND_DOMAIN}/su/${label?.slug_tr}`;
 
 }
-else if (cclass?.project=="yurtarama.com") 
+else if (label?.project=="yurtarama.com") 
 {
       FRONTEND_DOMAIN = process.env.NEXT_PUBLIC_YA_DOMAIN;
-      livelink=`${FRONTEND_DOMAIN}/${cclass?.slug_tr}`;
+      livelink=`${FRONTEND_DOMAIN}/${label?.slug_tr}`;
 }
 
-let project=cclass?.project;
+let project=label?.project;
 
-//let livelink=project=="yurtarama.com" ? `${FRONTEND_DOMAIN}/${cclass?.slug_tr}` : `${FRONTEND_DOMAIN}/su/${cclass?.slug_tr}`;//yurtarama.com için link yapısı farklı
-livelink = givelivelink({country_slug, city_slug, district_slug, subdistrict_slug, project:cclass?.project, livelink})
+//let livelink=project=="yurtarama.com" ? `${FRONTEND_DOMAIN}/${label?.slug_tr}` : `${FRONTEND_DOMAIN}/su/${label?.slug_tr}`;//yurtarama.com için link yapısı farklı
+livelink = givelivelink({country_slug, city_slug, district_slug, subdistrict_slug, project:label?.project, livelink})
 
-let pagetype="cclass";
-let eadvlink=`/p/promo/edit?pagetype=${pagetype}&parent_slug=${slug}&parent_id=${cclass?.id}`; // Reklamlara yönlendiren link
-let advlink=`/p/categoricalads?project=${cclass?.project}&sector=${cclass?.sector}&sector=${cclass?.slug_tr}`; // Reklamlara yönlendiren link
+let pagetype="label";
+let eadvlink=`/p/promo/edit?pagetype=${pagetype}&parent_slug=${slug}&parent_id=${label?.id}`; // Reklamlara yönlendiren link
+let advlink=`/p/categoricalads?project=${label?.project}&label=${label?.slug_tr}`; // Reklamlara yönlendiren link
 
 
 if (country_slug) // Yurtarama illere göre listelendiği için bu önemli..
@@ -222,9 +199,10 @@ if (subdistrict_slug)
   advlink=advlink+`&subdistrict_slug=${subdistrict_slug}` 
 }
 
-//  return (<div>{JSON.stringify(prefix)}</div>)
 
-if (!cclass) return "~"
+  // return (<div>{JSON.stringify(sectorclient?.project)}</div>)
+
+if (!label) return "~"
 if (isLoading) return <Loading/>
 
 // <LayoutMain layout_title={name} suptitle={`Alt Sektör ${country_slug ?? ""} ${city_slug ?? ""} ${district_slug ?? ""} ${subdistrict_slug ?? ""}`}>
@@ -288,17 +266,27 @@ if (isLoading) return <Loading/>
 
                                               pathname,
                                               countryStateObj, cityStateObj, districtStateObj, subdistrictStateObj,
-                                              project:cclass?.project,
+                                              project:label?.project,
 
                                               userdata,
                                               pathObj,
-                                              pagetype:"cclass"
+                                              pagetype:"label"
 
                                             }}/>
                                             
+
           //  </LayoutMain>
+
   );
 
 }
+
+
+
+
+
+
+
+  
   
 

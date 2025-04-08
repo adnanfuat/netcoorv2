@@ -8,13 +8,14 @@ import { SingleSelect } from "@/modules/common/reuseable/select/singleselect";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Region from "@/modules/common/region";
-import { RiExchangeFundsFill, RiEye2Line, RiListUnordered } from "react-icons/ri";
+import { RiBookReadLine, RiExchangeFundsFill, RiEye2Line, RiListUnordered, RiStarFill } from "react-icons/ri";
 import LayoutMeta_Admin_V2 from "./layoutmeta_admin_v2"
 import { useSearchParams } from "next/navigation";
 import { OperatorButtonV2 } from "@/modules/common/reuseable/button/operatorbuttonv2";
 import { cachecountriesv3hook_next15 } from "@/modules/functions/cachecountriesv3hook_next15";
 import Link from "next/link";
 import projectbasedurl from "@/modules/functions/projectbasedurl";
+import projectbasedlink from "@/modules/functions/projectbasedlink";
 
 
 export const LayoutShellV2_Admin = ({props}) => {
@@ -102,21 +103,18 @@ export const LayoutShellV2_Admin = ({props}) => {
 
  let url = projectbasedurl({project})
 
- let companiesParams=undefined;
+ let companiesParams=`project=${project}`;
 
  if (pathObj?.sector)
  {
-        companiesParams= `sector=${pathObj?.sector}`;
+        companiesParams= companiesParams+"&"+`sector=${pathObj?.sector}`;
 
-        if (pathObj?.subsector)
-                {
-                        companiesParams= companiesParams+"&"+`subsector=${pathObj?.subsector}`;
-                }        
+        if (pathObj?.subsector) { companiesParams= companiesParams+"&"+`subsector=${pathObj?.subsector}`; }        
  }
  
  if (pathObj?.cclass)
         {
-               companiesParams= companiesParams+"&"+`sector=${pathObj?.cclass}`;
+               companiesParams= companiesParams+"&"+`cclass=${pathObj?.cclass}`;
         }
  if (pathObj?.label)
                 {
@@ -140,11 +138,15 @@ export const LayoutShellV2_Admin = ({props}) => {
                         }
                 else if (pagetype=="label")
                         {
-                                title="Etiket Düzenleme"
+                        title="Etiket Düzenleme"
                         }
 
+                        let link = projectbasedlink({project, sector:pathObj?.sector, subsector:pathObj?.subsector, cclass:pathObj?.cclass, label:pathObj?.label, country_slug, city_slug, district_slug, subdistrict_slug});
+
 return ( 
-<form onSubmit={formik.handleSubmit}>
+<form onSubmit={formik.handleSubmit}> 
+        
+                {/* {JSON.stringify(companiesParams)} */}
 
 <div className={s.shell}> 
         
@@ -153,14 +155,14 @@ return (
                 {adv_authority && <div className={s.adsbutton}> 
                                         
                         {/* <Link href={listingPath} className={s.visit} title="Konsol > Firmalarım"><RiListUnordered/></Link> */}
+                        <Link href={`/p/categoricalads?${companiesParams}`} className={s.visit} title="Kategorik Reklamlar" target="_blank"><RiStarFill  /></Link> 
+                        <Link href={`/p/directory`} className={s.visit} title="Konsol > Firma Rehberi"><RiBookReadLine /></Link> 
                         {(active) ? <Link href={`/p/directory/companies?${companiesParams}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}
-                        {(active && project=="sakaryarehberim.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> SR </Link> : undefined}   
-                        {(active && project=="yurtarama.com" ) ? <Link href={`${url}/su/${slug}`} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> YA </Link> : undefined}                                                             
+                        {(active && project=="sakaryarehberim.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> SR </Link> : undefined}   
+                        {(active && project=="yurtarama.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> YA </Link> : undefined}                                                             
                         <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
-                        <div style={{fontWeight:"bold", backgroundColor:"black", padding:"8px 16px", borderRadius:4, color:"orange"}}>{title}</div>
-                        
-                {/* <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> */}
-
+                        <div style={{fontWeight:"bold", backgroundColor:"black", padding:"8px 16px", borderRadius:4, color:"orange"}}>{title}</div>                        
+                        {/* <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> */}
 
                 </div> }
                 

@@ -23,8 +23,7 @@ export default async function CompanyPage(props) {
   let {params} = props ?? {};
   params = await params;
   let data = await getserversidepropsfunction({params, project:process.env.NEXT_PUBLIC_PROJECT, mode:"admin"}) ?? {};   // { generatedData, locale } 
-  
-  // return "a.........1"
+    
   // return (JSON.stringify(userdata?.permissions));
   return ( <Company_Admin_View 
                                   userdata={userdata}                            

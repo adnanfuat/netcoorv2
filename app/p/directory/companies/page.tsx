@@ -29,17 +29,15 @@ export default async function CompaniesPage(context) {
 
   return (
       <div className={s.shell}>                 
-
-                <div style={{display:"flex", flexDirection:"column", textAlign:"right", position:"absolute", right:-20, top:-20}}><Link href="/p/directory"><RiBookReadLine size={20}/></Link></div>
-
-                <Memberships_Next15 
-                        title="Firmalar"
-                        userdata={userdata} 
-                        selecteduser={undefined} 
-                        project={"sakaryarehberim.com"}                         
-                        urlprefix="/p/directory"
-                        mode="allcompanies"                                        
-                        />
+                
+                    <Memberships_Next15 
+                            title="Firmalar"
+                            userdata={userdata} 
+                            selecteduser={undefined} 
+                            project={"sakaryarehberim.com"}                         
+                            urlprefix="/p/directory"
+                            mode="allcompanies"                                        
+                            />
                         
         </div>
   );
