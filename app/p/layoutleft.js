@@ -4,7 +4,7 @@ import s from "./layoutleft.module.css";
  import { FlagsMenu } from "@/modules/common/flagsmenu";
 import Link from "next/link";
 
-import { RiComputerFill, RiMoneyCnyBoxFill, RiNotification2Fill, RiMailFill, RiAdminFill, RiShoppingCart2Fill, RiBox1Fill      } from "react-icons/ri";
+import { RiComputerFill, RiMoneyCnyBoxFill, RiNotification2Fill, RiMailFill, RiAdminFill, RiShoppingCart2Fill, RiBox1Fill, RiSearch2Fill       } from "react-icons/ri";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { RiAccountCircleFill,RiBuilding3Fill  } from "react-icons/ri";
 import { RiNewspaperFill } from "react-icons/ri";
@@ -33,6 +33,11 @@ export const LayoutLeft = (props) => {
   
   let { permissions } = userdata ?? {};
   let email = userdata?.email;  
+  let {userscopes } = userdata ?? {};
+  let isTechnician       =   userscopes?.isTechnician;
+let manegerAuth        =   userscopes?.isManager;
+let patreonAuth        =   userscopes?.isPatreon;
+let technicianAuth     =   userdata?.userscopes.isManager;    
     
   let upload_authority = permissionsControlV3({
     askList: ["upload"],
@@ -40,7 +45,12 @@ export const LayoutLeft = (props) => {
     permissions:[],
 }); // parça yetkilere göre hareket etmek için sorgulama___ // slug değişimi hassas konu___
 
- 
+
+// yenisi bu. yetkileri buradna kullan
+
+
+
+
 
   let test_technician = !!(
     email == "yigitruzgaruzun@gmail.com" ||
@@ -101,6 +111,8 @@ export const LayoutLeft = (props) => {
               <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill/> <Link href="/p/memberships">Firmalarım</Link> </div>
 
               <div className={`${s.menuitem} flexrow`}> <RiBuilding3Fill/> <Link href="/p/directory/companies">Firmalar</Link></div>
+
+              {technicianAuth ? <div className={`${s.menuitem} flexrow`}> <RiSearch2Fill  /> <Link href="/p/companysearch">Firma Ara</Link></div> : undefined}
               
               <div className={`${s.menuitem} flexrow`}> <RiNotification2Fill/> <Link href="/p/notifications">Bildirimler</Link> </div>
 

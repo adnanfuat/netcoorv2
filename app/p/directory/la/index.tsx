@@ -53,8 +53,7 @@ export default function  Label(props) {
   const fetcher = async () => { let res= await fetch(`/api/perfectquery_next15`, {method: "POST", body: JSON.stringify({ data:{type:"label", id } }) } ); res = await res?.json(); return res; };
   const {  data:labelclient, isLoading } = useQuery( {queryKey:["labelquery"], queryFn:() => fetcher()});
 
-
-  // return JSON.stringify(labelclient)
+  //  return JSON.stringify(labelclient)
 
 
   const fetcher_rc = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:"regional_contents", parent_datakey:labelclient?.datakey, parent_type:"label", project:labelclient?.project, locale, defaultLocale, country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0] } }) } ); res = await res?.json(); return res; };
@@ -198,7 +197,6 @@ if (subdistrict_slug)
 {
   advlink=advlink+`&subdistrict_slug=${subdistrict_slug}` 
 }
-
 
   // return (<div>{JSON.stringify(sectorclient?.project)}</div>)
 

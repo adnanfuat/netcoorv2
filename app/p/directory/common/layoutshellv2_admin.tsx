@@ -98,7 +98,7 @@ export const LayoutShellV2_Admin = ({props}) => {
  locked = !patreonAuth ? true : locked; // Yedek: !category_authority ? true : locked; // Eğer kullanıcının category düzeşeöe yetkisi yoksa komple locked konumuna getir. Sadece reklamlar linkine tıklasın yeter.. // Bir negatifi. Düzenle butonu kilitli gözüküyor. // Sanki gerçekten o kategori kilitli gibi. Bir mantık hatası gibi durum var. Ama çok önemli değil...s
 
 
- if (!isTechnician) return undefined      
+if (!isTechnician) return undefined;
  // return (<div>{JSON.stringify(regional_contents)}</div>)
 
  let url = projectbasedurl({project})
@@ -118,7 +118,7 @@ export const LayoutShellV2_Admin = ({props}) => {
         }
  if (pathObj?.label)
                 {
-                       companiesParams= companiesParams+"&"+`sector=${pathObj?.label}`;
+                       companiesParams= companiesParams+"&"+`label=${pathObj?.label}`;
                 }
 
                 // return JSON.stringify(props)
@@ -212,13 +212,7 @@ let Regional_Contents = (props) => {
         
 let { regional_contents, regional_descriptions_fn, locked, locale, save_regional_contentfunc, add_regional_contentfunc, countryStateObj, cityStateObj, districtStateObj, subdistrictStateObj, } = props ?? {};
 
-
-
-        const countriesv2_alldataFunc = async () => {
-                let res = await fetch(`/api/swissarmyknifequery_tunnel`, { method: "POST", body: JSON.stringify({ data: { type: "countriesv2_alldata", givedistricts: true } }) }); res = await res?.json();
-                //console.log("resssssssssssdddss", res); 
-                return res;
-        };
+        
 let { data:countries } = cachecountriesv3hook_next15({givedistricts:true});
 
 let countries_options = countries?.map(country=>{return country =  {label:country?.title_tr, value:country?.slug_tr}}) ?? [];
@@ -242,7 +236,7 @@ return (<div style={{display:"flex", flexDirection:"column", gap:20, marginTop:5
                  </div>       
 
 {/* {country_slug} */}
-                 {!locked && <Button props={{text:`Bölgesel içerik bağla`, disabled:processing,  title:`Bölgesel içerik bağla`, width:240, icon:"IoAddOutline", onClick:() => { 
+                 {!locked && <Button props={{text:`Bölgesel içerik bağla`, disabled:processing,  title:`Bölgesel içerik bağla`, width:240, style:processing ? {color:"gray", cursor:"wait"}  : undefined, icon:"IoAddOutline", onClick:() => { 
                                 
                                 add_regional_contentfunc({country_slug:countryStateObj[0], city_slug:cityStateObj[0], district_slug:districtStateObj[0], subdistrict_slug:subdistrictStateObj[0]}); 
 
@@ -264,7 +258,7 @@ return (<div style={{display:"flex", flexDirection:"column", gap:20, marginTop:5
                          {/* { JSON.stringify(regional_contents?.[0]) } */}
                     
                          {regional_contents?.map((regional_content, index)=> {
-                                                                        return <Regional_Content regional_content={regional_content} locale={locale} countries={countries} countries_options={countries_options} save_regional_contentfunc={save_regional_contentfunc}/>
+                                                                        return <Regional_Content processing={processing} setprocessing={setprocessing} regional_content={regional_content} locale={locale} countries={countries} countries_options={countries_options} save_regional_contentfunc={save_regional_contentfunc}/>
                          })}
 
                </div>
@@ -282,7 +276,7 @@ return (<div style={{display:"flex", flexDirection:"column", gap:20, marginTop:5
 
 const Regional_Content = (props) => {
 
-        let { regional_content, locale, countries, countries_options, save_regional_contentfunc } = props ?? {};
+        let { regional_content, locale, countries, countries_options, save_regional_contentfunc, setprocessing, processing  } = props ?? {};
 
 
         const formik = useFormik({
@@ -401,7 +395,7 @@ const Regional_Content = (props) => {
                         
                                 {/* { JSON.stringify(regional_content) } */}
 
-                                <Button props={{icon:"IoSave", title:"", onClick:()=>save_regional_contentfunc({regional_content}), disabled:!formik?.dirty, color:formik?.dirty ? "green" : "gray" }}/>
+                                <Button props={{icon:"IoSave", title:"", onClick:()=>{setprocessing(true); save_regional_contentfunc({regional_content}); setTimeout(() => {  setprocessing(false); }, 4000);}, disabled:(!formik?.dirty), style:processing ? {color:"gray", cursor:"wait"}  : undefined, color:formik?.dirty ? "green" : "gray" }}/>
 
                                 {!locked && <Button props={{icon:"IoArrowUpCircleOutline", title:"", onClick:moveUp}}/>}
 
