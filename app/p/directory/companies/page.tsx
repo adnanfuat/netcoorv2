@@ -29,7 +29,7 @@ export default async function CompaniesPage(context) {
 
   return (
       <div className={s.shell}>                 
-                
+                    
                     <Memberships_Next15 
                             title="Firmalar"
                             userdata={userdata} 

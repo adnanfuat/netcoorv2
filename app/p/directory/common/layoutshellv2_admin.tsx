@@ -121,6 +121,27 @@ if (!isTechnician) return undefined;
                        companiesParams= companiesParams+"&"+`label=${pathObj?.label}`;
                 }
 
+if (country_slug)
+        {
+                companiesParams= companiesParams+"&"+`country=${country_slug}`;
+        }
+
+if (city_slug)
+                {
+                        companiesParams= companiesParams+"&"+`city=${city_slug}`;
+                }
+                
+if (district_slug)
+        {
+                companiesParams= companiesParams+"&"+`district=${district_slug}`;
+        }
+if (subdistrict_slug)
+                {
+                        companiesParams= companiesParams+"&"+`subdistrict=${subdistrict_slug}`;
+                }
+        
+                
+
                 // return JSON.stringify(props)
 
                 let title=undefined;
@@ -154,12 +175,13 @@ return (
 
                 {adv_authority && <div className={s.adsbutton}> 
                                         
+                        {country_slug} {city_slug} {district_slug} {subdistrict_slug}
                         {/* <Link href={listingPath} className={s.visit} title="Konsol > Firmalarım"><RiListUnordered/></Link> */}
-                        <Link href={`/p/categoricalads?${companiesParams}`} className={s.visit} title="Kategorik Reklamlar" target="_blank"><RiStarFill  /></Link> 
+                        <Link href={`/p/categoricalads?${companiesParams}`} className={s.visit} title="Kategorik Reklamlar"><RiStarFill  /></Link> 
                         <Link href={`/p/directory`} className={s.visit} title="Konsol > Firma Rehberi"><RiBookReadLine /></Link> 
                         {(active) ? <Link href={`/p/directory/companies?${companiesParams}`} className={s.visit} title="Konsol > Görüntüle"> <RiEye2Line /> </Link> : undefined}
-                        {(active && project=="sakaryarehberim.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> SR </Link> : undefined}   
-                        {(active && project=="yurtarama.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}} target="_blank"> YA </Link> : undefined}                                                             
+                        {(active && project=="sakaryarehberim.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> SR </Link> : undefined}   
+                        {(active && project=="yurtarama.com" ) ? <Link href={link} className={s.visit} title="Proje > Görüntüle" style={{ fontWeight:"bold", color:"#d43b3b"}}> YA </Link> : undefined}                                                             
                         <Button props={{title:"Kategori düzenle", width:150, icon:"IoArrowBackCircleSharp" , onClick:()=>router.back() }}/> 
                         <div style={{fontWeight:"bold", backgroundColor:"black", padding:"8px 16px", borderRadius:4, color:"orange"}}>{title}</div>                        
                         {/* <Button props={{onClick:()=>{router.push(eadvlink)}, text:`E. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> <Button props={{onClick:()=>{router.push(advlink)}, text:`Y. Reklamlar`, icon:`RiMagicFill`, disabled:false, width:180}}/> */}

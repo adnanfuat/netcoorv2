@@ -195,8 +195,7 @@ if (subdistrict_slug)
 }
 
 
-  // return (<div>{JSON.stringify(subsectorclient?.project)}</div>)
-
+// return (<div>{JSON.stringify(subsectorclient?.project)}</div>)
 if (!subsector) return "~"
 if (isLoading) return <Loading/>
 
