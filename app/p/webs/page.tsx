@@ -24,14 +24,13 @@ export default async function WebsPage(context) {
   
   // console.log("data::::assasa",  noncontrolleds_count)
   let cache =  permissionsControlV3({askList:["cache"], type:"some", permissions:userdata?.permissions});
-    
+      
   return (
-      <div className={s.shell}> 
-        {/* {JSON.stringify(users)} */}                                                  
+      <div className={s.shell}>  
         { isTechnician ? <UserSelection userdata={userdata}/> : 
         <div style={{fontSize:20, backgroundColor:"#f0f0f0", padding:10, borderRadius:2}}>
         {userdata?.email}
-        </div> }             
+        </div> }                     
                             <Webs_Next15
                                         selecteduser={undefined} 
                                         childTabStateObj_1={undefined} 
@@ -39,6 +38,7 @@ export default async function WebsPage(context) {
                                         contenturlprefix="/p/webs/c"      // Mobiweb:"/panel/webs/c", Netcoor: "/p/webs/c"
                                         listingurlprefix="/p/webs?"  // Netcoor: listingurlprefix="/p/webs?",  Mobiweb: "/panel/webs?"
                               />
+                              
         </div>
   );
 }
