@@ -61,7 +61,7 @@ let { closeDesktopMenu } =props ?? {}
                                         
                                          
 
-                                        {/* {(process.env.NODE_ENV == "development" || 1 == 1) && <Dynamic_Login/> }                                                                                                                                                                           */}
+                                        {/* {(NEXT_PUBLIC_NODE_ENV == "development" || 1 == 1) && <Dynamic_Login/> }                                                                                                                                                                           */}
                                   </div>
          )
 }
@@ -79,7 +79,7 @@ let { closeDesktopMenu } =props ?? {}
 
 
 
-// {(process.env.NODE_ENV == "development" || 1 == 1) && <Login props={{session}}/> } 
+// {(NEXT_PUBLIC_NODE_ENV == "development" || 1 == 1) && <Login props={{session}}/> } 
 
 
 
