@@ -1,13 +1,11 @@
-import JobAdvert from "@/components/job/jobadvert";
+
 // import { LayoutMain } from "@/app/layoutmain";
 import s from "./page.module.css";
 
 import {_userState} from "@/modules/constants/user"
 import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
-import JobAdvert_Core_Next15 from "@/modules/jobadverts_core_next15/jobadvert_core_next15";
 import { Inter } from "next/font/google";
-import Contents_Core from "@/modules/contents_core";
 import Content_Core from "@/modules/contents_core/content_core";
 
 
