@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
+import revalidateFunc from '@/modules/functions/revalidatefunc';
 
 export default function  Label(props) {
 
@@ -78,7 +79,11 @@ export default function  Label(props) {
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"labelupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  
+                                                        let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"labelupdate", ...values} }) }); 
+                                                        res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res);
+                                                        revalidateFunc({project:values?.label?.project, submittingObj:undefined, path:`/la/${values?.label?.slug_tr}`}); // yurtaramanın şehirlerini update etme meselesini henüz yapmadım.
+                                                        return res;  }; 
 
                 const formik = useFormik({
                                             enableReinitialize: true, initialValues: { label:labelclient, regional_contents },

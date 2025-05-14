@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
+import revalidateFunc from '@/modules/functions/revalidatefunc';
 
 export default function  Cclass (props) {
 
@@ -100,7 +101,13 @@ export default function  Cclass (props) {
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"cclassupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  
+                                      let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"cclassupdate", ...values} }) }); 
+                                      res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); 
+                                      revalidateFunc({project:values?.cclass?.project, submittingObj:undefined, path:`/cl/${values?.cclass?.subsector}/${values?.cclass?.slug_tr}`}); // yurtaramanın şehirlerini update etme meselesini henüz yapmadım.
+                                      revalidateFunc({project:values?.cclass?.project, submittingObj:undefined, path:`/su/${values?.cclass?.subsector}`}); // yurtaramanın şehirlerini update etme meselesini henüz yapmadım.
+                                      return res; 
+                                     }; 
 
                 const formik = useFormik({
                                             enableReinitialize: true, initialValues: { cclass:cclassclient, regional_contents },

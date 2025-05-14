@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
+import revalidateFunc from '@/modules/functions/revalidatefunc';
 
 export default function  Sector (props) {
 
@@ -100,7 +101,18 @@ export default function  Sector (props) {
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"sectorupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {                                                              
+                                                            let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"sectorupdate", ...values} }) }); 
+                                                            res=await res?.json();
+                                                            queryClient.invalidateQueries(); 
+                                                            
+                                                            let project = values?.sector?.project;
+                                                            console.log("resres:1________", project); 
+                                                             revalidateFunc({project:project, submittingObj:undefined, path:`/se/${values?.sector?.slug_tr}`}); // yurtaramanın şehirlerini update etme meselesini henüz yapmadım.
+                                                             revalidateFunc({project:project, submittingObj:undefined, path:project=="sakaryarehberim.com" ? `/firmarehberi` : "/yurtlar"});  // yurtarmaada yok. Ona özel birşey yapmak lazım.
+                                                             console.log("resres:_________", values?.sector?.project, values?.sector?.slug_tr ); 
+                                                            return res;                                                          
+                                                     }; 
 
                 const formik = useFormik({
                                             enableReinitialize: true, initialValues: { sector:sectorclient, regional_contents },
@@ -221,7 +233,7 @@ if (subdistrict_slug)
 }
 
 
-  // return (<div>{JSON.stringify(sectorclient?.project)}</div>)
+  //  return (<div>{JSON.stringify(sectorclient?.project)}</div>)
 
 if (!sector) return "~"
 if (isLoading) return <Loading/>

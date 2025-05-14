@@ -21,7 +21,7 @@ export default async function Home(context) {
 
   return ( 
             <div className={s.shell}>             
-                                      <Contents_Core userdata={userdata}/>
+                              <Contents_Core userdata={userdata}/>
             </div>
           );
 }

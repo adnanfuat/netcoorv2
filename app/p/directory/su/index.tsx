@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { givelivelink } from '../common/givelivelink';
 import { Loading } from '@/modules/loadings/loading';
 import { LayoutShellV2_Admin } from '../common/layoutshellv2_admin';
+import revalidateFunc from '@/modules/functions/revalidatefunc';
 
 export default function  Subsector (props) {
 
@@ -74,7 +75,15 @@ export default function  Subsector (props) {
                                                             }                                                              
 
               // return (<div>{JSON.stringify(regional_contents)}</div>);
-              const updateFunc = async ({values}) => {  let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"subsectorupdate", ...values} }) }); res=await res?.json();queryClient.invalidateQueries(); console.log("resres:1", res); return res;  }; 
+              const updateFunc = async ({values}) => {  
+                
+                                          let res = await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"subsectorupdate", ...values} }) }); 
+                                          res=await res?.json();queryClient.invalidateQueries(); 
+                                          let project=values?.subsector?.project;
+                                          revalidateFunc({project:project, submittingObj:undefined, path:`/su/${values?.subsector?.slug_tr}`}); // yurtaramanın şehirlerini update etme meselesini henüz yapmadım.
+                                          revalidateFunc({project:project, submittingObj:undefined, path:project=="sakaryarehberim.com" ? `/firmarehberi` : "/yurtlar"});  // yurtarmaada yok. Ona özel birşey yapmak lazım.
+                                          console.log("resres:1", res); return res; 
+                                         }; 
 
                 const formik = useFormik({
                                             enableReinitialize: true, initialValues: { subsector:subsectorclient, regional_contents },

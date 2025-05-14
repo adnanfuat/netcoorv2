@@ -26,7 +26,7 @@ export default async function Cuffs(context) {
 
   return ( 
             <div className={s.shell}>             
-                                       <Cuffs_Core userdata={userdata}/>
+                       <Cuffs_Core userdata={userdata}/>
             </div>
           );
 }
