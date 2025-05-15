@@ -32,7 +32,7 @@ const UserSelection = (props) => {
 
   const queryClient = useQueryClient();
 
-  setselecteduserhook({selecteduser, loggeduser:email})
+  setselecteduserhook({selecteduser, loggeduser:email}); // seçili kullanıcı yoksa login olan kullanıcıyı valtio'ya atıyor.
   
   const [ newusermail, setnewusermail ] = useState();
 
@@ -82,7 +82,7 @@ let initializeuserFunc= async ({email}) => {
                                                                   //setItem("ccuser", e?.target?.value);
                                                                    //console.log("çalıştım:::111:: ", e?.target?.value);
                                                                   //localStorage.removeItem("web"); // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
-                                                                  // webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
+                                                                   webProxy.web=undefined; // Aşağıda seçili bir web sitesi varsa onu yok etmek için kullanacağım
                                                                   }} value={selecteduser} className={s.select}>
 
                                                                     {updateaccount && <option value={"all"}>{processing ? "Aranıyor" :"Tümü"} {users?.length}</option>}
