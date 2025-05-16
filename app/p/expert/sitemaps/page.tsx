@@ -2,7 +2,7 @@ import 'react-tabs/style/react-tabs.css';
  import { isloggedv4_clerk } from "@/modules/functions/isloggedv4_clerk";
 import permissionsControlV3 from "@/modules/functions/permissionscontrolv3";
 import { Inter } from "next/font/google";
-import ExpertCore from '@/modules/expert_core/page';
+// import ExpertCore from '@/modules/expert_core/page';
 import Sitemaps from '.';
 
 const inter = Inter({ subsets: ['latin', "latin-ext"], variable:"--font-inter" }) ; // weight:["100", "200", '300', "400", '500', "600","700", "800", "900"],

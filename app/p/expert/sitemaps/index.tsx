@@ -8,6 +8,7 @@ import { RiChatDeleteFill } from "react-icons/ri";
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { projectshook_next15 } from '@/modules/functions/projectshook_next15';
 import { datetimeFunc } from '@/modules/functions/datetimefunc';
+import projectbasedurl from '@/modules/functions/projectbasedurl';
 
 
 export default function  Sitemaps (props) {
@@ -16,6 +17,8 @@ export default function  Sitemaps (props) {
   
   let patreonAuth  =  userdata?.userscopes.isPatreon;
   const queryClient = useQueryClient();
+
+    let createSitemap = async (id) => { await fetch("/api/sitemaps/create", { method: "POST", body: JSON.stringify({ data:{type:"removesitemapnotify", } }) });  queryClient.invalidateQueries(); } 
   
     // Build bildirimlerini tekil silme (s)------------------->
     let removeSitemapNotify = async (id) => { await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"removesitemapnotify", id } }) });  queryClient.invalidateQueries(); } 
@@ -115,27 +118,27 @@ export default function  Sitemaps (props) {
                                             </TabList>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"article", readyurllist:article_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"article", readyurllist:article_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"subsector", readyurllist:subsector_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"subsector", readyurllist:subsector_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"sector", readyurllist:sector_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"sector", readyurllist:sector_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"cclass", readyurllist:cclass_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"cclass", readyurllist:cclass_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"label", readyurllist:label_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"label", readyurllist:label_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, project, category:"company", readyurllist:company_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"company", readyurllist:company_readyurllist}}/>
                                             </TabPanel>                                            
                                                                                                                         
                                             <TabPanel>
@@ -160,9 +163,11 @@ export default function  Sitemaps (props) {
 
 function  SitemapModule ({props}) {
   
-  let {removeSitemapNotify, project, category, readyurllist} = props ?? {};
+  let {removeSitemapNotify,  createSitemap,  project, category, readyurllist} = props ?? {};
 
-  let sitemapLink=`https://www.${project?.domain}/api/sitemaps/create`;  
+  let url = projectbasedurl({project:"netcoor.com"})
+  
+  let sitemapLink=`${url}/api/sitemaps/create`;  
 
   const fetcher_count = async () => { let res= await fetch(`/api/perfectquery_next15`, { method: "POST", body: JSON.stringify({ data:{ type:`${category}_count` ,project:project?.domain } }) } ); res =  await res?.json(); return res; };
   let { data:article_count_db } = useQuery( {queryKey:["Article_Count",category, project?.domain ], queryFn:async () => await fetcher_count()});
@@ -206,6 +211,9 @@ function  SitemapModule ({props}) {
                                             : <RiStopCircleFill size={20} title="Tek seferlik oluşturulan sitemap"/>
                                             }
                                             <a href={`${sitemapLink}?${item?.slug}`} target={"_blank"}  style={styler({source:sitemaps, slug:item?.slug, isLoading})} >{item?.label}</a> 
+                                            
+                                            <div onClick={()=>{ createSitemap() }}>asdasddddddddddd__________</div>
+
                                         </li> 
                                 })}                                
                               </ul>                
@@ -406,15 +414,18 @@ function matchFunctions ({source, slug}) {
 }
 
 
+
 function givesitemapLink ({source, slug}) {  
 
   let matched = source?.find(item=>item?.slug==slug);
-    console.log("sasdsad....1",matched);
 
-  // let result = matched?.s_key_1 ?  <a href={`https://www.${project?.domain}${matched?.s_key_1}`} title='Oluşan sitemap dosyasını gör'><RiExternalLinkFill size={20}/></a> :<RiEmotionUnhappyLine size={20} title='Sitemap dosyası oluşmamış olarak gözüküyor. - Bir ihtimal space içinde vardır. Varsa da, tekrar oluşturduğunuzda var olan dosyanın üzerine yazar.'/>
-  let result = matched?.s_key_1 ?  <a href={`https://www.${matched?.project}${matched?.s_key_1}`} title='Oluşan sitemap dosyasını gör'><RiExternalLinkFill size={20}/></a> :<RiEmotionUnhappyLine size={20} title='Sitemap dosyası oluşmamış olarak gözüküyor. - Bir ihtimal space içinde vardır. Varsa da, tekrar oluşturduğunuzda var olan dosyanın üzerine yazar.'/>
   
+  let url = projectbasedurl({project:matched?.project})
+  // console.log("sasdsad....11::",url, matched?.s_key_1);
+  // Eskisi böyleydi. Artık bu işlemi netcoor'a aldım.
+  let result = matched?.s_key_1 ?  <a href={`${url}${matched?.s_key_1}`} title='Oluşan sitemap dosyasını gör'><RiExternalLinkFill size={20}/></a> :<RiEmotionUnhappyLine size={20} title='Sitemap dosyası oluşmamış olarak gözüküyor. - Bir ihtimal space içinde vardır. Varsa da, tekrar oluşturduğunuzda var olan dosyanın üzerine yazar.'/>  
   return result ;
+  
 }
 
 
