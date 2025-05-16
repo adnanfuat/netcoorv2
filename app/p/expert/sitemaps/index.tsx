@@ -18,7 +18,7 @@ export default function  Sitemaps (props) {
   let patreonAuth  =  userdata?.userscopes.isPatreon;
   const queryClient = useQueryClient();
 
-    let createSitemap = async (id) => { await fetch("/api/sitemaps/create", { method: "POST", body: JSON.stringify({ data:{type:"removesitemapnotify", } }) });  queryClient.invalidateQueries(); } 
+    
   
     // Build bildirimlerini tekil silme (s)------------------->
     let removeSitemapNotify = async (id) => { await fetch("/api/perfectmutation_next15", { method: "POST", body: JSON.stringify({ data:{type:"removesitemapnotify", id } }) });  queryClient.invalidateQueries(); } 
@@ -118,27 +118,27 @@ export default function  Sitemaps (props) {
                                             </TabList>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"article", readyurllist:article_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"article", readyurllist:article_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"subsector", readyurllist:subsector_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"subsector", readyurllist:subsector_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"sector", readyurllist:sector_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"sector", readyurllist:sector_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"cclass", readyurllist:cclass_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"cclass", readyurllist:cclass_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"label", readyurllist:label_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"label", readyurllist:label_readyurllist}}/>
                                             </TabPanel>
 
                                             <TabPanel className={s.maintab_1}>
-                                                  <SitemapModule props={{removeSitemapNotify, createSitemap,  project, category:"company", readyurllist:company_readyurllist}}/>
+                                                  <SitemapModule props={{removeSitemapNotify,   project, category:"company", readyurllist:company_readyurllist}}/>
                                             </TabPanel>                                            
                                                                                                                         
                                             <TabPanel>
@@ -163,7 +163,7 @@ export default function  Sitemaps (props) {
 
 function  SitemapModule ({props}) {
   
-  let {removeSitemapNotify,  createSitemap,  project, category, readyurllist} = props ?? {};
+  let {removeSitemapNotify,    project, category, readyurllist} = props ?? {};
 
   let url = projectbasedurl({project:"netcoor.com"})
   
@@ -212,7 +212,7 @@ function  SitemapModule ({props}) {
                                             }
                                             <a href={`${sitemapLink}?${item?.slug}`} target={"_blank"}  style={styler({source:sitemaps, slug:item?.slug, isLoading})} >{item?.label}</a> 
                                             
-                                            <div onClick={()=>{ createSitemap() }}>asdasddddddddddd__________</div>
+                                            
 
                                         </li> 
                                 })}                                
